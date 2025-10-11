@@ -1,0 +1,67 @@
+[
+  {
+    "id": "17281797",
+    "type": "COPSOQ III",
+    "name": "COPSOQ III - Resultados_COPSOQ (15)",
+    "timestamp": "2025-10-06T23:42:58.591027",
+    "data": {
+      "Exigências Quantitativas": 48.378888888888895,
+      "Ritmo de Trabalho": 63.888888888888886,
+      "Exigências Cognitivas": 67.70833333333333,
+      "Exigências Emocionais": 55.55555555555556,
+      "Influência no Trabalho": 62.84722222222222,
+      "Controle sobre o Tempo de Trabalho": 62.5,
+      "Significado do Trabalho": 61.57500000000001,
+      "Compromisso face ao Local de Trabalho": 49.30555555555556,
+      "Reconhecimento": 62.962222222222216,
+      "Transparência do Papel Laboral": 69.99944444444445,
+      "Conflitos de Papéis Laborais": 75.23166666666667,
+      "Suporte Social de Colegas": 68.9811111111111,
+      "Suporte Social de Superiores": 69.44333333333333,
+      "Insegurança Laboral": 66.66722222222222,
+      "Insegurança com as Condições de Trabalho": 68.51944444444445,
+      "Confiança Horizontal": 62.74411764705883,
+      "Confiança Vertical": 68.52,
+      "Justiça Organizacional": 64.58333333333333,
+      "Conflito Trabalho-Família": 65.74,
+      "Satisfação com o trabalho": 75.46277777777777,
+      "Autoavaliação da Saúde": 76.38888888888889,
+      "Autoeficácia": 77.77777777777777,
+      "Problemas de Sono": 75.0,
+      "Burnout": 78.47222222222223,
+      "Stress": 74.30555555555556,
+      "Sintomas Depressivos": 63.19388888888889
+    },
+    "metadata": {
+      "version": "III",
+      "n_responses": 18,
+      "format": "calculated_scores",
+      "coverage": 100.0
+    },
+    "risk_level": "Baixo",
+    "quality": null,
+    "insights": [
+      "📊 Dimensão mais crítica: 'Exigências Quantitativas' com score 48.4"
+    ],
+    "recommendations": null
+  },
+  {
+    "id": "17b98afc",
+    "type": "Esgotamento (CBI)",
+    "name": "Esgotamento-20251007-1530",
+    "timestamp": "2025-10-07T15:30:54.619045",
+    "data": {
+      "Burnout Pessoal": 54.166666666666664,
+      "Burnout Relacionado ao Trabalho": 67.85714285714286,
+      "Burnout Relacionado ao Cliente": 83.33333333333333
+    },
+    "metadata": {
+      "overall_score": 68.45238095238095,
+      "ai_detailed_analysis": "Com certeza. Com base nos dados fornecidos, aqui está uma análise e um plano de ação na perspectiva de um consultor de RH.\n\n---\n\n### **Análise de Dados de Burnout**\n\nOs dados apresentados indicam uma situação preocupante que exige atenção imediata. A pontuação geral (68.45) já é elevada, mas a análise detalhada revela a origem do problema.\n\n#### **1. Diagnóstico Curto**\n\nO principal problema é um nível **crítico de burnout relacionado ao cliente (83.33)**. Isso significa que a fonte primária de esgotamento, cinismo e estresse dos colaboradores vem diretamente da interação com os clientes. Este fator está inflando perigosamente os níveis de burnout relacionado ao trabalho (67.86) e contribuindo para o esgotamento pessoal geral (54.17).\n\n#### **2. Principais Riscos**\n\nSe não for tratado, este quadro apresenta 3 riscos principais para a organização:\n\n1.  **Alta Rotatividade (Turnover) em Funções de Linha de Frente:** Colaboradores em contato direto com clientes (suporte, vendas, atendimento) são os mais propensos a pedir demissão. A perda de talentos experientes gera altos custos de recrutamento e treinamento, além de sobrecarregar a equipe remanescente.\n2.  **Queda na Qualidade do Atendimento e da Experiência do Cliente:** Funcionários esgotados perdem a empatia e a paciência, resultando em um atendimento de menor qualidade. Isso cria um ciclo vicioso: o mau atendimento gera clientes mais insatisfeitos e agressivos, o que aumenta ainda mais o burnout da equipe. O impacto direto é na reputação da marca e na retenção de clientes.\n3.  **Aumento do Absenteísmo e Riscos Psicossociais:** O estresse crônico leva a problemas de saúde física e mental, resultando em mais faltas e licenças médicas. Além disso, a empresa fica exposta a riscos legais e passivos trabalhistas associados a um ambiente de trabalho psicologicamente inseguro.\n\n#### **3. Ações Recomendadas (Práticas e de Baixo Custo)**\n\nO foco deve ser em proteger e capacitar a equipe que lida diretamente com os clientes.\n\n1.  **Implementar \"Sessões de De-briefing e Apoio em Pares\" (Custo: Quase zero):**\n    *   **O que é:** Crie um espaço seguro e estruturado (semanal ou quinzenal, 30-45 minutos) para que as equipes de linha de frente compartilhem, sem julgamento, as interações mais difíceis que tiveram com clientes.\n    *   **Como funciona:** Um líder de equipe ou um colega experiente facilita a sessão, focando em validar os sentimentos dos colaboradores (\"é normal sentir-se frustrado com essa situação\") e em compartilhar coletivamente estratégias que funcionaram. O objetivo não é apenas desabafar, mas aprender coletivamente e reduzir a sensação de isolamento.\n    *   **Benefício:** Aumenta o apoio social, reduz o estresse e normaliza as dificuldades, fortalecendo a resiliência da equipe com um custo de implementação baixíssimo (apenas tempo).\n\n2.  **Desenvolver e Comunicar um \"Protocolo de Escalonamento e Limites\" (Custo: Zero):**\n    *   **O que é:** Criar e oficializar uma política clara que capacite os colaboradores a lidar com clientes abusivos ou excessivamente exigentes.\n    *   **Como funciona:** O protocolo deve definir claramente:\n        *   Quais comportamentos do cliente são inaceitáveis (ex: ofensas, ameaças).\n        *   Frases-padrão que o colaborador pode usar para sinalizar o limite de forma profissional (ex: \"Senhor(a), para continuarmos a conversa, preciso que não utilize essa linguagem\").\n        *   Um procedimento simples e sem punições para escalar a chamada para um supervisor ou encerrar a interação quando os limites forem ultrapassados.\n    *   **Benefício:** Devolve aos colaboradores um senso de controle e segurança psicológica. Saber que a empresa os apoia e lhes dá permissão para se protegerem de abusos é uma das formas mais eficazes e baratas de combater o burnout relacionado ao cliente."
+    },
+    "risk_level": "Moderado",
+    "quality": null,
+    "insights": null,
+    "recommendations": null
+  }
+]

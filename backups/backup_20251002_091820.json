@@ -1,0 +1,51 @@
+[
+  {
+    "id": "cde6e58e",
+    "type": "COPSOQ III",
+    "name": "COPSOQ III - Resultados_COPSOQ (15).xlsx",
+    "timestamp": "2025-10-02T07:58:42.607403",
+    "data": {
+      "Exigências Quantitativas": 45.0,
+      "Ritmo de Trabalho": 70.83333333333333,
+      "Exigências Cognitivas": 72.76785714285714,
+      "Exigências Emocionais": 57.5,
+      "Influência no Trabalho": 69.27083333333333,
+      "Possibilidades de Desenvolvimento": 56.875,
+      "Controlo sobre o Tempo de Trabalho": 66.46341463414635,
+      "Significado do Trabalho": 66.02564102564102,
+      "Compromisso face ao Local de Trabalho": 48.91304347826087,
+      "Previsibilidade": 67.0,
+      "Reconhecimento": 78.57142857142857,
+      "Transparência do Papel Laboral": 72.67441860465117,
+      "Conflitos de Papéis Laborais": 83.97435897435898,
+      "Qualidade da Liderança": 73.79032258064517,
+      "Suporte Social de Colegas": 75.0,
+      "Suporte Social de Superiores": 75.0,
+      "Sentido de Pertença a Comunidade": 59.65909090909091,
+      "Insegurança Laboral": 74.07407407407408,
+      "Insegurança com as Condições de Trabalho": 78.03030303030303,
+      "Qualidade do Trabalho": 70.3125,
+      "Confiança Horizontal": 37.142857142857146,
+      "Confiança Vertical": 78.88888888888889,
+      "Justiça Organizacional": 65.0,
+      "Conflito Trabalho-Família": 68.47826086956522,
+      "Satisfação com o trabalho": 80.55555555555556,
+      "Auto-Avaliação da Saúde": 83.33333333333333,
+      "Auto-Eficácia": 79.54545454545455,
+      "Problemas de Sono": 77.27272727272727,
+      "Burnout": 84.16666666666667,
+      "Stress": 75.0,
+      "Sintomas Depressivos": 66.66666666666667
+    },
+    "metadata": {
+      "version": "III",
+      "n_responses": 18,
+      "coverage": 99.80842911877394,
+      "ai_detailed_analysis": "Com certeza. Com base nos dados fornecidos, apresento a minha análise e recomendações como consultor de RH.\n\n---\n\n### **Análise de Clima e Riscos Psicossociais**\n\n**Nota Importante:** A análise baseia-se num número de respostas (n=18) que, embora com alta cobertura, representa uma amostra pequena. Os resultados são indicadores fortes que devem ser aprofundados, possivelmente com entrevistas ou grupos focais, para validar e compreender o contexto.\n\n---\n\n#### **1. Diagnóstico Curto**\n\nO principal problema é um **paradoxo crítico**: os colaboradores reportam alta satisfação pessoal com o trabalho e boa perceção da liderança, mas, ao mesmo tempo, sofrem de níveis alarmantes de **Burnout (84.17)** e **Conflitos de Papéis Laborais (83.97)**. Este cenário é alimentado por uma **confiança horizontal (entre colegas) extremamente baixa (37.14)**, sugerindo que, embora a relação com a chefia seja boa, o ambiente de equipa é disfuncional, competitivo e psicologicamente desgastante.\n\n#### **2. Principais Riscos**\n\n1.  **Risco de Burnout Generalizado e Perda de Talentos:** O índice de **Burnout (84.17)** é o mais elevado e crítico. Combinado com **Stress (75.00)** e **Problemas de Sono (77.27)**, indica um esgotamento severo. O risco iminente é o aumento do absentismo, a queda drástica da produtividade e a perda de colaboradores valiosos que, apesar de gostarem do seu trabalho e chefe, não suportarão o ambiente a longo prazo.\n\n2.  **Colapso da Colaboração e Eficiência:** A **Confiança Horizontal (37.14)** está em níveis perigosamente baixos. Isto significa que as equipas não confiam umas nas outras, o que impede a colaboração, a partilha de conhecimento e a inovação. Este cenário fomenta a criação de \"silos\", retrabalho e um clima de suspeita que mina qualquer esforço de trabalho em equipa, impactando diretamente os resultados do negócio.\n\n3.  **Ambiente de Trabalho Tóxico e Conflitos Interpessoais:** O altíssimo índice de **Conflitos de Papéis Laborais (83.97)**, somado à baixa confiança entre pares, cria um terreno fértil para mal-entendidos, disputas por responsabilidades e conflitos interpessoais. Este risco não só afeta o bem-estar, mas também pode evoluir para queixas formais de assédio moral ou um ambiente de trabalho considerado tóxico, gerando riscos legais e de reputação para a empresa.\n\n#### **3. Ações Recomendadas (Práticas e de Baixo Custo)**\n\nAs ações devem focar-se nas duas causas principais identificadas: a falta de clareza nos papéis e a quebra de confiança entre colegas.\n\n1.  **Ação 1: Workshop de Clarificação de Papéis (Matriz RACI)**\n    *   **Objetivo:** Atacar diretamente o \"Conflito de Papéis Laborais\".\n    *   **Como Fazer:** Realizar uma sessão de 2-3 horas com cada equipa, facilitada pelo gestor ou RH. Utilizar uma ferramenta simples como a Matriz RACI (Responsible, Accountable, Consulted, Informed) para mapear os principais processos e projetos da equipa. O objetivo é que todos saiam da sala sabendo exatamente quem faz o quê, a quem devem reportar e quem precisam de informar.\n    *   **Custo:** Praticamente zero. Requer apenas o tempo da equipa e do facilitador. O resultado é uma redução imediata da ambiguidade e da frustração.\n\n2.  **Ação 2: Implementação de Rituais de Equipa para Reconstruir a Confiança**\n    *   **Objetivo:** Melhorar a \"Confiança Horizontal\" e o \"Suporte Social de Colegas\".\n    *   **Como Fazer:** Introduzir duas práticas simples e regulares:\n        *   **Check-in Semanal (15 min):** No início da semana, a equipa reúne-se para partilhar rapidamente: 1) Qual a sua principal prioridade para a semana? 2) Onde precisa de ajuda? Esta prática força a interdependência positiva e a comunicação.\n        *   **Reconhecimento entre Pares (\"Kudos\"):** No final da semana, dedicar 10 minutos para que cada membro da equipa possa agradecer publicamente a um colega por uma ajuda ou um bom trabalho. Pode ser feito numa reunião ou num canal de comunicação partilhado. Isto foca a atenção no positivo e começa a reconstruir os laços de confiança.\n    *   **Custo:** Zero. São mudanças de processo que, ao serem consistentes, transformam a dinâmica da equipa de competitiva para colaborativa."
+    },
+    "risk_level": "Moderado",
+    "quality": "Excelente",
+    "insights": null,
+    "recommendations": null
+  }
+]
