@@ -1,6 +1,6 @@
 
 # Cole sua chave aqui (substitua)
-$API_KEY = "AIzaSyC43c_rpkJ6NZTch5jsB1x3ZK3F1gKHNIE"
+$API_KEY = 
 
 # Testar qual modelo funciona
 $models = @(
