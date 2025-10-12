@@ -1,35 +1,19 @@
-# ============================================
-# PAINEL RH MODULAR - Requirements
-# ============================================
-# Python 3.10+
-# ============================================
+# Framework
+streamlit>=1.31.0
 
-# Framework web
-streamlit==1.31.0
-
-# Manipulação de dados
-pandas==2.2.0
-numpy==1.26.3
-openpyxl==3.1.2
+# Dados
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0
 
 # Visualização
-matplotlib==3.8.2
-seaborn==0.13.1
-plotly==5.18.0
+plotly>=5.18.0
 
 # PDF
-reportlab==4.0.9
-pdfplumber==0.11.0
+pdfplumber>=0.11.0
 
-# API e requisições
-google-generativeai==0.3.2
-requests==2.31.0
+# API
+google-generativeai>=0.3.2
 
 # Variáveis de ambiente
-python-dotenv==1.0.1
-
-# Utilidades
-Pillow>=10.0.0
-
-# Extras (opcionais mas recomendados)
-scipy==1.12.0
+python-dotenv>=1.0.0
