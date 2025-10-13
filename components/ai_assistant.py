@@ -85,18 +85,19 @@ class AutoInsightsComponent:
             st.error("Ocorreu um erro ao gerar os insights automáticos.")
             logger.error(f"Erro em generate_auto_insights: {e}")
 
-        # Botões de Ação da IA
+                # Botões de Ação da IA
         col1, col2 = st.columns(2)
+        
         with col1:
             if st.button("🔍 Análise IA Detalhada", key=f"ai_detail_{analysis.id}", use_container_width=True):
                 self._show_detailed_ai_analysis(analysis)
         
         with col2:
-if st.button("💬 Conversar sobre Resultados", key=f"ai_chat_{analysis.id}", use_container_width=True):
-    storage.save_analysis(analysis)
-    st.session_state.selected_analysis_id = analysis.id
-    # Redireciona para página do Assistente IA
-    st.switch_page("pages/6_🤖_Assistente_IA.py")
+            if st.button("💬 Conversar sobre Resultados", key=f"ai_chat_{analysis.id}", use_container_width=True):
+                storage.save_analysis(analysis)
+                st.session_state.selected_analysis_id = analysis.id
+                # Redireciona para página do Assistente IA
+                st.switch_page("pages/6_🤖_Assistente_IA.py")
 
     def _prepare_data_summary(self, analysis: 'AnalysisResult') -> str:
         """Prepara resumo dos dados para o prompt"""
