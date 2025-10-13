@@ -92,10 +92,11 @@ class AutoInsightsComponent:
                 self._show_detailed_ai_analysis(analysis)
         
         with col2:
-            if st.button("💬 Conversar sobre Resultados", key=f"ai_chat_{analysis.id}", use_container_width=True):
-                storage.save_analysis(analysis)
-                st.session_state.selected_analysis_id = analysis.id
-                st.info("A página do Assistente IA será criada no próximo passo!")
+if st.button("💬 Conversar sobre Resultados", key=f"ai_chat_{analysis.id}", use_container_width=True):
+    storage.save_analysis(analysis)
+    st.session_state.selected_analysis_id = analysis.id
+    # Redireciona para página do Assistente IA
+    st.switch_page("pages/6_🤖_Assistente_IA.py")
 
     def _prepare_data_summary(self, analysis: 'AnalysisResult') -> str:
         """Prepara resumo dos dados para o prompt"""
