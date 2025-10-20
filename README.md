@@ -17,6 +17,14 @@ Sistema completo de análise de dados de Recursos Humanos com Assistente IA inte
 
 ---
 
+## 📚 Documentação
+
+📖 **[Manual de Uso Completo](MANUAL_DE_USO.md)** - Guia passo a passo para toda a equipe
+
+*Tudo o que você precisa saber para usar o sistema: análises, exportações, IA e muito mais!*
+
+---
+
 ## 🎯 Funcionalidades
 
 ### 📈 Análises Disponíveis

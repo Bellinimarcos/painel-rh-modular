@@ -940,6 +940,8 @@ R: Na pasta `reports/` (versão local) ou no download do navegador (versão onli
 
 \*\*Última atualização:\*\* Outubro 2025
 
+
+
 \*\*Versão:\*\* 1.0.0  
 
 \*\*Data:\*\* Outubro 2025  
