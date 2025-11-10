@@ -72,3 +72,7 @@ htmlcov/
 temp/
 tmp/
 *.tmp
+# Evitar upload de executáveis grandes
+ffmpeg.exe
+ffprobe.exe
+*.exe
