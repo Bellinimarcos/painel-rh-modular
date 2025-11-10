@@ -1,13 +1,32 @@
+# C:\painel_rh_modular\models\__init__.py
+
 """
-Módulo de modelos de dados para o Painel de RH
+Módulo de modelos de dados do Painel RH Modular
 """
-from .enums import AnalysisType, RiskLevel, DataQuality
-from .analysis import AnalysisResult, ValidationResult
+
+from .toxicidade_model import (
+    QuestionarioToxicidade,
+    Dimensao,
+    Questao,
+    TipoQuestao,
+    RespostaAvaliacao,
+    ResultadoAvaliacao
+)
+
+# --- INÍCIO DA ADIÇÃO ---
+from .copsoq_ii_model import CopsoqII
+# --- FIM DA ADIÇÃO ---
+
 
 __all__ = [
-    'AnalysisType',
-    'RiskLevel', 
-    'DataQuality',
-    'AnalysisResult',
-    'ValidationResult'
+    'QuestionarioToxicidade',
+    'Dimensao',
+    'Questao',
+    'TipoQuestao',
+    'RespostaAvaliacao',
+    'ResultadoAvaliacao',
+    
+    # --- INÍCIO DA ADIÇÃO ---
+    'CopsoqII'
+    # --- FIM DA ADIÇÃO ---
 ]
