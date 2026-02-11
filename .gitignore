@@ -1,0 +1,78 @@
+# ============================================
+# PAINEL RH MODULAR - .gitignore
+# ============================================
+
+# Credenciais e configurações sensíveis
+.env
+*.env
+config/credentials.json
+secrets/
+
+# Dados e relatórios gerados
+data/
+reports/
+exports/
+*.pkl
+*.csv
+*.xlsx
+*.pdf
+
+# Logs
+*.log
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Ambientes virtuais
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporários
+temp/
+tmp/
+*.tmp
+# Evitar upload de executáveis grandes
+ffmpeg.exe
+ffprobe.exe
+*.exe
