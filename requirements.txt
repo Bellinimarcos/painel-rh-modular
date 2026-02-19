@@ -10,3 +10,4 @@ oauth2client
 python-dotenv
 imageio-ffmpeg
 pydantic<2
+openpyxl
