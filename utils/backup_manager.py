@@ -147,93 +147,122 @@ class BackupManager:
 def render_backup_interface():
     """Renderiza interface de backup na sidebar."""
     from services.storage import get_persistent_storage
-    
+
     st.sidebar.divider()
     st.sidebar.subheader("💾 Backup & Export")
-    
+
     storage = get_persistent_storage()
     backup_mgr = BackupManager()
     analyses = storage.get_analyses()
-    
+
     if not analyses:
         st.sidebar.info("Nenhuma análise para exportar")
         return
-    
+
     col1, col2 = st.sidebar.columns(2)
-    
+
+    # ===============================
+    # EXPORTAÇÃO EXCEL
+    # ===============================
     with col1:
-        # Export para Excel
-        if st.button("📊 Excel", use_container_width=True, help="Exportar para Excel"):
+        if st.sidebar.button(
+            "📊 Excel",
+            key="btn_export_excel",
+            width="stretch",
+            help="Exportar para Excel"
+        ):
             try:
                 filepath = backup_mgr.export_to_excel(analyses)
-                
+
                 with open(filepath, 'rb') as f:
                     st.sidebar.download_button(
                         label="⬇️ Baixar Excel",
                         data=f.read(),
                         file_name=Path(filepath).name,
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        use_container_width=True
+                        key="download_excel",
+                        width="stretch"
                     )
                 st.sidebar.success("Excel gerado!")
             except Exception as e:
                 st.sidebar.error(f"Erro: {e}")
-    
+
+    # ===============================
+    # EXPORTAÇÃO JSON
+    # ===============================
     with col2:
-        # Export para JSON
-        if st.button("📄 JSON", use_container_width=True, help="Exportar para JSON"):
+        if st.sidebar.button(
+            "📄 JSON",
+            key="btn_export_json",
+            width="stretch",
+            help="Exportar para JSON"
+        ):
             try:
                 filepath = backup_mgr.export_to_json(analyses)
-                
+
                 with open(filepath, 'rb') as f:
                     st.sidebar.download_button(
                         label="⬇️ Baixar JSON",
                         data=f.read(),
                         file_name=Path(filepath).name,
                         mime="application/json",
-                        use_container_width=True
+                        key="download_json",
+                        width="stretch"
                     )
                 st.sidebar.success("JSON gerado!")
             except Exception as e:
                 st.sidebar.error(f"Erro: {e}")
-    
-    # Backup completo (.zip)
-    if st.sidebar.button("🗜️ Backup Completo (.zip)", use_container_width=True):
+
+    # ===============================
+    # BACKUP COMPLETO ZIP
+    # ===============================
+    if st.sidebar.button(
+        "🗜️ Backup Completo (.zip)",
+        key="btn_backup_zip",
+        width="stretch"
+    ):
         try:
             zip_path = backup_mgr.create_full_backup()
-            
+
             with open(zip_path, 'rb') as f:
                 st.sidebar.download_button(
                     label="⬇️ Baixar Backup ZIP",
                     data=f.read(),
                     file_name=Path(zip_path).name,
                     mime="application/zip",
-                    use_container_width=True
+                    key="download_zip",
+                    width="stretch"
                 )
             st.sidebar.success("Backup completo criado!")
         except Exception as e:
             st.sidebar.error(f"Erro: {e}")
-    
-    # Restaurar backup
+
+    # ===============================
+    # RESTAURAÇÃO
+    # ===============================
     with st.sidebar.expander("🔄 Restaurar Backup"):
         uploaded_zip = st.file_uploader(
             "Upload arquivo .zip",
             type=['zip'],
-            key="restore_backup"
+            key="restore_backup_uploader"
         )
-        
-        if uploaded_zip and st.button("Restaurar", type="primary"):
+
+        if uploaded_zip and st.sidebar.button(
+            "Restaurar",
+            key="btn_restore_backup",
+            type="primary",
+            width="stretch"
+        ):
             try:
-                # Salva temporariamente
                 temp_path = Path("backups") / uploaded_zip.name
+
                 with open(temp_path, 'wb') as f:
                     f.write(uploaded_zip.read())
-                
-                # Restaura
+
                 backup_mgr.restore_from_backup(str(temp_path))
-                st.success("Backup restaurado! Recarregue a página.")
-                
-                # Remove temporário
+
+                st.sidebar.success("Backup restaurado! Recarregue a página.")
                 temp_path.unlink()
+
             except Exception as e:
-                st.error(f"Erro ao restaurar: {e}")
+                st.sidebar.error(f"Erro ao restaurar: {e}")

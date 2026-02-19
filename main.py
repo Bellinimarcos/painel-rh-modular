@@ -11,6 +11,7 @@ from collections import Counter
 from services.storage import get_persistent_storage
 from config.settings import AppConfig
 from utils.backup_manager import render_backup_interface
+from utils.visualizations import render_analysis_timeline, render_analysis_distribution
 
 # --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(
@@ -57,8 +58,8 @@ def render_sidebar():
         st.divider()
         st.toggle("🐞 Debug Mode", key="debug_mode")
         
-        if st.button("🗑️ Resetar Base de Dados", use_container_width=True):
-            if st.sidebar.checkbox("Confirmar exclusão permanente"):
+        if st.button("🗑️ Resetar Base de Dados", key="btn_reset_db", width="stretch"):
+            if st.checkbox("Confirmar exclusão permanente", key="chk_confirm_reset"):
                 storage.clear_all()
                 st.session_state.clear()
                 st.rerun()
@@ -136,10 +137,10 @@ else:
     col_t1, col_t2 = st.columns([1, 1])
     with col_t1:
         # Importamos aqui as funções de timeline/distribuição que você já tinha
-        from main import render_analysis_timeline
+        
         render_analysis_timeline(analyses)
     with col_t2:
-        from main import render_analysis_distribution
+        
         render_analysis_distribution(analyses)
 
     st.divider()
