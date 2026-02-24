@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy
+plotly
+pydub
+requests
+fpdf
+gspread
+oauth2client
+python-dotenv
+imageio-ffmpeg
+pydantic<2
+openpyxl
