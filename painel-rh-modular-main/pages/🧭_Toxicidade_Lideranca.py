@@ -20,12 +20,12 @@ from logic.toxicidade_logic import GerenciadorAvaliacaoToxicidade
 
 
 # ============================================================================
-# CONFIGURAÇÃO DA PÁGINA
+# CONFIGURAO DA PÁGINA
 # ============================================================================
 
 st.set_page_config(
     page_title="Avaliação de Toxicidade em Lideranças",
-    page_icon="🧭",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -280,7 +280,7 @@ st.markdown("""
 
 
 # ============================================================================
-# INICIALIZAÇÃO DO SESSION STATE
+# INICIALIZAO DO SESSION STATE
 # ============================================================================
 
 def inicializar_session_state():
@@ -323,7 +323,7 @@ def inicializar_session_state():
 
 
 # ============================================================================
-# FUNÇÕES DE RENDERIZAÇÃO DE QUESTIONÁRIO
+# FUNES DE RENDERIZAO DE QUESTIONÁRIO
 # ============================================================================
 
 def renderizar_escala_likert(questao_id: int, texto: str, chave: str, tipo: str = "direta"):
@@ -353,29 +353,29 @@ def renderizar_escala_likert(questao_id: int, texto: str, chave: str, tipo: str 
     resposta = None
     
     with col1:
-        if st.button(f"1️⃣\n{labels[0]}", key=f"{chave}_1", use_container_width=True):
+        if st.button(f"1️\n{labels[0]}", key=f"{chave}_1", width='stretch'):
             resposta = opcoes[0]
     
     with col2:
-        if st.button(f"2️⃣\n{labels[1]}", key=f"{chave}_2", use_container_width=True):
+        if st.button(f"2️\n{labels[1]}", key=f"{chave}_2", width='stretch'):
             resposta = opcoes[1]
     
     with col3:
-        if st.button(f"3️⃣\n{labels[2]}", key=f"{chave}_3", use_container_width=True):
+        if st.button(f"3️\n{labels[2]}", key=f"{chave}_3", width='stretch'):
             resposta = opcoes[2]
     
     with col4:
-        if st.button(f"4️⃣\n{labels[3]}", key=f"{chave}_4", use_container_width=True):
+        if st.button(f"4️\n{labels[3]}", key=f"{chave}_4", width='stretch'):
             resposta = opcoes[3]
     
     with col5:
-        if st.button(f"5️⃣\n{labels[4]}", key=f"{chave}_5", use_container_width=True):
+        if st.button(f"5️\n{labels[4]}", key=f"{chave}_5", width='stretch'):
             resposta = opcoes[4]
     
     # Mostra resposta atual se já houver uma
     if questao_id in st.session_state.respostas_toxicidade:
         resp_atual = st.session_state.respostas_toxicidade[questao_id]
-        st.success(f"✓ Resposta registrada: {resp_atual} - {ESCALA_LIKERT[resp_atual]}")
+        st.success(f" Resposta registrada: {resp_atual} - {ESCALA_LIKERT[resp_atual]}")
     
     # Registra resposta
     if resposta:
@@ -395,7 +395,7 @@ def renderizar_questionario(questionario):
     # Header
     st.markdown(f"""
     <div class="fade-in">
-        <h1 class="main-header">🧭 {questionario.titulo}</h1>
+        <h1 class="main-header"> {questionario.titulo}</h1>
         <p class="sub-header">{questionario.descricao}</p>
     </div>
     """, unsafe_allow_html=True)
@@ -403,14 +403,14 @@ def renderizar_questionario(questionario):
     st.markdown("---")
     
     # Instruções
-    with st.expander("📋 **Instruções de Preenchimento**", expanded=True):
+    with st.expander(" **Instruções de Preenchimento**", expanded=True):
         st.markdown("""
-        ### 👋 Bem-vindo(a) à Avaliação de Toxicidade em Lideranças
+        ###  Bem-vindo(a) à Avaliação de Toxicidade em Lideranças
         
         Esta ferramenta foi desenvolvida para auxiliar na identificação de comportamentos tóxicos 
         em ambientes de liderança organizacional.
         
-        #### 📝 Como responder:
+        ####  Como responder:
         
         1. **Leia cada afirmação com atenção** - Não há respostas certas ou erradas
         2. **Pense na sua experiência real** com a liderança avaliada
@@ -418,7 +418,7 @@ def renderizar_questionario(questionario):
         4. **Seja honesto(a)** - Suas respostas são confidenciais
         5. **Responda todas as questões** para obter um resultado completo
         
-        #### 🎯 Escala de Resposta:
+        ####  Escala de Resposta:
         
         - **1 - Discordo Totalmente**: Nunca acontece / Não se aplica
         - **2 - Discordo**: Acontece raramente (menos de 25% das vezes)
@@ -426,7 +426,7 @@ def renderizar_questionario(questionario):
         - **4 - Concordo**: Acontece frequentemente (mais de 75% das vezes)
         - **5 - Concordo Totalmente**: Acontece sempre ou quase sempre
         
-        #### 🔒 Confidencialidade:
+        ####  Confidencialidade:
         
         Todas as suas respostas serão tratadas com confidencialidade e utilizadas apenas 
         para fins de diagnóstico organizacional e desenvolvimento de liderança.
@@ -434,13 +434,13 @@ def renderizar_questionario(questionario):
         ---
         
         **⏱️ Tempo estimado:** 10-15 minutos  
-        **📊 Total de questões:** {len(questionario)} questões em {len(questionario.dimensoes)} dimensões
+        ** Total de questões:** {len(questionario)} questões em {len(questionario.dimensoes)} dimensões
         """)
     
     st.markdown("---")
     
     # Opção de coletar dados do participante
-    with st.expander("👤 Dados do Participante (Opcional)", expanded=False):
+    with st.expander(" Dados do Participante (Opcional)", expanded=False):
         st.markdown("*Preencha apenas se desejar identificar esta avaliação*")
         
         col1, col2 = st.columns(2)
@@ -468,7 +468,7 @@ def renderizar_questionario(questionario):
     for idx, dimensao in enumerate(questionario.dimensoes, 1):
         st.markdown(f"""
         <div class="dimensao-header fade-in">
-            <h3>📌 Dimensão {idx}: {dimensao.nome}</h3>
+            <h3> Dimensão {idx}: {dimensao.nome}</h3>
             <p style="margin: 5px 0 0 0; opacity: 0.9;">{dimensao.descricao}</p>
         </div>
         """, unsafe_allow_html=True)
@@ -486,7 +486,7 @@ def renderizar_questionario(questionario):
 
 
 # ============================================================================
-# FUNÇÕES DE VISUALIZAÇÃO DE RESULTADOS
+# FUNES DE VISUALIZAO DE RESULTADOS
 # ============================================================================
 
 def criar_grafico_radar(resultado):
@@ -652,7 +652,7 @@ def criar_tabela_dimensoes(resultado):
 
 
 # ============================================================================
-# FUNÇÃO PRINCIPAL DE RENDERIZAÇÃO DE RESULTADOS
+# FUNO PRINCIPAL DE RENDERIZAO DE RESULTADOS
 # ============================================================================
 
 def renderizar_resultados(resultado, gerenciador):
@@ -665,22 +665,22 @@ def renderizar_resultados(resultado, gerenciador):
     """
     st.markdown("""
     <div class="fade-in">
-        <h1 class="main-header">📊 Resultados da Avaliação</h1>
+        <h1 class="main-header"> Resultados da Avaliação</h1>
         <p class="sub-header">Análise Completa de Toxicidade em Liderança</p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("---")
     
-    # ========== SEÇÃO 1: PONTUAÇÃO GERAL ==========
-    st.markdown("### 🎯 Pontuação Geral")
+    # ========== SEO 1: PONTUAO GERAL ==========
+    st.markdown("###  Pontuação Geral")
     
     col_gauge, col_metrics = st.columns([1, 1])
     
     with col_gauge:
         st.plotly_chart(
             criar_grafico_gauge(resultado.pontuacao_total, resultado.nivel_risco_geral),
-            use_container_width=True
+            width='stretch'
         )
     
     with col_metrics:
@@ -697,67 +697,67 @@ def renderizar_resultados(resultado, gerenciador):
     
     st.markdown("---")
     
-    # ========== SEÇÃO 2: INTERPRETAÇÃO ==========
-    st.markdown("### 📖 Interpretação dos Resultados")
+    # ========== SEO 2: INTERPRETAO ==========
+    st.markdown("###  Interpretação dos Resultados")
     
     interpretacao = obter_interpretacao(resultado.nivel_risco_geral)
     
     if resultado.nivel_risco_geral == "Alto":
         st.markdown(f"""
         <div class="custom-alert alert-danger">
-            <h4>⚠️ Situação Crítica Detectada</h4>
+            <h4>️ Situação Crítica Detectada</h4>
             <p>{interpretacao}</p>
         </div>
         """, unsafe_allow_html=True)
     elif resultado.nivel_risco_geral == "Moderado":
         st.markdown(f"""
         <div class="custom-alert alert-warning">
-            <h4>⚠️ Atenção Necessária</h4>
+            <h4>️ Atenção Necessária</h4>
             <p>{interpretacao}</p>
         </div>
         """, unsafe_allow_html=True)
     elif resultado.nivel_risco_geral == "Baixo":
         st.markdown(f"""
         <div class="custom-alert alert-success">
-            <h4>✓ Situação Controlada</h4>
+            <h4> Situação Controlada</h4>
             <p>{interpretacao}</p>
         </div>
         """, unsafe_allow_html=True)
     else:
         st.markdown(f"""
         <div class="custom-alert alert-info">
-            <h4>✓ Excelente Ambiente</h4>
+            <h4> Excelente Ambiente</h4>
             <p>{interpretacao}</p>
         </div>
         """, unsafe_allow_html=True)
     
     st.markdown("---")
     
-    # ========== SEÇÃO 3: ANÁLISE POR DIMENSÃO ==========
-    st.markdown("### 📊 Análise Detalhada por Dimensão")
+    # ========== SEO 3: ANÁLISE POR DIMENSO ==========
+    st.markdown("###  Análise Detalhada por Dimensão")
     
-    tab_graficos, tab_tabela = st.tabs(["📈 Visualizações", "📋 Tabela Detalhada"])
+    tab_graficos, tab_tabela = st.tabs([" Visualizações", " Tabela Detalhada"])
     
     with tab_graficos:
         col_radar, col_barras = st.columns(2)
         
         with col_radar:
-            st.plotly_chart(criar_grafico_radar(resultado), use_container_width=True)
+            st.plotly_chart(criar_grafico_radar(resultado), width='stretch')
         
         with col_barras:
-            st.plotly_chart(criar_grafico_barras_horizontal(resultado), use_container_width=True)
+            st.plotly_chart(criar_grafico_barras_horizontal(resultado), width='stretch')
     
     with tab_tabela:
         df_dimensoes = criar_tabela_dimensoes(resultado)
-        st.dataframe(df_dimensoes, use_container_width=True, hide_index=True)
+        st.dataframe(df_dimensoes, width='stretch', hide_index=True)
     
     st.markdown("---")
     
-    # ========== SEÇÃO 4: DIMENSÕES CRÍTICAS E POSITIVAS ==========
+    # ========== SEO 4: DIMENSES CRÍTICAS E POSITIVAS ==========
     col_criticas, col_positivas = st.columns(2)
     
     with col_criticas:
-        st.markdown("### 🚨 Dimensões Mais Críticas")
+        st.markdown("###  Dimensões Mais Críticas")
         
         dimensoes_criticas = resultado.obter_dimensoes_criticas(limite=50)
         
@@ -773,10 +773,10 @@ def renderizar_resultados(resultado, gerenciador):
                 </div>
                 """, unsafe_allow_html=True)
         else:
-            st.success("✓ Nenhuma dimensão crítica identificada!")
+            st.success(" Nenhuma dimensão crítica identificada!")
     
     with col_positivas:
-        st.markdown("### ✨ Dimensões Mais Positivas")
+        st.markdown("###  Dimensões Mais Positivas")
         
         dimensoes_positivas = resultado.obter_dimensoes_positivas(limite=50)
         
@@ -796,56 +796,56 @@ def renderizar_resultados(resultado, gerenciador):
     
     st.markdown("---")
     
-    # ========== SEÇÃO 5: RECOMENDAÇÕES ==========
+    # ========== SEO 5: RECOMENDAES ==========
     if resultado.recomendacoes:
-        st.markdown("### 💡 Recomendações e Plano de Ação")
+        st.markdown("###  Recomendações e Plano de Ação")
         
         for idx, recomendacao in enumerate(resultado.recomendacoes, 1):
             if recomendacao.strip():
                 if "**" in recomendacao:
                     st.markdown(recomendacao)
-                elif recomendacao.startswith("⚠️") or recomendacao.startswith("✓"):
+                elif recomendacao.startswith("️") or recomendacao.startswith(""):
                     st.markdown(f"""
                     <div class="recommendation-card">
                         {recomendacao}
                     </div>
                     """, unsafe_allow_html=True)
                 else:
-                    st.markdown(f"• {recomendacao}")
+                    st.markdown(f" {recomendacao}")
     
     st.markdown("---")
     
-    # ========== SEÇÃO 6: AÇÕES E EXPORTAÇÃO ==========
-    st.markdown("### 🎬 Próximas Ações")
+    # ========== SEO 6: AES E EXPORTAO ==========
+    st.markdown("###  Próximas Ações")
     
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        if st.button("💾 Salvar Resultado", use_container_width=True, type="primary"):
+        if st.button(" Salvar Resultado", width='stretch', type="primary"):
             try:
                 avaliacao_id = gerenciador.salvar_resultado(resultado)
-                st.success(f"✅ Resultado salvo!\n\nID: `{avaliacao_id}`")
+                st.success(f" Resultado salvo!\n\nID: `{avaliacao_id}`")
             except Exception as e:
-                st.error(f"❌ Erro ao salvar: {str(e)}")
+                st.error(f" Erro ao salvar: {str(e)}")
     
     with col2:
-        if st.button("📥 Exportar JSON", use_container_width=True):
+        if st.button(" Exportar JSON", width='stretch'):
             try:
                 caminho = gerenciador.exportar_resultados(formato="json")
-                st.success(f"✅ Exportado para:\n`{caminho}`")
+                st.success(f" Exportado para:\n`{caminho}`")
             except Exception as e:
-                st.error(f"❌ Erro: {str(e)}")
+                st.error(f" Erro: {str(e)}")
     
     with col3:
-        if st.button("📊 Exportar CSV", use_container_width=True):
+        if st.button(" Exportar CSV", width='stretch'):
             try:
                 caminho = gerenciador.exportar_resultados(formato="csv")
-                st.success(f"✅ Exportado para:\n`{caminho}`")
+                st.success(f" Exportado para:\n`{caminho}`")
             except Exception as e:
-                st.error(f"❌ Erro: {str(e)}")
+                st.error(f" Erro: {str(e)}")
     
     with col4:
-        if st.button("🔄 Nova Avaliação", use_container_width=True):
+        if st.button(" Nova Avaliação", width='stretch'):
             st.session_state.respostas_toxicidade = {}
             st.session_state.avaliacao_completa = False
             st.session_state.resultado_atual = None
@@ -854,18 +854,18 @@ def renderizar_resultados(resultado, gerenciador):
 
 
 # ============================================================================
-# FUNÇÃO DE RENDERIZAÇÃO DE HISTÓRICO
+# FUNO DE RENDERIZAO DE HISTRICO
 # ============================================================================
 
 def renderizar_historico(gerenciador):
     """Renderiza página de histórico com estatísticas"""
     
-    st.markdown("### 📚 Histórico de Avaliações")
+    st.markdown("###  Histórico de Avaliações")
     
     avaliacoes = gerenciador.listar_avaliacoes()
     
     if not avaliacoes:
-        st.info("📭 Nenhuma avaliação registrada ainda.")
+        st.info(" Nenhuma avaliação registrada ainda.")
         st.markdown("""
         **Comece agora:**
         1. Vá para "Nova Avaliação"
@@ -875,7 +875,7 @@ def renderizar_historico(gerenciador):
         return
     
     # ========== ESTATÍSTICAS GERAIS ==========
-    st.markdown("#### 📊 Visão Geral")
+    st.markdown("####  Visão Geral")
     
     stats = gerenciador.obter_estatisticas()
     
@@ -921,8 +921,8 @@ def renderizar_historico(gerenciador):
     
     st.markdown("---")
     
-    # ========== LISTA DE AVALIAÇÕES ==========
-    st.markdown("#### 📋 Lista de Avaliações")
+    # ========== LISTA DE AVALIAES ==========
+    st.markdown("####  Lista de Avaliações")
     
     # Filtros
     col_filtro1, col_filtro2, col_filtro3 = st.columns(3)
@@ -962,7 +962,7 @@ def renderizar_historico(gerenciador):
     if avaliacoes_exibir:
         df = pd.DataFrame([
             {
-                'ID': a['id'][-8:],  # Últimos 8 caracteres
+                'ID': a['id'][-8:],  # ltimos 8 caracteres
                 'Data': pd.to_datetime(a['timestamp']).strftime('%d/%m/%Y %H:%M'),
                 'Pontuação': f"{a['pontuacao_total']:.1f}",
                 'Nível': a['nivel_risco_geral'],
@@ -971,7 +971,7 @@ def renderizar_historico(gerenciador):
             for a in avaliacoes_exibir
         ])
         
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(df, width='stretch', hide_index=True)
         
         st.caption(f"Exibindo {len(avaliacoes_exibir)} de {len(avaliacoes_filtradas)} avaliações filtradas")
     else:
@@ -979,7 +979,7 @@ def renderizar_historico(gerenciador):
 
 
 # ============================================================================
-# FUNÇÕES AUXILIARES
+# FUNES AUXILIARES
 # ============================================================================
 
 def obter_classe_css_risco(nivel_risco: str) -> str:
@@ -997,7 +997,7 @@ def renderizar_sobre():
     """Renderiza página Sobre"""
     st.markdown("""
     <div class="fade-in">
-        <h1 class="main-header">📖 Sobre esta Ferramenta</h1>
+        <h1 class="main-header"> Sobre esta Ferramenta</h1>
     </div>
     """, unsafe_allow_html=True)
     
@@ -1008,70 +1008,70 @@ def renderizar_sobre():
     
     **Desenvolvido por:** Projeto SER | Marcos Simões Bellini, CRP 04/37811
     
-    ### 🎯 Objetivo
+    ###  Objetivo
     
     Esta ferramenta foi desenvolvida para auxiliar organizações na identificação e mensuração 
     de comportamentos tóxicos em ambientes de liderança, contribuindo para:
     
-    - 🏢 Ambientes de trabalho mais saudáveis
-    - 📈 Maior produtividade e engajamento
-    - 🤝 Melhor clima organizacional
-    - 💪 Desenvolvimento de lideranças mais eficazes
+    -  Ambientes de trabalho mais saudáveis
+    -  Maior produtividade e engajamento
+    -  Melhor clima organizacional
+    -  Desenvolvimento de lideranças mais eficazes
     
-    ### 📊 Dimensões Avaliadas
+    ###  Dimensões Avaliadas
     
     O questionário avalia **8 dimensões fundamentais** de toxicidade:
     
-    1. **🗣️ Comunicação e Feedback** - Qualidade e clareza da comunicação
-    2. **🏆 Reconhecimento e Valorização** - Reconhecimento de esforços e resultados
-    3. **⚖️ Equidade e Justiça** - Tratamento justo e imparcial
-    4. **🤝 Confiança e Transparência** - Honestidade e confiabilidade
-    5. **💪 Empoderamento e Autonomia** - Delegação e confiança na equipe
-    6. **😰 Pressão e Estresse** - Gestão de prazos e pressões
-    7. **👁️ Respeito e Dignidade** - Tratamento respeitoso
-    8. **🎯 Expectativas e Clareza** - Clareza de objetivos e expectativas
+    1. **️ Comunicação e Feedback** - Qualidade e clareza da comunicação
+    2. ** Reconhecimento e Valorização** - Reconhecimento de esforços e resultados
+    3. **️ Equidade e Justiça** - Tratamento justo e imparcial
+    4. ** Confiança e Transparência** - Honestidade e confiabilidade
+    5. ** Empoderamento e Autonomia** - Delegação e confiança na equipe
+    6. ** Pressão e Estresse** - Gestão de prazos e pressões
+    7. **️ Respeito e Dignidade** - Tratamento respeitoso
+    8. ** Expectativas e Clareza** - Clareza de objetivos e expectativas
     
-    ### 📈 Interpretação dos Resultados
+    ###  Interpretação dos Resultados
     
     Os resultados são classificados em **4 níveis de risco**:
     
-    #### 🟦 Excelente (0-24 pontos)
+    ####  Excelente (0-24 pontos)
     - Liderança exemplar e saudável
     - Ambiente positivo e motivador
     - Manter e fortalecer práticas atuais
     
-    #### 🟩 Baixo (25-49 pontos)
+    ####  Baixo (25-49 pontos)
     - Situação aceitável com pontos de atenção
     - Monitoramento regular recomendado
     - Algumas melhorias podem ser implementadas
     
-    #### 🟨 Moderado (50-74 pontos)
+    ####  Moderado (50-74 pontos)
     - Sinais significativos de toxicidade
     - Requer avaliação aprofundada
     - Plano de ação corretivo necessário
     
-    #### 🟥 Alto (75-100 pontos)
+    ####  Alto (75-100 pontos)
     - Situação crítica
     - Intervenção imediata necessária
     - Suporte do RH e profissionais especializados
     
-    ### 🔒 Confidencialidade
+    ###  Confidencialidade
     
     - Todas as respostas são tratadas com **confidencialidade**
     - Dados utilizados apenas para **diagnóstico organizacional**
     - Resultados apresentados de forma **agregada e anônima**
     - Conformidade com **LGPD** (Lei Geral de Proteção de Dados)
     
-    ### 📱 Recursos da Ferramenta
+    ###  Recursos da Ferramenta
     
-    - ✅ Questionário completo com 40+ questões
-    - 📊 Visualizações interativas dos resultados
-    - 💾 Salvamento e histórico de avaliações
-    - 📥 Exportação de dados (JSON, CSV)
-    - 📈 Estatísticas e análises comparativas
-    - 💡 Recomendações personalizadas
+    -  Questionário completo com 40+ questões
+    -  Visualizações interativas dos resultados
+    -  Salvamento e histórico de avaliações
+    -  Exportação de dados (JSON, CSV)
+    -  Estatísticas e análises comparativas
+    -  Recomendações personalizadas
     
-    ### 🎓 Base Científica
+    ###  Base Científica
     
     Esta ferramenta foi desenvolvida com base em:
     
@@ -1080,7 +1080,7 @@ def renderizar_sobre():
     - Experiência clínica em psicologia organizacional
     - Feedback de profissionais de RH
     
-    ### 📞 Contato e Suporte
+    ###  Contato e Suporte
     
     **Projeto SER**  
     Marcos Simões Bellini, CRP 04/37811  
@@ -1090,13 +1090,13 @@ def renderizar_sobre():
     ---
     
     **Versão:** 1.0  
-    **Última Atualização:** Novembro 2025  
+    **ltima Atualização:** Novembro 2025  
     **Licença:** Proprietária - Todos os direitos reservados
     """)
 
 
 # ============================================================================
-# FUNÇÃO PRINCIPAL
+# FUNO PRINCIPAL
 # ============================================================================
 
 def main():
@@ -1111,7 +1111,7 @@ def main():
     
     # ========== SIDEBAR ==========
     with st.sidebar:
-        st.markdown("## 🧭 Toxicidade em Lideranças")
+        st.markdown("##  Toxicidade em Lideranças")
         st.markdown("---")
         
         # Navegação
@@ -1125,7 +1125,7 @@ def main():
         
         # Progresso (apenas na página de avaliação)
         if pagina == "Nova Avaliação" and not st.session_state.avaliacao_completa:
-            st.markdown("### 📊 Progresso")
+            st.markdown("###  Progresso")
             
             total_questoes = len(questionario)
             respondidas = len(st.session_state.respostas_toxicidade)
@@ -1146,12 +1146,12 @@ def main():
             """, unsafe_allow_html=True)
             
             if respondidas < total_questoes:
-                st.warning(f"⚠️ Faltam {total_questoes - respondidas} questões")
+                st.warning(f"️ Faltam {total_questoes - respondidas} questões")
             else:
-                st.success("✅ Todas as questões respondidas!")
+                st.success(" Todas as questões respondidas!")
         
         # Informações adicionais
-        with st.expander("ℹ️ Informações"):
+        with st.expander("️ Informações"):
             st.markdown("""
             **Versão:** 1.0  
             **Total de Dimensões:** 8  
@@ -1165,7 +1165,7 @@ def main():
             CRP 04/37811
             """)
     
-    # ========== CONTEÚDO PRINCIPAL ==========
+    # ========== CONTEDO PRINCIPAL ==========
     
     if pagina == "Nova Avaliação":
         if not st.session_state.avaliacao_completa:
@@ -1181,18 +1181,18 @@ def main():
                 respondidas = len(st.session_state.respostas_toxicidade)
                 
                 if respondidas < total_questoes:
-                    st.warning(f"⚠️ Complete todas as {total_questoes - respondidas} questões restantes")
+                    st.warning(f"️ Complete todas as {total_questoes - respondidas} questões restantes")
                     enviar_disabled = True
                 else:
                     enviar_disabled = False
                 
                 if st.button(
-                    "✅ ENVIAR AVALIAÇÃO",
-                    use_container_width=True,
+                    " ENVIAR AVALIAO",
+                    width='stretch',
                     disabled=enviar_disabled,
                     type="primary"
                 ):
-                    with st.spinner("🔄 Processando sua avaliação..."):
+                    with st.spinner(" Processando sua avaliação..."):
                         try:
                             # Valida
                             valido, erros = gerenciador.validar_respostas(
@@ -1200,7 +1200,7 @@ def main():
                             )
                             
                             if not valido:
-                                st.error(f"❌ Erro na validação:\n{chr(10).join(erros)}")
+                                st.error(f" Erro na validação:\n{chr(10).join(erros)}")
                             else:
                                 # Processa
                                 resultado = gerenciador.processar_avaliacao(
@@ -1211,13 +1211,13 @@ def main():
                                 st.session_state.resultado_atual = resultado
                                 st.session_state.avaliacao_completa = True
                                 
-                                st.success("✅ Avaliação processada com sucesso!")
+                                st.success(" Avaliação processada com sucesso!")
                                 st.balloons()
                                 
                                 st.rerun()
                         
                         except Exception as e:
-                            st.error(f"❌ Erro ao processar: {str(e)}")
+                            st.error(f" Erro ao processar: {str(e)}")
         
         else:
             # Mostra resultados
@@ -1243,9 +1243,11 @@ def render_footer():
 
 
 # ============================================================================
-# EXECUÇÃO
+# EXECUO
 # ============================================================================
 
 if __name__ == "__main__":
     main()
     render_footer()
+
+

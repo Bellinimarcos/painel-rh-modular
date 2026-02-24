@@ -10,11 +10,11 @@ from elevenlabs import VoiceSettings
 # Configuração da página
 st.set_page_config(
     page_title="Podcast 60s - Alfa Bureau",
-    page_icon="🎙️",
+    page_icon="️",
     layout="wide"
 )
 
-st.title("🎙️ Podcast Profissional 60s - Alfa Bureau")
+st.title("️ Podcast Profissional 60s - Alfa Bureau")
 st.markdown("**Reforma Tributária 2026 - Formato Podcast com Vinhetas**")
 
 # ========== ROTEIRO COMPLETO ==========
@@ -38,7 +38,7 @@ roteiro = [
     },
     {
         "tipo": "dialogo",
-        "texto": "Ótima! Obrigada por me receber. A Reforma Tributária é um dos maiores desafios que as empresas vão enfrentar nos próximos anos.",
+        "texto": "tima! Obrigada por me receber. A Reforma Tributária é um dos maiores desafios que as empresas vão enfrentar nos próximos anos.",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
         "descricao": "Especialista - Introdução"
@@ -102,9 +102,9 @@ roteiro = [
 try:
     api_key = st.secrets["ELEVENLABS_API_KEY"]
     client = ElevenLabs(api_key=api_key)
-    st.success("✅ ElevenLabs API PREMIUM carregada!")
+    st.success(" ElevenLabs API PREMIUM carregada!")
 except Exception as e:
-    st.error("❌ Erro ao carregar chave API")
+    st.error(" Erro ao carregar chave API")
     st.stop()
 
 # Localizar FFmpeg
@@ -150,7 +150,7 @@ def generate_audio(texto, voice_id, tipo_conteudo):
         )
         return b"".join(audio)
     except Exception as e:
-        st.error(f"❌ Erro: {str(e)}")
+        st.error(f" Erro: {str(e)}")
         return None
 
 # Função para combinar áudios
@@ -191,42 +191,42 @@ def combine_audios_ffmpeg(audio_segments):
             with open(output_file, 'rb') as f:
                 return f.read()
     except Exception as e:
-        st.error(f"❌ Erro ao combinar: {str(e)}")
+        st.error(f" Erro ao combinar: {str(e)}")
         return None
 
 # ========== INTERFACE ==========
 
 st.markdown("---")
-st.subheader("📻 Estrutura do Podcast")
+st.subheader(" Estrutura do Podcast")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.info("**🎵 Vinheta Abertura**\n\n~3 segundos\n\nDaniel")
+    st.info("** Vinheta Abertura**\n\n~3 segundos\n\nDaniel")
 with col2:
-    st.success("**🎙️ Diálogo Principal**\n\n~50 segundos\n\nDaniel + Matilda")
+    st.success("**️ Diálogo Principal**\n\n~50 segundos\n\nDaniel + Matilda")
 with col3:
-    st.warning("**🎶 Jingle + Encerramento**\n\n~7 segundos\n\nMatilda + Daniel")
+    st.warning("** Jingle + Encerramento**\n\n~7 segundos\n\nMatilda + Daniel")
 
 # Mostrar roteiro
 st.markdown("---")
-st.subheader("📝 Roteiro Completo do Podcast")
+st.subheader(" Roteiro Completo do Podcast")
 
 for i, item in enumerate(roteiro, 1):
-    icone = "🎵" if "vinheta" in item["tipo"] else "🎶" if item["tipo"] == "jingle" else "🎙️"
+    icone = "" if "vinheta" in item["tipo"] else "" if item["tipo"] == "jingle" else "️"
     with st.expander(f"{icone} **{item['descricao']}** - {item['nome']}"):
         st.write(f"**Tipo:** {item['tipo']}")
         st.write(f"**Texto:** {item['texto']}")
 
 # Info sobre vozes
-with st.expander("🎤 Configurações de Voz por Tipo"):
+with st.expander(" Configurações de Voz por Tipo"):
     st.markdown("""
     - **Vinhetas:** Voz mais dramática e enfática
     - **Diálogo:** Voz natural e conversacional
     - **Jingle:** Voz animada e memorável
     
     **Vozes:**
-    - 👨 **Daniel** (apresentador) - Tom energético e profissional
-    - 👩 **Matilda** (especialista) - Tom técnico e confiável
+    -  **Daniel** (apresentador) - Tom energético e profissional
+    -  **Matilda** (especialista) - Tom técnico e confiável
     """)
 
 # Botão de geração
@@ -234,62 +234,64 @@ st.markdown("---")
 col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
-    if st.button("🎙️ **GERAR PODCAST 60s COMPLETO**", type="primary", use_container_width=True):
+    if st.button("️ **GERAR PODCAST 60s COMPLETO**", type="primary", width='stretch'):
         progress_bar = st.progress(0.0)
         status_text = st.empty()
         
         audio_segments = []
         
         for i, item in enumerate(roteiro):
-            status_text.text(f"🎤 Gerando: {item['descricao']}...")
+            status_text.text(f" Gerando: {item['descricao']}...")
             progress_bar.progress((i / len(roteiro)) * 0.8)
             
             audio = generate_audio(item['texto'], item['voz'], item['tipo'])
             
             if audio:
                 audio_segments.append(audio)
-                st.success(f"✅ {item['descricao']} - {item['nome']}")
+                st.success(f" {item['descricao']} - {item['nome']}")
             else:
-                st.error(f"❌ Falha: {item['descricao']}")
+                st.error(f" Falha: {item['descricao']}")
                 break
             
             time.sleep(0.5)
         
         if len(audio_segments) == len(roteiro):
-            status_text.text("🔗 Montando podcast completo...")
+            status_text.text(" Montando podcast completo...")
             progress_bar.progress(0.9)
             
             final_podcast = combine_audios_ffmpeg(audio_segments)
             
             if final_podcast:
                 progress_bar.progress(1.0)
-                status_text.text("✅ Podcast pronto!")
+                status_text.text(" Podcast pronto!")
                 
                 st.markdown("---")
-                st.subheader("🎧 Podcast 60s - Alfa Bureau Cast")
+                st.subheader(" Podcast 60s - Alfa Bureau Cast")
                 st.audio(final_podcast, format="audio/wav")
                 
                 col_a, col_b = st.columns(2)
                 with col_a:
                     st.download_button(
-                        label="📥 Download Podcast (.wav)",
+                        label=" Download Podcast (.wav)",
                         data=final_podcast,
                         file_name="alfa_bureau_podcast_60s.wav",
                         mime="audio/wav",
-                        use_container_width=True
+                        width='stretch'
                     )
                 with col_b:
                     st.metric("Duração Estimada", "~60 segundos")
                 
-                st.success("🎉 Podcast gerado com sucesso!")
+                st.success(" Podcast gerado com sucesso!")
                 st.balloons()
             else:
-                st.error("❌ Erro ao combinar")
+                st.error(" Erro ao combinar")
         else:
-            st.error("❌ Não foi possível gerar todos os trechos")
+            st.error(" Não foi possível gerar todos os trechos")
 
 st.markdown("---")
-st.info("💎 **Podcast Premium** com vozes Daniel + Matilda | Estrutura: Vinheta → Diálogo → Jingle → Encerramento")
+st.info(" **Podcast Premium** com vozes Daniel + Matilda | Estrutura: Vinheta  Diálogo  Jingle  Encerramento")
 
 total_chars = sum(len(item['texto']) for item in roteiro)
-st.caption(f"📊 {len(roteiro)} segmentos | {total_chars} caracteres | Duração: ~60 segundos")
+st.caption(f" {len(roteiro)} segmentos | {total_chars} caracteres | Duração: ~60 segundos")
+
+

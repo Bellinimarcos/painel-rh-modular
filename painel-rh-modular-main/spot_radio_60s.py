@@ -2,7 +2,7 @@
 SPOT DE RÁDIO COMERCIAL - ALFA BUREAU
 Reforma Tributária 2026
 Duração: 55-60 segundos (EXATO)
-APROVADO PARA VEICULAÇÃO
+APROVADO PARA VEICULAO
 """
 
 import streamlit as st
@@ -15,151 +15,151 @@ from elevenlabs import VoiceSettings
 
 st.set_page_config(
     page_title="Spot Rádio 60s - Alfa Bureau",
-    page_icon="📻",
+    page_icon="",
     layout="wide"
 )
 
-st.title("📻 Spot Comercial para Rádio - Alfa Bureau")
+st.title(" Spot Comercial para Rádio - Alfa Bureau")
 st.markdown("**Reforma Tributária 2026 - 55-60 segundos**")
 
 # ==================== UPLOAD DE JINGLES ====================
 st.markdown("---")
-st.subheader("🎵 Upload de Jingles (3-5 segundos cada)")
+st.subheader(" Upload de Jingles (3-5 segundos cada)")
 
-st.warning("⚠️ **IMPORTANTE:** Use jingles curtos (3-5s) para não ultrapassar 60 segundos totais!")
+st.warning("️ **IMPORTANTE:** Use jingles curtos (3-5s) para não ultrapassar 60 segundos totais!")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.info("**🎵 Jingle Abertura (3-5s)**")
+    st.info("** Jingle Abertura (3-5s)**")
     jingle_abertura = st.file_uploader(
         "Vinheta de abertura",
         type=['mp3', 'wav', 'm4a', 'ogg', 'flac'],
         key="abertura"
     )
     if jingle_abertura:
-        st.success(f"✅ {jingle_abertura.name}")
+        st.success(f" {jingle_abertura.name}")
         st.audio(jingle_abertura)
 
 with col2:
-    st.warning("**🎵 Assinatura Final (3-5s)**")
+    st.warning("** Assinatura Final (3-5s)**")
     jingle_encerramento = st.file_uploader(
         "Assinatura da marca",
         type=['mp3', 'wav', 'm4a', 'ogg', 'flac'],
         key="encerramento"
     )
     if jingle_encerramento:
-        st.success(f"✅ {jingle_encerramento.name}")
+        st.success(f" {jingle_encerramento.name}")
         st.audio(jingle_encerramento)
 
 # ==================== ROTEIRO RÁDIO (55-60s) ====================
 
-# OPÇÃO 1: Spot Informativo
+# OPO 1: Spot Informativo
 roteiro_opcao1 = [
     {
         "texto": "Atenção empresário! A Reforma Tributária de 2026 está chegando e vai mudar completamente a forma como sua empresa paga impostos.",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
         "tempo_estimado": "8s",
-        "descricao": "🎯 Gancho - Atenção"
+        "descricao": " Gancho - Atenção"
     },
     {
         "texto": "Cinco impostos atuais serão substituídos por apenas dois. O sistema de créditos tributários muda totalmente. E quem não se preparar agora pode ter sérios problemas em 2026.",
         "voz": "m151rjrbWXbBqyq56tly",
         "nome": "Carla",
         "tempo_estimado": "14s",
-        "descricao": "📊 Problema/Urgência"
+        "descricao": " Problema/Urgência"
     },
     {
         "texto": "A Alfa Bureau está ajudando empresas a se prepararem com diagnóstico completo, análise de impactos e plano de ação personalizado. Não deixe para a última hora!",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
         "tempo_estimado": "13s",
-        "descricao": "💼 Solução Alfa Bureau"
+        "descricao": " Solução Alfa Bureau"
     },
     {
         "texto": "Entre em contato com a Alfa Bureau e garanta que sua empresa esteja pronta para essa transformação. Alfa Bureau: transformando complexidade em simplicidade.",
         "voz": "m151rjrbWXbBqyq56tly",
         "nome": "Carla",
         "tempo_estimado": "12s",
-        "descricao": "📞 CTA + Assinatura"
+        "descricao": " CTA + Assinatura"
     }
 ]
 
-# OPÇÃO 2: Spot Mais Direto
+# OPO 2: Spot Mais Direto
 roteiro_opcao2 = [
     {
         "texto": "2026 está logo ali! A Reforma Tributária vai revolucionar os impostos da sua empresa. Você está preparado?",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
         "tempo_estimado": "7s",
-        "descricao": "⚡ Gancho Direto"
+        "descricao": " Gancho Direto"
     },
     {
         "texto": "CBS e IBS substituem cinco impostos atuais. Sistema de créditos totalmente novo. Notas fiscais eletrônicas diferentes. Sua empresa precisa se adaptar já!",
         "voz": "m151rjrbWXbBqyq56tly",
         "nome": "Carla",
         "tempo_estimado": "13s",
-        "descricao": "🎯 Mudanças Principais"
+        "descricao": " Mudanças Principais"
     },
     {
         "texto": "A Alfa Bureau oferece diagnóstico completo da sua situação tributária e cria um plano de ação sob medida. Não arrisque a saúde financeira do seu negócio!",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
         "tempo_estimado": "14s",
-        "descricao": "💡 Oferta"
+        "descricao": " Oferta"
     },
     {
         "texto": "Alfa Bureau: especialistas em gestão tributária. Fale conosco e prepare sua empresa para 2026. Alfa Bureau, simplificando sua gestão.",
         "voz": "m151rjrbWXbBqyq56tly",
         "nome": "Carla",
         "tempo_estimado": "11s",
-        "descricao": "🏢 CTA Final"
+        "descricao": " CTA Final"
     }
 ]
 
-# OPÇÃO 3: Spot Consultor
+# OPO 3: Spot Consultor
 roteiro_opcao3 = [
     {
         "texto": "Empresário, sua empresa está pronta para a Reforma Tributária de 2026?",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
         "tempo_estimado": "5s",
-        "descricao": "❓ Pergunta Direta"
+        "descricao": " Pergunta Direta"
     },
     {
         "texto": "A maior mudança tributária em décadas está chegando. Novos impostos, novas regras, novo sistema de créditos. Quem não se preparar pode enfrentar multas, perder dinheiro e ter problemas com a fiscalização.",
         "voz": "m151rjrbWXbBqyq56tly",
         "nome": "Carla",
         "tempo_estimado": "16s",
-        "descricao": "⚠️ Riscos"
+        "descricao": "️ Riscos"
     },
     {
         "texto": "A Alfa Bureau tem a solução! Fazemos análise completa dos impactos na sua empresa, mapeamos oportunidades e criamos estratégia personalizada para 2026.",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
         "tempo_estimado": "13s",
-        "descricao": "✅ Solução Completa"
+        "descricao": " Solução Completa"
     },
     {
         "texto": "Entre em contato agora com a Alfa Bureau. Sua tranquilidade tributária começa aqui!",
         "voz": "m151rjrbWXbBqyq56tly",
         "nome": "Carla",
         "tempo_estimado": "7s",
-        "descricao": "📲 CTA Urgente"
+        "descricao": " CTA Urgente"
     }
 ]
 
-# ==================== SELEÇÃO DE ROTEIRO ====================
+# ==================== SELEO DE ROTEIRO ====================
 st.markdown("---")
-st.subheader("📝 Escolha o Roteiro")
+st.subheader(" Escolha o Roteiro")
 
 opcao_roteiro = st.radio(
     "Selecione a versão do spot:",
     options=[
-        ("Opção 1: Informativo (Problema → Solução)", roteiro_opcao1),
-        ("Opção 2: Direto (Mudanças → Ação)", roteiro_opcao2),
-        ("Opção 3: Consultivo (Pergunta → Solução)", roteiro_opcao3)
+        ("Opção 1: Informativo (Problema  Solução)", roteiro_opcao1),
+        ("Opção 2: Direto (Mudanças  Ação)", roteiro_opcao2),
+        ("Opção 3: Consultivo (Pergunta  Solução)", roteiro_opcao3)
     ],
     format_func=lambda x: x[0]
 )
@@ -167,7 +167,7 @@ opcao_roteiro = st.radio(
 roteiro = opcao_roteiro[1]
 
 # Mostrar roteiro selecionado
-with st.expander("📄 Ver Roteiro Completo Selecionado"):
+with st.expander(" Ver Roteiro Completo Selecionado"):
     tempo_total_fala = 0
     for i, item in enumerate(roteiro, 1):
         tempo = int(item['tempo_estimado'].replace('s', ''))
@@ -177,16 +177,16 @@ with st.expander("📄 Ver Roteiro Completo Selecionado"):
         st.divider()
     
     st.info(f"⏱️ **Tempo total das falas:** ~{tempo_total_fala} segundos")
-    st.warning(f"🎵 **+ Jingles:** 6-10s (abertura + encerramento)")
-    st.success(f"📻 **TOTAL ESTIMADO:** {tempo_total_fala + 8} segundos (objetivo: 55-60s)")
+    st.warning(f" **+ Jingles:** 6-10s (abertura + encerramento)")
+    st.success(f" **TOTAL ESTIMADO:** {tempo_total_fala + 8} segundos (objetivo: 55-60s)")
 
 # ==================== API ====================
 try:
     api_key = st.secrets["ELEVENLABS_API_KEY"]
     client = ElevenLabs(api_key=api_key)
-    st.success("✅ API conectada")
+    st.success(" API conectada")
 except Exception as e:
-    st.error(f"❌ {str(e)}")
+    st.error(f" {str(e)}")
     st.stop()
 
 project_root = Path(__file__).parent
@@ -194,7 +194,7 @@ ffmpeg_path = project_root / "ffmpeg.exe"
 if not ffmpeg_path.exists():
     ffmpeg_path = "ffmpeg"
 
-# ==================== FUNÇÕES ====================
+# ==================== FUNES ====================
 
 def generate_audio_stable(texto, voice_id, nome_voz):
     """Gera áudio otimizado para rádio"""
@@ -231,7 +231,7 @@ def generate_audio_stable(texto, voice_id, nome_voz):
         return audio_bytes
         
     except Exception as e:
-        st.error(f"❌ {str(e)}")
+        st.error(f" {str(e)}")
         return None
 
 
@@ -295,18 +295,18 @@ def combine_audios_with_jingles(audio_segments, jingle_start=None, jingle_end=No
                 return f.read()
                 
     except Exception as e:
-        st.error(f"❌ {str(e)}")
+        st.error(f" {str(e)}")
         return None
 
-# ==================== GERAÇÃO ====================
+# ==================== GERAO ====================
 
 st.markdown("---")
-st.markdown("### 🎙️ Gerar Spot para Rádio")
+st.markdown("### ️ Gerar Spot para Rádio")
 
-if st.button("📻 **GERAR SPOT DE 60 SEGUNDOS**", type="primary", use_container_width=True):
+if st.button(" **GERAR SPOT DE 60 SEGUNDOS**", type="primary", width='stretch'):
     
     if not jingle_abertura or not jingle_encerramento:
-        st.error("⚠️ É obrigatório incluir jingles de abertura E encerramento!")
+        st.error("️  obrigatório incluir jingles de abertura E encerramento!")
         st.stop()
     
     progress_bar = st.progress(0.0)
@@ -319,23 +319,23 @@ if st.button("📻 **GERAR SPOT DE 60 SEGUNDOS**", type="primary", use_container
         if failed:
             break
             
-        status_text.text(f"🎤 Gerando: {item['descricao']}...")
+        status_text.text(f" Gerando: {item['descricao']}...")
         progress_bar.progress((i / len(roteiro)) * 0.85)
         
         audio = generate_audio_stable(item['texto'], item['voz'], item['nome'])
         
         if audio and len(audio) > 1000:
             audio_segments.append(audio)
-            st.success(f"✅ {item['descricao']}")
+            st.success(f" {item['descricao']}")
         else:
-            st.error(f"❌ Falha: {item['descricao']}")
+            st.error(f" Falha: {item['descricao']}")
             failed = True
             break
         
         time.sleep(0.5)
     
     if not failed and len(audio_segments) == len(roteiro):
-        status_text.text("🎬 Finalizando spot...")
+        status_text.text(" Finalizando spot...")
         progress_bar.progress(0.95)
         
         jingle_abertura.seek(0)
@@ -349,20 +349,20 @@ if st.button("📻 **GERAR SPOT DE 60 SEGUNDOS**", type="primary", use_container
         
         if final_spot:
             progress_bar.progress(1.0)
-            status_text.text("✅ Spot pronto!")
+            status_text.text(" Spot pronto!")
             
             st.markdown("---")
-            st.markdown("## 📻 SPOT COMERCIAL PRONTO")
+            st.markdown("##  SPOT COMERCIAL PRONTO")
             
-            st.warning("⚠️ **OUÇA O SPOT COMPLETO BAIXANDO O ARQUIVO!**")
+            st.warning("️ **OUA O SPOT COMPLETO BAIXANDO O ARQUIVO!**")
             
             # Download destacado
             st.download_button(
-                label="📥 BAIXAR SPOT PARA RÁDIO (.mp3)",
+                label=" BAIXAR SPOT PARA RÁDIO (.mp3)",
                 data=final_spot,
                 file_name="SPOT_ALFA_BUREAU_REFORMA_2026_60s.mp3",
                 mime="audio/mp3",
-                use_container_width=True,
+                width='stretch',
                 type="primary"
             )
             
@@ -375,13 +375,13 @@ if st.button("📻 **GERAR SPOT DE 60 SEGUNDOS**", type="primary", use_container
                 st.metric("Duração", "~60s")
             
             # Player para conferência
-            with st.expander("🎧 Preview (confira antes de veicular)"):
+            with st.expander(" Preview (confira antes de veicular)"):
                 st.audio(final_spot, format="audio/mp3")
             
-            st.success("✅ SPOT COMERCIAL PRONTO PARA VEICULAÇÃO!")
+            st.success(" SPOT COMERCIAL PRONTO PARA VEICULAO!")
             
             st.info("""
-            **📋 CHECKLIST ANTES DE VEICULAR:**
+            ** CHECKLIST ANTES DE VEICULAR:**
             - [ ] Ouça o spot completo
             - [ ] Verifique se está entre 55-60 segundos
             - [ ] Confirme que o áudio está claro
@@ -392,4 +392,6 @@ if st.button("📻 **GERAR SPOT DE 60 SEGUNDOS**", type="primary", use_container
             st.balloons()
 
 st.markdown("---")
-st.info("📻 **Spot Comercial Profissional** | 55-60s | Pronto para rádio | Alta qualidade")
+st.info(" **Spot Comercial Profissional** | 55-60s | Pronto para rádio | Alta qualidade")
+
+

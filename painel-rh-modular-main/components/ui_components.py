@@ -22,12 +22,14 @@ class UIComponents:
         st.markdown(header_html, unsafe_allow_html=True)
 
     @staticmethod
-    def render_metric_card(label: str, value: Any, delta: Optional[str] = None, color: str = "#1E3A8A", icon: str = "📊", help_text: str = ""):
+    def render_metric_card(label: str, value: Any, delta: Optional[str] = None, color: str = "#1E3A8A", icon: str = "", help_text: str = ""):
         """Renderiza um cartão de métrica com ícone e formatação."""
-        # CORREÇÃO: Usar st.metric em vez de HTML personalizado
+        # CORREO: Usar st.metric em vez de HTML personalizado
         st.metric(
             label=label,
             value=value,
             delta=delta,
             delta_color="normal" if not delta or not delta.startswith('-') else "inverse"
         )
+
+

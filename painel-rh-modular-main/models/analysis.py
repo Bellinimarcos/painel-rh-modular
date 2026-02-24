@@ -35,3 +35,6 @@ class ValidationResult:
                 return quality_level
         return DataQuality.INVALID
 
+
+
+

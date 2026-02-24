@@ -17,10 +17,10 @@ class AnalysisType(Enum):
     CLIMATE = "Clima Organizacional"
 
 class RiskLevel(Enum):
-    LOW = ("Baixo", "#10B981", "✅")
-    MODERATE = ("Moderado", "#F59E0B", "⚠️")
-    HIGH = ("Alto", "#EF4444", "🚨")
-    CRITICAL = ("Crítico", "#7C3AED", "🆘")
+    LOW = ("Baixo", "#10B981", "")
+    MODERATE = ("Moderado", "#F59E0B", "️")
+    HIGH = ("Alto", "#EF4444", "")
+    CRITICAL = ("Crítico", "#7C3AED", "")
 
     def __init__(self, label: str, color: str, emoji: str):
         self.label = label
@@ -37,4 +37,7 @@ class DataQuality(Enum):
     def __init__(self, label: str, threshold: float):
         self.label = label
         self.threshold = threshold
+
+
+
 

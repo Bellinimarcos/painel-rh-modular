@@ -149,7 +149,7 @@ def render_backup_interface():
     from services.storage import get_persistent_storage
 
     st.sidebar.divider()
-    st.sidebar.subheader("💾 Backup & Export")
+    st.sidebar.subheader(" Backup & Export")
 
     storage = get_persistent_storage()
     backup_mgr = BackupManager()
@@ -162,11 +162,11 @@ def render_backup_interface():
     col1, col2 = st.sidebar.columns(2)
 
     # ===============================
-    # EXPORTAÇÃO EXCEL
+    # EXPORTAO EXCEL
     # ===============================
     with col1:
         if st.sidebar.button(
-            "📊 Excel",
+            " Excel",
             key="btn_export_excel",
             width="stretch",
             help="Exportar para Excel"
@@ -176,7 +176,7 @@ def render_backup_interface():
 
                 with open(filepath, 'rb') as f:
                     st.sidebar.download_button(
-                        label="⬇️ Baixar Excel",
+                        label="️ Baixar Excel",
                         data=f.read(),
                         file_name=Path(filepath).name,
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -188,11 +188,11 @@ def render_backup_interface():
                 st.sidebar.error(f"Erro: {e}")
 
     # ===============================
-    # EXPORTAÇÃO JSON
+    # EXPORTAO JSON
     # ===============================
     with col2:
         if st.sidebar.button(
-            "📄 JSON",
+            " JSON",
             key="btn_export_json",
             width="stretch",
             help="Exportar para JSON"
@@ -202,7 +202,7 @@ def render_backup_interface():
 
                 with open(filepath, 'rb') as f:
                     st.sidebar.download_button(
-                        label="⬇️ Baixar JSON",
+                        label="️ Baixar JSON",
                         data=f.read(),
                         file_name=Path(filepath).name,
                         mime="application/json",
@@ -217,7 +217,7 @@ def render_backup_interface():
     # BACKUP COMPLETO ZIP
     # ===============================
     if st.sidebar.button(
-        "🗜️ Backup Completo (.zip)",
+        "️ Backup Completo (.zip)",
         key="btn_backup_zip",
         width="stretch"
     ):
@@ -226,7 +226,7 @@ def render_backup_interface():
 
             with open(zip_path, 'rb') as f:
                 st.sidebar.download_button(
-                    label="⬇️ Baixar Backup ZIP",
+                    label="️ Baixar Backup ZIP",
                     data=f.read(),
                     file_name=Path(zip_path).name,
                     mime="application/zip",
@@ -238,9 +238,9 @@ def render_backup_interface():
             st.sidebar.error(f"Erro: {e}")
 
     # ===============================
-    # RESTAURAÇÃO
+    # RESTAURAO
     # ===============================
-    with st.sidebar.expander("🔄 Restaurar Backup"):
+    with st.sidebar.expander(" Restaurar Backup"):
         uploaded_zip = st.file_uploader(
             "Upload arquivo .zip",
             type=['zip'],
@@ -266,3 +266,6 @@ def render_backup_interface():
 
             except Exception as e:
                 st.sidebar.error(f"Erro ao restaurar: {e}")
+
+
+

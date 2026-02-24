@@ -88,7 +88,7 @@ class ResourceLimiter:
                 f"Remova colunas desnecessárias."
             )
         
-        logger.debug(f"DataFrame OK: {rows:,} × {cols}")
+        logger.debug(f"DataFrame OK: {rows:,}  {cols}")
         return True
     
     @staticmethod
@@ -281,3 +281,5 @@ class SafeExecutor:
         except Exception as e:
             logger.error(f"Erro em '{operation_name}': {e}")
             raise
+
+

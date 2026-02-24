@@ -35,21 +35,21 @@ class IntegratedAIAssistant:
             if scores:
                 max_dimension = max(scores.items(), key=lambda x: x[1])
                 if max_dimension[1] > 75:
-                    insights.append(f"🔥 Dimensão '{max_dimension[0]}' em nível crítico ({max_dimension[1]:.1f}/100)")
+                    insights.append(f" Dimensão '{max_dimension[0]}' em nível crítico ({max_dimension[1]:.1f}/100)")
                 
                 overall = sum(scores.values()) / len(scores)
                 if overall > 60:
-                    insights.append(f"🚨 Score geral de burnout preocupante ({overall:.1f}/100)")
+                    insights.append(f" Score geral de burnout preocupante ({overall:.1f}/100)")
 
         elif analysis_type_value in [AnalysisType.COPSOQ_II.value, AnalysisType.COPSOQ_III.value]:
             # Lógica específica para COPSOQ
             problem_dimensions = sorted([(k, v) for k, v in analysis.data.items() if v < 50], key=lambda item: item[1])
             if problem_dimensions:
                 worst = problem_dimensions[0]
-                insights.append(f"📊 Dimensão mais crítica: '{worst[0]}' com score {worst[1]:.1f}.")
+                insights.append(f" Dimensão mais crítica: '{worst[0]}' com score {worst[1]:.1f}.")
         
         if not insights:
-            insights.append("✅ Análise concluída. Dados dentro dos parâmetros esperados.")
+            insights.append(" Análise concluída. Dados dentro dos parâmetros esperados.")
             
         return insights
     
@@ -70,14 +70,14 @@ class AutoInsightsComponent:
 
     def render(self, analysis: AnalysisResult):
         """Renderiza a secção completa de insights da IA."""
-        st.subheader("🤖 Insights Automáticos do Co-piloto")
+        st.subheader(" Insights Automáticos do Co-piloto")
         
         try:
             insights = self.ai_assistant.generate_auto_insights(analysis)
             for insight in insights:
-                if "🚨" in insight or "crítico" in insight.lower():
+                if "" in insight or "crítico" in insight.lower():
                     st.error(insight)
-                elif "📊" in insight or "⚠️" in insight:
+                elif "" in insight or "️" in insight:
                     st.warning(insight)
                 else:
                     st.info(insight)
@@ -89,15 +89,15 @@ class AutoInsightsComponent:
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("🔍 Análise IA Detalhada", key=f"ai_detail_{analysis.id}", use_container_width=True):
+            if st.button(" Análise IA Detalhada", key=f"ai_detail_{analysis.id}", width='stretch'):
                 self._show_detailed_ai_analysis(analysis)
         
         with col2:
-            if st.button("💬 Conversar sobre Resultados", key=f"ai_chat_{analysis.id}", use_container_width=True):
+            if st.button(" Conversar sobre Resultados", key=f"ai_chat_{analysis.id}", width='stretch'):
                 storage.save_analysis(analysis)
                 st.session_state.selected_analysis_id = analysis.id
                 # Redireciona para página do Assistente IA
-                st.switch_page("pages/6_🤖_Assistente_IA.py")
+                st.switch_page("pages/6__Assistente_IA.py")
 
     def _prepare_data_summary(self, analysis: 'AnalysisResult') -> str:
         """Prepara resumo dos dados para o prompt"""
@@ -131,10 +131,10 @@ class AutoInsightsComponent:
             if analysis.metadata and 'ai_detailed_analysis' in analysis.metadata:
                 st.session_state[ai_text_key] = analysis.metadata['ai_detailed_analysis']
         
-        with st.expander("🤖 Análise IA Detalhada", expanded=True):
+        with st.expander(" Análise IA Detalhada", expanded=True):
             # Se já existe no session_state, mostra
             if st.session_state.get(ai_text_key):
-                st.success("🤖 Análise IA sucesso")
+                st.success(" Análise IA sucesso")
                 st.markdown(st.session_state[ai_text_key])
             else:
                 # Se não existe, gera nova
@@ -168,7 +168,9 @@ class AutoInsightsComponent:
                         except Exception as e:
                             logger.error(f"Erro ao salvar análise IA: {e}")
                         
-                        st.success("🤖 Análise IA sucesso")
+                        st.success(" Análise IA sucesso")
                         st.markdown(response)
                     else:
                         st.error("Não foi possível obter uma resposta da IA. Verifique a chave da API.")
+
+

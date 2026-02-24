@@ -5,16 +5,16 @@ import os
 import pandas as pd
 from typing import Dict, Any, List, Tuple
 
-# --- INÍCIO DA CORREÇÃO DE IMPORTAÇÃO ---
+# --- INÍCIO DA CORREO DE IMPORTAO ---
 current_dir = os.path.dirname(__file__)
 root_dir = os.path.abspath(os.path.join(current_dir, ".."))
 if root_dir not in sys.path:
     sys.path.append(root_dir)
-# --- FIM DA CORREÇÃO ---
+# --- FIM DA CORREO ---
 
 from models.copsoq_ii_model import CopsoqII
 
-# --- CONSTANTES DE PONTUAÇÃO ---
+# --- CONSTANTES DE PONTUAO ---
 
 # Mapeamento das dimensões para as suas respectivas questões no modelo
 # Formato: (nome_da_questao, reverter_pontuacao, min_escala, max_escala)
@@ -168,3 +168,5 @@ def calcular_pontuacao_copsoq_ii(respostas: CopsoqII) -> pd.DataFrame:
     })
 
     return pd.DataFrame(resultados)
+
+

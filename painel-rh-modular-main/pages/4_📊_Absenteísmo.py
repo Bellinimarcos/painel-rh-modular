@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pages/4_📊_Absenteísmo.py
+# pages/4__Absenteísmo.py
 # Responsabilidade: Interface para análise de absentismo com Fator de Bradford.
 
 import streamlit as st
@@ -24,7 +24,7 @@ try:
     from utils.file_validators import FileValidator, ColumnMapper
     from utils.validators import DataValidator
 except ImportError:
-    st.error("⚠️ Módulo utils.file_validators não encontrado.")
+    st.error("️ Módulo utils.file_validators não encontrado.")
     st.stop()
 
 # Inicialização
@@ -52,7 +52,7 @@ BENCHMARK_ABSENTISMO = {
 
 def render_results(analysis):
     """Renderiza os resultados da análise."""
-    st.success(f"✅ Análise '{analysis.name}' concluída!")
+    st.success(f" Análise '{analysis.name}' concluída!")
     
     # Métricas principais
     taxa = analysis.data['taxa_absentismo']
@@ -60,7 +60,7 @@ def render_results(analysis):
     total_dias = analysis.data['total_dias_ausencia']
     bradford_medio = analysis.data['fator_bradford_medio']
     
-    st.subheader("📊 Métricas Principais")
+    st.subheader(" Métricas Principais")
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -68,7 +68,7 @@ def render_results(analysis):
         ui.render_metric_card(
             "Taxa de Absentismo",
             f"{taxa:.2f}%",
-            icon="📉",
+            icon="",
             color=analysis.risk_level.color
         )
     
@@ -85,19 +85,19 @@ def render_results(analysis):
         ui.render_metric_card(
             "Total Dias Ausência",
             f"{total_dias:.0f}",
-            icon="🗓️"
+            icon="️"
         )
     
     with col4:
         ui.render_metric_card(
             "Bradford Médio",
             f"{bradford_medio:.1f}",
-            icon="⚡"
+            icon=""
         )
     
     # Insights
     if analysis.insights:
-        st.subheader("💡 Insights Automáticos")
+        st.subheader(" Insights Automáticos")
         for insight in analysis.insights:
             if "crítico" in insight.lower():
                 st.error(insight)
@@ -111,12 +111,12 @@ def render_results(analysis):
     
     # Botão de Exportação
     st.divider()
-    st.subheader("📥 Exportar Análise")
+    st.subheader(" Exportar Análise")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        if st.button("📊 Exportar para Excel", use_container_width=True):
+        if st.button(" Exportar para Excel", width='stretch'):
             try:
                 import pandas as pd
                 from datetime import datetime
@@ -132,13 +132,13 @@ def render_results(analysis):
                 
                 # Salva
                 df_export.to_excel(filename, index=False)
-                st.success(f"✅ Relatório exportado: {filename}")
+                st.success(f" Relatório exportado: {filename}")
                 
             except Exception as e:
-                st.error(f"❌ Erro ao exportar: {e}")
+                st.error(f" Erro ao exportar: {e}")
     
     with col2:
-        if st.button("💾 Baixar Dados Completos (CSV)", use_container_width=True):
+        if st.button(" Baixar Dados Completos (CSV)", width='stretch'):
             try:
                 import pandas as pd
                 from datetime import datetime
@@ -151,24 +151,24 @@ def render_results(analysis):
                 
                 # Salva
                 df_bradford.to_csv(filename, index=False, encoding='utf-8-sig')
-                st.success(f"✅ Dados exportados: {filename}")
+                st.success(f" Dados exportados: {filename}")
                 
             except Exception as e:
-                st.error(f"❌ Erro ao exportar: {e}")
+                st.error(f" Erro ao exportar: {e}")
 
 
 # Interface Principal
-ui.render_header("📊 Análise de Absentismo", "Cálculo da taxa de absentismo e Fator de Bradford")
+ui.render_header(" Análise de Absentismo", "Cálculo da taxa de absentismo e Fator de Bradford")
 
 uploaded_file = st.file_uploader(
-    "📂 Selecione o arquivo de ausências",
+    " Selecione o arquivo de ausências",
     type=['csv', 'xlsx', 'xls', 'txt'],
     key="absenteeism_uploader",
     help="Arquivo deve conter: ID do colaborador, data início, data fim"
 )
 
 if uploaded_file:
-    with st.spinner("📖 Lendo arquivo..."):
+    with st.spinner(" Lendo arquivo..."):
         df, warnings, errors = FileValidator.read_file_robust(uploaded_file)
     
     for warning in warnings:
@@ -177,13 +177,13 @@ if uploaded_file:
         st.error(error)
     
     if df is not None:
-        st.success(f"✅ Arquivo lido com sucesso!")
+        st.success(f" Arquivo lido com sucesso!")
         
-        with st.expander("👁️ Pré-visualização"):
-            st.dataframe(df.head(10), use_container_width=True)
+        with st.expander("️ Pré-visualização"):
+            st.dataframe(df.head(10), width='stretch')
         
         st.divider()
-        st.subheader("1️⃣ Mapeamento de Colunas")
+        st.subheader("1️ Mapeamento de Colunas")
         
         suggestions = ColumnMapper.suggest_mappings(df)
         cols = df.columns.tolist()
@@ -218,7 +218,7 @@ if uploaded_file:
         }
         
         st.divider()
-        st.subheader("2️⃣ Parâmetros de Análise")
+        st.subheader("2️ Parâmetros de Análise")
         
         period_option = st.selectbox("Selecione o Período", ["Mês Específico", "Período Personalizado"])
         
@@ -270,7 +270,7 @@ if uploaded_file:
         
         st.divider()
         
-        if st.button("🚀 Executar Análise", type="primary", use_container_width=True):
+        if st.button(" Executar Análise", type="primary", width='stretch'):
             validations = [
                 DataValidator.validate_date_range(start_date, end_date, max_days=730),
                 DataValidator.validate_employee_count(total_emp, min_val=1, max_val=100000)
@@ -279,11 +279,11 @@ if uploaded_file:
             all_valid, validation_errors = DataValidator.validate_all(validations)
             
             if not all_valid:
-                st.error("❌ Erros de validação:")
+                st.error(" Erros de validação:")
                 for error in validation_errors:
-                    st.error(f"  • {error}")
+                    st.error(f"   {error}")
             else:
-                with st.spinner("⚙️ Processando..."):
+                with st.spinner("️ Processando..."):
                     try:
                         analysis_result = processor.process(
                             df=df,
@@ -300,14 +300,14 @@ if uploaded_file:
                         
                         try:
                             storage.save_analysis(analysis_result)
-                            st.success("✅ Análise salva!")
+                            st.success(" Análise salva!")
                         except Exception as e:
                             st.warning(f"Análise calculada, mas não salva: {e}")
                     
                     except ValueError as e:
-                        st.error(f"❌ Erro: {e}")
+                        st.error(f" Erro: {e}")
                     except Exception as e:
-                        st.error(f"❌ Erro inesperado: {e}")
+                        st.error(f" Erro inesperado: {e}")
                         st.exception(e)
 
 # Renderização de Resultados
@@ -316,3 +316,5 @@ if 'latest_analysis' in st.session_state and st.session_state.latest_analysis is
         if st.session_state.get('analysis_ready', False):
             st.divider()
             render_results(st.session_state.latest_analysis)
+
+

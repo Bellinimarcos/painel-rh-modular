@@ -14,16 +14,16 @@ from utils.backup_manager import render_backup_interface
 from utils.visualizations import render_analysis_timeline, render_analysis_distribution
 
 # =========================
-# CONFIGURAÇÃO DE LIMIARES
+# CONFIGURAO DE LIMIARES
 # =========================
 # Faixas (COPSOQ, 0-100): Verde >= 60 | Amarelo 40-59.9 | Vermelho < 40
 COPSOQ_RED = 40.0
 COPSOQ_YELLOW = 60.0
 
-# --- CONFIGURAÇÃO DA PÁGINA ---
+# --- CONFIGURAO DA PÁGINA ---
 st.set_page_config(
     page_title=f"Hub Compliance RPS - v{AppConfig.APP_VERSION}",
-    page_icon="🛡️",
+    page_icon="️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -38,7 +38,7 @@ def setup_session():
 
 def verify_api_key():
     if not AppConfig.GEMINI_API_KEY:
-        st.sidebar.warning("⚠️ Co-piloto Offline: Configure a API Key")
+        st.sidebar.warning("️ Co-piloto Offline: Configure a API Key")
         return False
     return True
 
@@ -150,7 +150,7 @@ def render_sidebar():
 
         st.divider()
         if verify_api_key():
-            st.success("🤖 Co-piloto IA: Ativo")
+            st.success(" Co-piloto IA: Ativo")
 
         try:
             total = len(storage.get_analyses())
@@ -158,23 +158,23 @@ def render_sidebar():
             total = 0
         st.metric("Base de Dados", f"{total} Análises")
 
-        st.markdown("### ⚙️ Administração")
+        st.markdown("### ️ Administração")
         render_backup_interface()
 
         st.divider()
-        st.toggle("🐞 Debug Mode", key="debug_mode")
+        st.toggle(" Debug Mode", key="debug_mode")
 
-        if st.button("🗑️ Resetar Base de Dados", key="btn_reset_db", use_container_width=True):
+        if st.button("️ Resetar Base de Dados", key="btn_reset_db", width='stretch'):
             if st.checkbox("Confirmar exclusão permanente", key="chk_confirm_reset"):
                 storage.clear_all()
                 st.session_state.clear()
                 st.rerun()
 
 # =========================
-# COMPONENTES DE VISUALIZAÇÃO
+# COMPONENTES DE VISUALIZAO
 # =========================
 def render_metrics_overview(analyses):
-    st.subheader("📊 Indicadores Estratégicos")
+    st.subheader(" Indicadores Estratégicos")
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
@@ -201,11 +201,11 @@ def render_metrics_overview(analyses):
 
         total_alerts = red + yellow
         if red > 0:
-            status_msg = "🚨 Vermelho: ação imediata"
+            status_msg = " Vermelho: ação imediata"
         elif yellow > 0:
-            status_msg = "⚠️ Amarelo: atenção e monitorar"
+            status_msg = "️ Amarelo: atenção e monitorar"
         else:
-            status_msg = "✅ Verde: ambiente estável"
+            status_msg = " Verde: ambiente estável"
 
         st.metric(
             "Status de Risco",
@@ -215,7 +215,7 @@ def render_metrics_overview(analyses):
         )
 
         if st.session_state.get("debug_mode") and explanations:
-            with st.expander("🐞 Debug Alertas (por quê?)"):
+            with st.expander(" Debug Alertas (por quê?)"):
                 st.markdown("\n".join(explanations))
 
     with col4:
@@ -223,8 +223,8 @@ def render_metrics_overview(analyses):
         st.metric("Ferramentas", unique_tools, help="Diversidade de inventários aplicados")
 
 def render_analysis_details(analysis):
-    st.write(f"**📅 Data da Coleta:** {analysis.timestamp.strftime('%d/%m/%Y %H:%M')}")
-    st.write(f"**🔬 Metodologia:** {analysis.type.value}")
+    st.write(f"** Data da Coleta:** {analysis.timestamp.strftime('%d/%m/%Y %H:%M')}")
+    st.write(f"** Metodologia:** {analysis.type.value}")
 
     if analysis.risk_level:
         st.markdown(f"**Nível de Risco (geral):** {analysis.risk_level.emoji} `{analysis.risk_level.label.upper()}`")
@@ -234,22 +234,22 @@ def render_analysis_details(analysis):
     # Resumo COPSOQ com cores e "por quê"
     if is_copsoq_analysis(analysis):
         overall, counts, worst, critical_list = copsoq_risk_summary(analysis)
-        badge = {"RED": "🔴 Vermelho", "YELLOW": "🟡 Amarelo", "GREEN": "🟢 Verde"}[overall]
-        st.markdown(f"### {badge} — Resumo COPSOQ")
+        badge = {"RED": " Vermelho", "YELLOW": " Amarelo", "GREEN": " Verde"}[overall]
+        st.markdown(f"### {badge}  Resumo COPSOQ")
         c1, c2, c3 = st.columns(3)
         c1.metric("Dimensões Vermelhas", counts["RED"])
         c2.metric("Dimensões Amarelas", counts["YELLOW"])
         c3.metric("Dimensões Verdes", counts["GREEN"])
 
-        st.markdown("**🎯 Principais riscos (pior → melhor):**")
+        st.markdown("** Principais riscos (pior  melhor):**")
         for dim, score, band in critical_list:
-            icon = "🔴" if band == "RED" else "🟡" if band == "YELLOW" else "🟢"
+            icon = "" if band == "RED" else "" if band == "YELLOW" else ""
             st.write(f"{icon} **{dim}**: {score:.1f}")
 
         st.divider()
 
     # Exibição de Scores (cards)
-    st.markdown("**📈 Dimensões Processadas:**")
+    st.markdown("** Dimensões Processadas:**")
     items = list(analysis.data.items()) if isinstance(analysis.data, dict) else []
     numeric_items = [(k, v) for k, v in items if isinstance(v, (int, float))]
     cols = st.columns(3)
@@ -259,11 +259,11 @@ def render_analysis_details(analysis):
 
     if analysis.metadata and 'ai_detailed_analysis' in analysis.metadata:
         st.divider()
-        st.markdown("### 🤖 Parecer do Co-piloto IA")
+        st.markdown("###  Parecer do Co-piloto IA")
         st.info(analysis.metadata['ai_detailed_analysis'])
 
 # =========================
-# HEADER E EXECUÇÃO
+# HEADER E EXECUO
 # =========================
 setup_session()
 render_sidebar()
@@ -276,7 +276,7 @@ st.markdown("""
         Hub Compliance RPS
     </h1>
     <p style="color: rgba(255,255,255,0.9); margin-top: 0.75rem; font-size: 1.2rem; font-weight: 300;">
-        Gestão Estratégica de Riscos Psicossociais • <b>Projeto Itajubá 2026</b>
+        Gestão Estratégica de Riscos Psicossociais  <b>Projeto Itajubá 2026</b>
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -285,7 +285,7 @@ storage = get_persistent_storage()
 analyses = storage.get_analyses()
 
 if not analyses:
-    st.info("👋 Bem-vindo, Marcos! Comece importando uma planilha do COPSOQ III no menu lateral para gerar os primeiros insights.")
+    st.info(" Bem-vindo, Marcos! Comece importando uma planilha do COPSOQ III no menu lateral para gerar os primeiros insights.")
 else:
     render_metrics_overview(analyses)
     st.divider()
@@ -297,14 +297,14 @@ else:
         render_analysis_distribution(analyses)
 
     st.divider()
-    st.subheader("🕒 Histórico de Diagnósticos")
+    st.subheader(" Histórico de Diagnósticos")
     for a in sorted(analyses, key=lambda x: x.timestamp, reverse=True)[:10]:
-        icon = "📊"
+        icon = ""
         try:
             # Ícone baseado no risco COPSOQ (mais explicável)
             if is_copsoq_analysis(a):
                 overall, _, _, _ = copsoq_risk_summary(a)
-                icon = "🔴" if overall == "RED" else "🟡" if overall == "YELLOW" else "🟢"
+                icon = "" if overall == "RED" else "" if overall == "YELLOW" else ""
             elif a.risk_level:
                 icon = a.risk_level.emoji
         except Exception:
@@ -312,3 +312,6 @@ else:
 
         with st.expander(f"{icon} {a.name} - {a.timestamp.strftime('%d/%m/%Y')}"):
             render_analysis_details(a)
+
+
+

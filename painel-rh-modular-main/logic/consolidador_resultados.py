@@ -186,7 +186,7 @@ class ConsolidadorResultados:
     
     def gerar_matriz_risco(self) -> Dict:
         """
-        Gera matriz de probabilidade × severidade
+        Gera matriz de probabilidade  severidade
         
         Returns:
             Dict com contagem de riscos por célula da matriz
@@ -226,7 +226,7 @@ class ConsolidadorResultados:
         elif criticos >= 1 or altos >= 5:
             return "ALTO"
         elif altos >= 2:
-            return "MÉDIO"
+            return "MDIO"
         else:
             return "BAIXO"
     
@@ -302,3 +302,5 @@ class ConsolidadorResultados:
             'resumo_executivo': self.gerar_resumo_executivo(),
             'matriz_risco': self.gerar_matriz_risco()
         }
+
+

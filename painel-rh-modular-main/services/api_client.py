@@ -66,7 +66,7 @@ class APIClient:
 
             except requests.exceptions.RequestException as e:
                 error_details = ""
-                # --- LÓGICA DE DIAGNÓSTICO MELHORADA ---
+                # --- LGICA DE DIAGNSTICO MELHORADA ---
                 # Tenta extrair a mensagem de erro específica da resposta da API
                 if e.response is not None:
                     try:
@@ -90,4 +90,7 @@ class APIClient:
         logger.error("Todas as tentativas de comunicação com a API falharam.")
         st.error("Não foi possível comunicar com o Assistente IA após várias tentativas.")
         return None
+
+
+
 

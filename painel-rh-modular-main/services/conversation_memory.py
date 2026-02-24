@@ -145,7 +145,7 @@ class ConversationMemory:
             return "Nenhuma conversa anterior sobre esta análise."
         
         lines = []
-        for msg in related[-10:]:  # Últimas 10 mensagens relacionadas
+        for msg in related[-10:]:  # ltimas 10 mensagens relacionadas
             role = "Você" if msg['role'] == 'user' else "IA"
             lines.append(f"{role}: {msg['content'][:300]}")
         
@@ -208,3 +208,5 @@ class ConversationMemory:
             "last_message": last_msg.strftime("%Y-%m-%d %H:%M"),
             "days_active": (last_msg - first_msg).days + 1
         }
+
+

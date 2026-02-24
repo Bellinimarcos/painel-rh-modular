@@ -184,3 +184,5 @@ class COPSOQProcessor:
         if avg_risk >= 50: return RiskLevel.HIGH
         if avg_risk >= 25: return RiskLevel.MODERATE
         return RiskLevel.LOW
+
+

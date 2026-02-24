@@ -1,4 +1,4 @@
-# pages/7_📚_Base_de_Conhecimento.py
+# pages/7__Base_de_Conhecimento.py
 """
 Interface para gerenciar base de conhecimento do assistente IA.
 Permite upload de documentos (TXTs, MDs, PDFs) que o bot pode consultar.
@@ -28,7 +28,7 @@ kb = st.session_state.knowledge_base
 
 def render_upload_section():
     """Seção de upload de documentos"""
-    st.subheader("📤 Adicionar Documento")
+    st.subheader(" Adicionar Documento")
     
     with st.form(key="doc_upload_form"):
         title = st.text_input(
@@ -44,13 +44,13 @@ def render_upload_section():
         # Métodos de input
         input_method = st.radio(
             "Método de entrada:",
-            ["✍️ Digitar texto", "📄 Upload de arquivo"],
+            ["️ Digitar texto", " Upload de arquivo"],
             horizontal=True
         )
         
         content = ""
         
-        if input_method == "✍️ Digitar texto":
+        if input_method == "️ Digitar texto":
             content = st.text_area(
                 "Conteúdo do documento",
                 height=300,
@@ -84,17 +84,17 @@ def render_upload_section():
                                     text = ' '.join(text.split())
                                     content += text + "\n\n"
                         
-                        st.info(f"✅ PDF lido: {len(content)} caracteres, {len(content.split())} palavras")
+                        st.info(f" PDF lido: {len(content)} caracteres, {len(content.split())} palavras")
                     else:
                         # Lê TXT/MD
                         content = uploaded_file.read().decode('utf-8')
-                        st.info(f"✅ Arquivo lido: {len(content)} caracteres")
+                        st.info(f" Arquivo lido: {len(content)} caracteres")
                         
                 except UnicodeDecodeError:
                     try:
                         uploaded_file.seek(0)
                         content = uploaded_file.read().decode('latin-1')
-                        st.info(f"✅ Arquivo lido (latin-1): {len(content)} caracteres")
+                        st.info(f" Arquivo lido (latin-1): {len(content)} caracteres")
                     except Exception as e:
                         st.error(f"Erro ao ler arquivo: {e}")
                 except Exception as e:
@@ -108,14 +108,14 @@ def render_upload_section():
         
         tags = [t.strip() for t in tags_input.split(',') if t.strip()]
         
-        # BOTÃO SUBMIT
-        submitted = st.form_submit_button("💾 Adicionar à Base", type="primary", use_container_width=True)
+        # BOTO SUBMIT
+        submitted = st.form_submit_button(" Adicionar à Base", type="primary", width='stretch')
         
         if submitted:
             if not title:
-                st.error("❌ Título é obrigatório")
+                st.error(" Título é obrigatório")
             elif not content or len(content) < 10:
-                st.error("❌ Conteúdo muito curto (mínimo 10 caracteres)")
+                st.error(" Conteúdo muito curto (mínimo 10 caracteres)")
             else:
                 try:
                     doc_id = kb.add_document(
@@ -124,7 +124,7 @@ def render_upload_section():
                         category=category,
                         tags=tags
                     )
-                    st.success(f"✅ Documento adicionado: {title}")
+                    st.success(f" Documento adicionado: {title}")
                     st.info(f"ID: {doc_id}")
                     st.rerun()
                 except Exception as e:
@@ -133,7 +133,7 @@ def render_upload_section():
 
 def render_search_section():
     """Seção de busca na base"""
-    st.subheader("🔍 Buscar Documentos")
+    st.subheader(" Buscar Documentos")
     
     col1, col2 = st.columns([3, 1])
     
@@ -165,12 +165,12 @@ def render_search_section():
                 snippet = result['snippet']
                 
                 with st.container():
-                    st.markdown(f"### 📄 {doc['title']}")
+                    st.markdown(f"###  {doc['title']}")
                     st.caption(f"Categoria: {doc['category']} | Relevância: {score} pontos")
                     
                     if doc.get('tags'):
                         tags_str = ", ".join(doc['tags'])
-                        st.caption(f"🏷️ Tags: {tags_str}")
+                        st.caption(f"️ Tags: {tags_str}")
                     
                     st.markdown(f"**Trecho relevante:**")
                     st.info(snippet)
@@ -178,13 +178,13 @@ def render_search_section():
                     col1, col2 = st.columns([1, 4])
                     
                     with col1:
-                        if st.button("🗑️ Remover", key=f"del_{doc['id']}"):
+                        if st.button("️ Remover", key=f"del_{doc['id']}"):
                             if kb.delete_document(doc['id']):
                                 st.success("Documento removido")
                                 st.rerun()
                     
                     with col2:
-                        with st.expander("📖 Ver conteúdo completo"):
+                        with st.expander(" Ver conteúdo completo"):
                             st.text_area(
                                 "Conteúdo",
                                 value=doc['content'],
@@ -197,17 +197,17 @@ def render_search_section():
         else:
             st.warning("Nenhum documento encontrado com esses critérios")
     elif query == "":
-        st.info("💡 Digite palavras-chave acima para buscar documentos")
+        st.info(" Digite palavras-chave acima para buscar documentos")
 
 
 def render_library_section():
     """Seção de biblioteca completa"""
-    st.subheader("📚 Biblioteca Completa")
+    st.subheader(" Biblioteca Completa")
     
     stats = kb.get_statistics()
     
     if stats['total_documents'] == 0:
-        st.info("📭 Nenhum documento na base ainda. Adicione documentos na aba 'Adicionar'.")
+        st.info(" Nenhum documento na base ainda. Adicione documentos na aba 'Adicionar'.")
         return
     
     # Estatísticas
@@ -224,9 +224,9 @@ def render_library_section():
     
     # Documentos por categoria
     if stats.get('categories'):
-        st.markdown("**📊 Documentos por Categoria:**")
+        st.markdown("** Documentos por Categoria:**")
         for cat, count in sorted(stats['categories'].items()):
-            st.text(f"• {cat}: {count}")
+            st.text(f" {cat}: {count}")
     
     st.divider()
     
@@ -238,7 +238,7 @@ def render_library_section():
     )
     
     # Lista documentos filtrados
-    st.markdown("**📑 Documentos:**")
+    st.markdown("** Documentos:**")
     
     docs_to_show = kb.documents if selected_cat == "Todas" else kb.get_by_category(selected_cat)
     
@@ -246,16 +246,16 @@ def render_library_section():
         st.info(f"Nenhum documento na categoria '{selected_cat}'")
     else:
         for doc in docs_to_show:
-            with st.expander(f"📄 {doc['title']} ({doc['category']})"):
+            with st.expander(f" {doc['title']} ({doc['category']})"):
                 col1, col2 = st.columns([2, 1])
                 
                 with col1:
-                    st.caption(f"📅 Criado em: {doc['created_at'][:10]}")
-                    st.caption(f"📝 Palavras: {doc['word_count']}")
+                    st.caption(f" Criado em: {doc['created_at'][:10]}")
+                    st.caption(f" Palavras: {doc['word_count']}")
                 
                 with col2:
                     if doc.get('tags'):
-                        st.caption(f"🏷️ Tags: {', '.join(doc['tags'])}")
+                        st.caption(f"️ Tags: {', '.join(doc['tags'])}")
                 
                 st.text_area(
                     "Conteúdo",
@@ -265,7 +265,7 @@ def render_library_section():
                     key=f"content_{doc['id']}"
                 )
                 
-                if st.button("🗑️ Remover documento", key=f"remove_{doc['id']}"):
+                if st.button("️ Remover documento", key=f"remove_{doc['id']}"):
                     if kb.delete_document(doc['id']):
                         st.success("Documento removido")
                         st.rerun()
@@ -273,7 +273,7 @@ def render_library_section():
 
 # --- Interface Principal ---
 ui.render_header(
-    "📚 Base de Conhecimento",
+    " Base de Conhecimento",
     "Gerencie documentos que o Assistente IA pode consultar"
 )
 
@@ -288,13 +288,13 @@ st.info("""
 """)
 
 # Mostra integração com IA
-with st.expander("🤖 Como o Assistente IA usa estes documentos"):
+with st.expander(" Como o Assistente IA usa estes documentos"):
     st.markdown("""
     Quando você pergunta algo ao Assistente IA, ele:
     
-    1. 🔍 **Busca** palavras-chave da sua pergunta nesta base
-    2. 📄 **Encontra** os documentos mais relevantes
-    3. 💬 **Responde** usando o conteúdo desses documentos
+    1.  **Busca** palavras-chave da sua pergunta nesta base
+    2.  **Encontra** os documentos mais relevantes
+    3.  **Responde** usando o conteúdo desses documentos
     
     **Exemplo:**
     - Você adiciona: "Política de Férias - 30 dias por ano"
@@ -305,7 +305,7 @@ with st.expander("🤖 Como o Assistente IA usa estes documentos"):
 st.divider()
 
 # Tabs para organizar interface
-tab1, tab2, tab3 = st.tabs(["📤 Adicionar", "🔍 Buscar", "📚 Biblioteca"])
+tab1, tab2, tab3 = st.tabs([" Adicionar", " Buscar", " Biblioteca"])
 
 with tab1:
     render_upload_section()
@@ -320,4 +320,6 @@ with tab3:
 st.divider()
 stats = kb.get_statistics()
 if stats['total_documents'] > 0:
-    st.caption(f"📊 Base de conhecimento: {stats['total_documents']} documento(s) | {stats['total_words']:,} palavras")
+    st.caption(f" Base de conhecimento: {stats['total_documents']} documento(s) | {stats['total_words']:,} palavras")
+
+

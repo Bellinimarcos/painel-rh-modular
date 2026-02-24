@@ -23,13 +23,13 @@ class CopsoqII(BaseModel):
     q11: Optional[int] = Field(None, description="11. Recebe toda a informação de que necessita para fazer bem o seu trabalho?")
     q12: Optional[int] = Field(None, description="12. Sabe exatamente quais as suas responsabilidades?")
     q13: Optional[int] = Field(None, description="13. O seu trabalho é reconhecido e apreciado pela gerência?")
-    q14: Optional[int] = Field(None, description="14. É tratado de forma justa no seu local de trabalho?")
+    q14: Optional[int] = Field(None, description="14.  tratado de forma justa no seu local de trabalho?")
     q15: Optional[int] = Field(None, description="15. Com que frequência tem ajuda e apoio do seu superior imediato?")
     q16: Optional[int] = Field(None, description="16. Existe um bom ambiente de trabalho entre si e os seus colegas?")
     
     # Critério: relações sociais e liderança
     q17: Optional[int] = Field(None, description="17. Oferece aos indivíduos e ao grupo boas oportunidades de desenvolvimento?")
-    q18: Optional[int] = Field(None, description="18. É bom no planejamento do trabalho?")
+    q18: Optional[int] = Field(None, description="18.  bom no planejamento do trabalho?")
     q19: Optional[int] = Field(None, description="19. A gerência confia nos seus funcionários para fazerem o seu trabalho bem?")
     q20: Optional[int] = Field(None, description="20. Confia na informação que lhe é transmitida pela gerência?")
     q21: Optional[int] = Field(None, description="21. Os conflitos são resolvidos de uma forma justa?")
@@ -63,3 +63,5 @@ class CopsoqII(BaseModel):
     q39: Optional[int] = Field(None, description="39. Tem sido exposto a assédio sexual indesejado?")
     q40: Optional[int] = Field(None, description="40. Tem sido exposto a ameaças de violência?")
     q41: Optional[int] = Field(None, description="41. Tem sido exposto a violência física?")
+
+

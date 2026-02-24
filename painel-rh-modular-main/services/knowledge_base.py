@@ -81,7 +81,7 @@ class SimpleKnowledgeBase:
         return doc_id
     
     def search(self, query: str, top_k: int = 5, category: str = None):
-        """Busca documentos por palavras-chave NO CONTEÚDO COMPLETO"""
+        """Busca documentos por palavras-chave NO CONTEDO COMPLETO"""
         if not self.documents:
             return []
         
@@ -95,7 +95,7 @@ class SimpleKnowledgeBase:
             if category and doc['category'] != category:
                 continue
             
-            # Busca em TÍTULO, TAGS E CONTEÚDO COMPLETO
+            # Busca em TÍTULO, TAGS E CONTEDO COMPLETO
             title_lower = doc['title'].lower()
             tags_lower = ' '.join(doc.get('tags', [])).lower()
             content_lower = doc['content'].lower()
@@ -112,7 +112,7 @@ class SimpleKnowledgeBase:
                 score += content_lower.count(word) * 10  # Conteúdo completo
             
             if score > 0:
-                # Encontra snippet relevante com MÚLTIPLOS trechos
+                # Encontra snippet relevante com MLTIPLOS trechos
                 snippet = self._extract_snippet(doc['content'], query_words, max_length=2000)
                 
                 results.append({
@@ -126,7 +126,7 @@ class SimpleKnowledgeBase:
         return results[:top_k]
 
     def _extract_snippet(self, content: str, query_words: set, max_length: int = 2000):
-        """Extrai MÚLTIPLOS trechos relevantes do conteúdo"""
+        """Extrai MLTIPLOS trechos relevantes do conteúdo"""
         content_lower = content.lower()
         snippets = []
         positions = []
@@ -238,3 +238,5 @@ Trecho: {result['snippet']}
 ---""")
         
         return "\n".join(formatted)
+
+

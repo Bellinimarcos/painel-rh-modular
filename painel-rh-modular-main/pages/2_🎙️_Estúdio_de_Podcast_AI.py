@@ -9,17 +9,17 @@ import time
 import sys
 import subprocess
 
-# --- CONFIGURAÇÃO DA PÁGINA ---
+# --- CONFIGURAO DA PÁGINA ---
 st.set_page_config(
     page_title="Estúdio de Podcast AI",
-    page_icon="🎙️",
+    page_icon="️",
     layout="wide"
 )
 
-st.title("🎙️ Estúdio de Podcast AI - Alfa Bureau")
+st.title("️ Estúdio de Podcast AI - Alfa Bureau")
 st.markdown("Produza um podcast com duas vozes, edite o roteiro e controle o tempo.")
 
-# --- VERIFICAÇÃO FORÇADA DO PYDUB ---
+# --- VERIFICAO FORADA DO PYDUB ---
 def install_pydub():
     """Instala o PyDub e recarrega o módulo"""
     try:
@@ -68,25 +68,25 @@ if has_ffmpeg and has_pydub:
 
 mode = "complete" if (has_ffmpeg and has_pydub) else "basic"
 
-# --- EXIBIÇÃO DO STATUS ---
+# --- EXIBIO DO STATUS ---
 if has_ffmpeg and has_pydub:
-    st.success("🎧 **Modo Completo Ativado!**")
+    st.success(" **Modo Completo Ativado!**")
     st.info("FFmpeg e PyDub detectados! O podcast será gerado como um único arquivo combinado.")
     
 elif has_ffmpeg and not has_pydub:
-    st.warning("🔊 **Modo Básico Ativado**")
+    st.warning(" **Modo Básico Ativado**")
     
     st.markdown("---")
-    st.subheader("🔧 Instalação do PyDub Necessária")
+    st.subheader(" Instalação do PyDub Necessária")
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
         st.markdown("""
         **Para ativar o Modo Completo:**
-        - ✅ Combine todos os áudios em um único arquivo
-        - ✅ Download do podcast completo  
-        - ✅ Melhor qualidade de produção
+        -  Combine todos os áudios em um único arquivo
+        -  Download do podcast completo  
+        -  Melhor qualidade de produção
         
         **Solução rápida:**
         1. Clique no botão ao lado para instalar
@@ -95,25 +95,25 @@ elif has_ffmpeg and not has_pydub:
         """)
     
     with col2:
-        if st.button("📦 Instalar PyDub Agora", type="primary", use_container_width=True):
+        if st.button(" Instalar PyDub Agora", type="primary", width='stretch'):
             with st.spinner("Instalando PyDub... Por favor, aguarde."):
                 if install_pydub():
-                    st.success("✅ PyDub instalado com sucesso!")
+                    st.success(" PyDub instalado com sucesso!")
                     st.info("**Recarregue a página** para ativar o Modo Completo.")
                     st.rerun()
                 else:
-                    st.error("❌ Falha na instalação do PyDub")
+                    st.error(" Falha na instalação do PyDub")
     
     st.markdown("---")
-    st.subheader("📋 Solução Manual")
+    st.subheader(" Solução Manual")
     st.code("pip install pydub")
     st.markdown("Execute o comando acima no terminal e recarregue a página.")
     
 else:
-    st.warning("🔊 **Modo Básico Ativado**")
+    st.warning(" **Modo Básico Ativado**")
     st.info("FFmpeg não encontrado. Gerando áudios individuais.")
 
-# --- FUNÇÕES DE ÁUDIO ---
+# --- FUNES DE ÁUDIO ---
 def create_wav_from_pcm(pcm_data, sample_rate=24000, channels=1, sample_width=2):
     """Converte dados PCM para WAV usando bibliotecas nativas"""
     try:
@@ -152,7 +152,7 @@ def combine_audio_segments(segments):
         st.error(f"Erro ao combinar áudio: {e}")
         return None
 
-# --- FUNÇÃO DA API COM PROTEÇÃO CONTRA LIMITES ---
+# --- FUNO DA API COM PROTEO CONTRA LIMITES ---
 @st.cache_data(show_spinner=False)
 def generate_audio_segment(text, style, voice_name, api_key):
     """Chama a API do Gemini para gerar um segmento de áudio"""
@@ -174,10 +174,10 @@ def generate_audio_segment(text, style, voice_name, api_key):
         response = requests.post(api_url, json=payload, timeout=60)
         
         if response.status_code == 429:
-            st.error("🚫 **Limite de API excedido.** Aguarde 1 hora ou use outra chave.")
+            st.error(" **Limite de API excedido.** Aguarde 1 hora ou use outra chave.")
             return None
         elif response.status_code == 403:
-            st.error("🔐 **Erro de autorização.** Verifique sua chave API.")
+            st.error(" **Erro de autorização.** Verifique sua chave API.")
             return None
             
         response.raise_for_status()
@@ -198,7 +198,7 @@ def generate_audio_segment(text, style, voice_name, api_key):
             st.error(f"Erro de conexão: {e}")
         return None
 
-# --- VERIFICAÇÃO DA API KEY ---
+# --- VERIFICAO DA API KEY ---
 try:
     api_key = st.secrets["GEMINI_API_KEY"]
 except (FileNotFoundError, KeyError):
@@ -243,7 +243,7 @@ st.subheader("Roteiro do Podcast")
 default_script = """[LOCUTOR 1]: Atenção, empresário! A Reforma Tributária de 2026 está chegando.
 [LOCUTOR 2]: A mudança é grande. Cinco impostos viram apenas dois.
 [LOCUTOR 1]: E qual o segredo para se preparar?
-[LOCUTOR 2]: O planejamento. É preciso revisar contratos.
+[LOCUTOR 2]: O planejamento.  preciso revisar contratos.
 [LOCUTOR 1]: E a Alfa Bureau pode ajudar?
 [LOCUTOR 2]: Com certeza. Oferecemos diagnóstico completo."""
 
@@ -254,32 +254,32 @@ script_text = st.text_area(
     key="script_editor"
 )
 
-# --- ESTIMADOR DE DURAÇÃO ---
+# --- ESTIMADOR DE DURAO ---
 char_count = len(script_text)
 estimated_seconds = round(char_count / 15)
-st.info(f"**Duração estimada:** `{char_count}` caracteres ≈ `{estimated_seconds}` segundos")
+st.info(f"**Duração estimada:** `{char_count}` caracteres  `{estimated_seconds}` segundos")
 
-# --- BOTÕES DE GERAÇÃO ---
+# --- BOTES DE GERAO ---
 st.markdown("---")
 
 # Verificação de limites da API
-if st.button("🔍 Verificar Status da API"):
+if st.button(" Verificar Status da API"):
     test_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key={api_key}"
     try:
         response = requests.post(test_url, json={"contents": [{"parts": [{"text": "Teste: Olá"}]}]}, timeout=10)
         if response.status_code == 200:
-            st.success("✅ API está funcionando normalmente!")
+            st.success(" API está funcionando normalmente!")
         elif response.status_code == 429:
-            st.error("❌ Limite de API excedido. Aguarde 1 hora.")
+            st.error(" Limite de API excedido. Aguarde 1 hora.")
         else:
-            st.error(f"❌ API retornou erro: {response.status_code}")
+            st.error(f" API retornou erro: {response.status_code}")
     except Exception as e:
         st.error(f"Erro ao verificar API: {e}")
 
 col_test, col_full = st.columns(2)
 
 with col_test:
-    if st.button("🧪 Teste Rápido (2 linhas)", type="secondary", use_container_width=True):
+    if st.button(" Teste Rápido (2 linhas)", type="secondary", width='stretch'):
         if not script_text.strip():
             st.warning("Por favor, insira um roteiro.")
         else:
@@ -287,7 +287,7 @@ with col_test:
             test_lines = script_lines[:2]  # Apenas 2 linhas para teste
             
             if test_lines:
-                st.info(f"🧪 **Teste rápido:** Gerando {len(test_lines)} trechos...")
+                st.info(f" **Teste rápido:** Gerando {len(test_lines)} trechos...")
                 
                 all_segments = []
                 success_count = 0
@@ -314,17 +314,17 @@ with col_test:
                                 if wav_data:
                                     all_segments.append(wav_data)
                                     success_count += 1
-                                    st.success(f"✅ {clean_text[:30]}...")
+                                    st.success(f" {clean_text[:30]}...")
                 
                 if all_segments:
                     st.session_state.individual_segments = all_segments
                     st.session_state.test_mode = True
-                    st.success(f"🎉 Teste concluído! {success_count}/{len(test_lines)} trechos gerados.")
+                    st.success(f" Teste concluído! {success_count}/{len(test_lines)} trechos gerados.")
                 else:
-                    st.error("❌ Teste falhou. Aguarde e tente novamente.")
+                    st.error(" Teste falhou. Aguarde e tente novamente.")
 
 with col_full:
-    if st.button("🚀 Gerar Podcast Completo", type="primary", use_container_width=True):
+    if st.button(" Gerar Podcast Completo", type="primary", width='stretch'):
         if not script_text.strip():
             st.warning("Por favor, insira um roteiro.")
         else:
@@ -332,7 +332,7 @@ with col_full:
             
             # Aviso para textos longos
             if len(script_lines) > 6:
-                st.warning("⚠️ **Texto longo pode exceder limites.**")
+                st.warning("️ **Texto longo pode exceder limites.**")
                 if not st.checkbox("Continuar mesmo assim"):
                     st.stop()
             
@@ -366,7 +366,7 @@ with col_full:
                     
                     # Para se encontrar muitos erros
                     if i >= 2 and success_count == 0:
-                        st.error("❌ Muitas falhas consecutivas. Parando...")
+                        st.error(" Muitas falhas consecutivas. Parando...")
                         break
                 
                 progress_bar.progress((i + 1) / len(script_lines))
@@ -382,7 +382,7 @@ with col_full:
                         if combined_audio:
                             st.session_state.podcast_audio = combined_audio
                             st.session_state.individual_segments = all_segments
-                            st.success(f"✅ Podcast completo gerado! {success_count} trechos combinados.")
+                            st.success(f" Podcast completo gerado! {success_count} trechos combinados.")
                         else:
                             st.error("Erro ao combinar áudio. Exibindo trechos individuais.")
                             st.session_state.individual_segments = all_segments
@@ -391,30 +391,30 @@ with col_full:
                         st.session_state.individual_segments = all_segments
                 else:
                     st.session_state.individual_segments = all_segments
-                    st.success(f"✅ {success_count} trechos de áudio gerados com sucesso!")
+                    st.success(f" {success_count} trechos de áudio gerados com sucesso!")
             else:
                 st.error("Não foi possível gerar áudio. Aguarde e tente novamente.")
 
-# --- EXIBIÇÃO DOS RESULTADOS ---
+# --- EXIBIO DOS RESULTADOS ---
 if 'podcast_audio' in st.session_state and st.session_state.podcast_audio:
     st.markdown("---")
-    st.subheader("🎧 Podcast Completo")
+    st.subheader(" Podcast Completo")
     audio_placeholder.audio(st.session_state.podcast_audio, format='audio/wav')
     download_placeholder.download_button(
-        label="📥 Download do Podcast Completo (.wav)",
+        label=" Download do Podcast Completo (.wav)",
         data=st.session_state.podcast_audio,
         file_name="podcast_alfa_bureau.wav",
         mime="audio/wav",
-        use_container_width=True
+        width='stretch'
     )
 
 if 'individual_segments' in st.session_state and st.session_state.individual_segments:
     st.markdown("---")
     
     if st.session_state.get('test_mode', False):
-        st.subheader("🎧 Trechos de Teste Gerados")
+        st.subheader(" Trechos de Teste Gerados")
     else:
-        st.subheader("🎧 Trechos de Áudio")
+        st.subheader(" Trechos de Áudio")
     
     script_lines = [line.strip() for line in script_text.split('\n') if line.strip()]
     valid_lines = [line for line in script_lines if line.startswith(("[LOCUTOR 1]:", "[LOCUTOR 2]:"))]
@@ -428,7 +428,7 @@ if 'individual_segments' in st.session_state and st.session_state.individual_seg
             st.audio(audio_data, format='audio/wav')
         with col2:
             st.download_button(
-                label=f"📥 Trecho {i+1}",
+                label=f" Trecho {i+1}",
                 data=audio_data,
                 file_name=f"trecho_{i+1}.wav",
                 mime="audio/wav",
@@ -436,9 +436,9 @@ if 'individual_segments' in st.session_state and st.session_state.individual_seg
             )
         st.divider()
 
-# --- SOLUÇÃO PARA LIMITES DA API ---
+# --- SOLUO PARA LIMITES DA API ---
 st.markdown("---")
-st.subheader("🚨 Solução para Limites da API")
+st.subheader(" Solução para Limites da API")
 
 col1, col2 = st.columns(2)
 
@@ -452,21 +452,23 @@ with col1:
     
 with col2:
     st.markdown("""
-    **🔑 Use outra chave API:**
+    ** Use outra chave API:**
     - Crie nova chave no Google AI Studio
     - Atualize o arquivo `secrets.toml`
     - Recarregue a aplicação
     """)
 
 st.info("""
-**💡 Dica:** Use o **botão de teste rápido** primeiro para verificar se a API já está respondendo,
+** Dica:** Use o **botão de teste rápido** primeiro para verificar se a API já está respondendo,
 antes de gerar o podcast completo.
 """)
 
-# --- REINICIALIZAÇÃO DO PYDUB ---
+# --- REINICIALIZAO DO PYDUB ---
 if not has_pydub and has_ffmpeg:
     st.markdown("---")
-    st.subheader("🔧 Configuração do Modo Completo")
+    st.subheader(" Configuração do Modo Completo")
     
-    if st.button("🔄 Tentar Detecção Novamente do PyDub", use_container_width=True):
+    if st.button(" Tentar Detecção Novamente do PyDub", width='stretch'):
         st.rerun()
+
+

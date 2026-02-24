@@ -82,3 +82,5 @@ class PersistentStorage:
 def get_persistent_storage() -> PersistentStorage:
     """Função de acesso global ao singleton de armazenamento."""
     return PersistentStorage()
+
+

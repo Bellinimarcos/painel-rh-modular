@@ -1,4 +1,4 @@
-﻿# logic/absenteeism_processor.py
+# logic/absenteeism_processor.py
 # Responsabilidade: Processar e analisar dados de absentismo, incluindo o Fator de Bradford.
 
 import pandas as pd
@@ -18,21 +18,21 @@ logger = logging.getLogger(__name__)
 
 # BENCHMARK DE ABSENTISMO
 BENCHMARK_ABSENTISMO = {
-    'Indústria': 4.5,
-    'Comércio': 3.8,
-    'Serviços': 3.2,
-    'Saúde': 5.5,
-    'Educação': 4.0,
+    'Indstria': 4.5,
+    'Comrcio': 3.8,
+    'Servios': 3.2,
+    'Sade': 5.5,
+    'Educao': 4.0,
     'TI': 2.5,
     'Outros': 3.5
 }
 
 class AbsenteeismProcessor:
     """
-    Processa dados de absentismo e calcula mÃ©tricas chave:
+    Processa dados de absentismo e calcula métricas chave:
     - Taxa de absentismo
     - Fator de Bradford
-    - AnÃ¡lise por colaborador
+    - Análise por colaborador
     """
     
     def __init__(self):
@@ -43,11 +43,11 @@ class AbsenteeismProcessor:
         Valida os dados de entrada antes do processamento.
         
         Args:
-            df: DataFrame com os dados de ausÃªncias
+            df: DataFrame com os dados de ausências
             column_mapping: Mapeamento das colunas do arquivo
         
         Returns:
-            ValidationResult com status da validaÃ§Ã£o
+            ValidationResult com status da validação
         """
         errors = []
         warnings = []
@@ -62,11 +62,11 @@ class AbsenteeismProcessor:
                 missing_fields.append(field)
         
         if missing_fields:
-            errors.append(f"Campos obrigatÃ³rios nÃ£o mapeados: {', '.join(missing_fields)}")
+            errors.append(f"Campos obrigatórios não mapeados: {', '.join(missing_fields)}")
         
-        # Verifica se o DataFrame nÃ£o estÃ¡ vazio
+        # Verifica se o DataFrame não está vazio
         if df.empty:
-            errors.append("O arquivo estÃ¡ vazio ou nÃ£o contÃ©m dados vÃ¡lidos")
+            errors.append("O arquivo está vazio ou não contém dados válidos")
         
         # Verifica percentual de dados nulos
         if not df.empty:
@@ -97,7 +97,7 @@ class AbsenteeismProcessor:
     
     def _parse_dates_robust(self, df: pd.DataFrame, date_column: str) -> pd.Series:
         """
-        Converte uma coluna para datas de forma robusta, tentando mÃºltiplos formatos.
+        Converte uma coluna para datas de forma robusta, tentando múltiplos formatos.
         
         Args:
             df: DataFrame contendo a coluna
@@ -107,7 +107,7 @@ class AbsenteeismProcessor:
             Series com as datas convertidas
         """
         try:
-            # Tenta conversÃ£o padrÃ£o do pandas (suporta mÃºltiplos formatos)
+            # Tenta conversão padrão do pandas (suporta múltiplos formatos)
             dates = pd.to_datetime(df[date_column], dayfirst=True, errors='coerce')
             
             # Converte para date (remove timezone se existir)
@@ -116,10 +116,10 @@ class AbsenteeismProcessor:
             
             dates = dates.dt.date
             
-            # Log de datas invÃ¡lidas
+            # Log de datas inválidas
             invalid_count = dates.isna().sum()
             if invalid_count > 0:
-                logger.warning(f"Coluna '{date_column}': {invalid_count} datas invÃ¡lidas encontradas")
+                logger.warning(f"Coluna '{date_column}': {invalid_count} datas inválidas encontradas")
             
             return dates
             
@@ -129,14 +129,14 @@ class AbsenteeismProcessor:
     
     def _calculate_business_days(self, start_date: date, end_date: date) -> int:
         """
-        Calcula o nÃºmero de dias Ãºteis entre duas datas.
+        Calcula o número de dias úteis entre duas datas.
         
         Args:
-            start_date: Data de inÃ­cio
+            start_date: Data de início
             end_date: Data de fim
         
         Returns:
-            NÃºmero de dias Ãºteis (excluindo fins de semana)
+            Número de dias úteis (excluindo fins de semana)
         """
         try:
             if pd.isna(start_date) or pd.isna(end_date):
@@ -149,23 +149,23 @@ class AbsenteeismProcessor:
             start_np = np.datetime64(start_date)
             end_np = np.datetime64(end_date)
             
-            # Calcula dias Ãºteis (inclusive o Ãºltimo dia)
+            # Calcula dias úteis (inclusive o último dia)
             business_days = np.busday_count(start_np, end_np + np.timedelta64(1, 'D'))
             
             return max(0, int(business_days))
             
         except Exception as e:
-            logger.error(f"Erro ao calcular dias Ãºteis entre {start_date} e {end_date}: {e}")
+            logger.error(f"Erro ao calcular dias úteis entre {start_date} e {end_date}: {e}")
             return 1  # Fallback: considera pelo menos 1 dia
     
     def _calculate_bradford_factor(self, absences_df: pd.DataFrame) -> pd.DataFrame:
         """
         Calcula o Fator de Bradford para cada colaborador.
-        FÃ³rmula: B = SÂ² Ã— D
-        Onde S = nÃºmero de perÃ­odos de ausÃªncia, D = total de dias ausentes
+        Fórmula: B = S²  D
+        Onde S = número de períodos de ausência, D = total de dias ausentes
         
         Args:
-            absences_df: DataFrame com ausÃªncias jÃ¡ processadas
+            absences_df: DataFrame com ausências já processadas
         
         Returns:
             DataFrame com o Fator de Bradford por colaborador
@@ -174,11 +174,11 @@ class AbsenteeismProcessor:
             return pd.DataFrame(columns=['id_colaborador', 'S', 'D', 'fator_bradford'])
         
         bradford_df = absences_df.groupby('id_colaborador').agg(
-            S=('data_inicio', 'count'),  # NÃºmero de perÃ­odos
+            S=('data_inicio', 'count'),  # Número de períodos
             D=('dias_ausencia', 'sum')   # Total de dias
         ).reset_index()
         
-        # Calcula o fator: SÂ² Ã— D
+        # Calcula o fator: S²  D
         bradford_df['fator_bradford'] = (bradford_df['S'] ** 2) * bradford_df['D']
         
         return bradford_df
@@ -194,24 +194,24 @@ class AbsenteeismProcessor:
         column_mapping: Dict[str, str]
     ) -> AnalysisResult:
         """
-        Processa os dados de absentismo e calcula todas as mÃ©tricas.
+        Processa os dados de absentismo e calcula todas as métricas.
         
         Args:
             df: DataFrame com os dados brutos
-            name: Nome da anÃ¡lise
-            period_start: Data de inÃ­cio do perÃ­odo
-            period_end: Data de fim do perÃ­odo
-            total_employees: Total de colaboradores na organizaÃ§Ã£o
+            name: Nome da análise
+            period_start: Data de início do período
+            period_end: Data de fim do período
+            total_employees: Total de colaboradores na organização
             setor: Setor da empresa (para benchmark)
             column_mapping: Mapeamento das colunas
         
         Returns:
-            AnalysisResult com os resultados da anÃ¡lise
+            AnalysisResult com os resultados da análise
         """
         # Valida os dados
         validation = self.validate(df, column_mapping)
         if not validation.is_valid:
-            raise ValueError(f"Dados invÃ¡lidos: {'; '.join(validation.errors)}")
+            raise ValueError(f"Dados inválidos: {'; '.join(validation.errors)}")
         
         # Renomeia as colunas de acordo com o mapeamento
         df_processed = df.rename(columns=column_mapping).copy()
@@ -220,30 +220,30 @@ class AbsenteeismProcessor:
         df_processed['data_inicio'] = self._parse_dates_robust(df_processed, 'data_inicio')
         df_processed['data_fim'] = self._parse_dates_robust(df_processed, 'data_fim')
         
-        # Remove linhas com datas invÃ¡lidas
+        # Remove linhas com datas inválidas
         initial_rows = len(df_processed)
         df_processed.dropna(subset=['data_inicio', 'data_fim'], inplace=True)
         removed_rows = initial_rows - len(df_processed)
         
         if removed_rows > 0:
-            logger.warning(f"{removed_rows} linhas removidas por datas invÃ¡lidas")
+            logger.warning(f"{removed_rows} linhas removidas por datas inválidas")
         
         # Remove registros onde data_fim < data_inicio
         invalid_ranges = df_processed['data_fim'] < df_processed['data_inicio']
         if invalid_ranges.any():
-            logger.warning(f"{invalid_ranges.sum()} registros com intervalo de datas invÃ¡lido removidos")
+            logger.warning(f"{invalid_ranges.sum()} registros com intervalo de datas inválido removidos")
             df_processed = df_processed[~invalid_ranges]
         
-        # Filtra apenas ausÃªncias que se sobrepÃµem ao perÃ­odo analisado
+        # Filtra apenas ausências que se sobrepõem ao período analisado
         df_filtered = df_processed[
             (df_processed['data_inicio'] <= period_end) & 
             (df_processed['data_fim'] >= period_start)
         ].copy()
         
-        # Calcula dias de ausÃªncia para cada registro
+        # Calcula dias de ausência para cada registro
         dias_ausencia = []
         for _, row in df_filtered.iterrows():
-            # Ajusta as datas para o perÃ­odo analisado
+            # Ajusta as datas para o período analisado
             start = max(row['data_inicio'], period_start)
             end = min(row['data_fim'], period_end)
             
@@ -252,10 +252,10 @@ class AbsenteeismProcessor:
         
         df_filtered['dias_ausencia'] = dias_ausencia
         
-        # Remove ausÃªncias com 0 dias (podem ser fins de semana ou feriados)
+        # Remove ausências com 0 dias (podem ser fins de semana ou feriados)
         df_filtered = df_filtered[df_filtered['dias_ausencia'] > 0]
         
-        # Calcula mÃ©tricas principais
+        # Calcula métricas principais
         total_dias_uteis = self._calculate_business_days(period_start, period_end)
         total_dias_possiveis = total_employees * total_dias_uteis
         total_dias_ausencia = int(df_filtered['dias_ausencia'].sum()) if not df_filtered.empty else 0
@@ -267,11 +267,11 @@ class AbsenteeismProcessor:
         bradford_df = self._calculate_bradford_factor(df_filtered)
         fator_bradford_medio = bradford_df['fator_bradford'].mean() if not bradford_df.empty else 0
         
-        # Determina nÃ­vel de risco
+        # Determina nível de risco
         benchmark = BENCHMARK_ABSENTISMO.get(setor, 3.5)
         risk_level = self._calculate_risk_level(taxa_absentismo, benchmark)
         
-        # Gera insights automÃ¡ticos
+        # Gera insights automáticos
         insights = self._generate_insights(
             taxa_absentismo, 
             benchmark, 
@@ -306,7 +306,7 @@ class AbsenteeismProcessor:
         )
     
     def _calculate_risk_level(self, taxa: float, benchmark: float) -> RiskLevel:
-        """Determina o nÃ­vel de risco baseado na comparaÃ§Ã£o com o benchmark."""
+        """Determina o nível de risco baseado na comparação com o benchmark."""
         if taxa > benchmark * 1.5:
             return RiskLevel.HIGH
         elif taxa > benchmark * 1.2:
@@ -321,7 +321,7 @@ class AbsenteeismProcessor:
         bradford_medio: float,
         bradford_df: pd.DataFrame
     ) -> List[str]:
-        """Gera insights automÃ¡ticos baseados nos dados."""
+        """Gera insights automáticos baseados nos dados."""
         insights = []
         
         # Insight sobre a taxa
@@ -332,25 +332,28 @@ class AbsenteeismProcessor:
             )
         else:
             insights.append(
-                f"Taxa de absentismo dentro dos parÃ¢metros esperados para o setor"
+                f"Taxa de absentismo dentro dos parâmetros esperados para o setor"
             )
         
         # Insight sobre Bradford
         if bradford_medio > 100:
             insights.append(
-                f"Fator Bradford mÃ©dio elevado ({bradford_medio:.1f}) indica padrÃ£o preocupante de ausÃªncias frequentes"
+                f"Fator Bradford médio elevado ({bradford_medio:.1f}) indica padrão preocupante de ausências frequentes"
             )
         elif bradford_medio > 50:
             insights.append(
-                f"Fator Bradford mÃ©dio moderado ({bradford_medio:.1f}) - monitorar colaboradores com scores altos"
+                f"Fator Bradford médio moderado ({bradford_medio:.1f}) - monitorar colaboradores com scores altos"
             )
         
-        # Insight sobre colaboradores crÃ­ticos
+        # Insight sobre colaboradores críticos
         if not bradford_df.empty:
             critical_employees = bradford_df[bradford_df['fator_bradford'] > 200]
             if len(critical_employees) > 0:
                 insights.append(
-                    f"{len(critical_employees)} colaborador(es) com Fator Bradford crÃ­tico (>200) - requer atenÃ§Ã£o imediata"
+                    f"{len(critical_employees)} colaborador(es) com Fator Bradford crítico (>200) - requer atenção imediata"
                 )
         
         return insights
+
+
+

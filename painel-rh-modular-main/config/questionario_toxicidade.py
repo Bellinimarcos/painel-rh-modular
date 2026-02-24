@@ -22,7 +22,7 @@ ESCALA_LIKERT = {
 
 
 # ============================================================================
-# FUNÇÃO PRINCIPAL DE CRIAÇÃO DO QUESTIONÁRIO
+# FUNO PRINCIPAL DE CRIAO DO QUESTIONÁRIO
 # ============================================================================
 
 def criar_questionario_toxicidade() -> QuestionarioToxicidade:
@@ -40,7 +40,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
         versao="2.0"
     )
     
-    # ========== DIMENSÃO 1: COMUNICAÇÃO E FEEDBACK ==========
+    # ========== DIMENSO 1: COMUNICAO E FEEDBACK ==========
     dim_comunicacao = Dimensao(
         id="comunicacao",
         nome="Comunicação e Feedback",
@@ -82,7 +82,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
     
     questionario.adicionar_dimensao(dim_comunicacao)
     
-    # ========== DIMENSÃO 2: RECONHECIMENTO E VALORIZAÇÃO ==========
+    # ========== DIMENSO 2: RECONHECIMENTO E VALORIZAO ==========
     dim_reconhecimento = Dimensao(
         id="reconhecimento",
         nome="Reconhecimento e Valorização",
@@ -124,7 +124,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
     
     questionario.adicionar_dimensao(dim_reconhecimento)
     
-    # ========== DIMENSÃO 3: EQUIDADE E JUSTIÇA ==========
+    # ========== DIMENSO 3: EQUIDADE E JUSTIA ==========
     dim_equidade = Dimensao(
         id="equidade",
         nome="Equidade e Justiça",
@@ -166,7 +166,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
     
     questionario.adicionar_dimensao(dim_equidade)
     
-    # ========== DIMENSÃO 4: CONFIANÇA E TRANSPARÊNCIA ==========
+    # ========== DIMENSO 4: CONFIANA E TRANSPARNCIA ==========
     dim_confianca = Dimensao(
         id="confianca",
         nome="Confiança e Transparência",
@@ -208,7 +208,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
     
     questionario.adicionar_dimensao(dim_confianca)
     
-    # ========== DIMENSÃO 5: EMPODERAMENTO E AUTONOMIA ==========
+    # ========== DIMENSO 5: EMPODERAMENTO E AUTONOMIA ==========
     dim_empoderamento = Dimensao(
         id="empoderamento",
         nome="Empoderamento e Autonomia",
@@ -250,7 +250,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
     
     questionario.adicionar_dimensao(dim_empoderamento)
     
-    # ========== DIMENSÃO 6: PRESSÃO E ESTRESSE ==========
+    # ========== DIMENSO 6: PRESSO E ESTRESSE ==========
     dim_pressao = Dimensao(
         id="pressao",
         nome="Pressão e Estresse",
@@ -292,7 +292,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
     
     questionario.adicionar_dimensao(dim_pressao)
     
-    # ========== DIMENSÃO 7: RESPEITO E DIGNIDADE ==========
+    # ========== DIMENSO 7: RESPEITO E DIGNIDADE ==========
     dim_respeito = Dimensao(
         id="respeito",
         nome="Respeito e Dignidade",
@@ -334,7 +334,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
     
     questionario.adicionar_dimensao(dim_respeito)
     
-    # ========== DIMENSÃO 8: EXPECTATIVAS E CLAREZA ==========
+    # ========== DIMENSO 8: EXPECTATIVAS E CLAREZA ==========
     dim_expectativas = Dimensao(
         id="expectativas",
         nome="Expectativas e Clareza",
@@ -380,7 +380,7 @@ def criar_questionario_toxicidade() -> QuestionarioToxicidade:
 
 
 # ============================================================================
-# FUNÇÃO DE INTERPRETAÇÃO
+# FUNO DE INTERPRETAO
 # ============================================================================
 
 def obter_interpretacao(nivel_risco: str) -> str:
@@ -396,7 +396,7 @@ def obter_interpretacao(nivel_risco: str) -> str:
     
     interpretacoes = {
         "Excelente": """
-        **🌟 Ambiente de Liderança Exemplar**
+        ** Ambiente de Liderança Exemplar**
         
         Os resultados indicam uma liderança saudável e positiva. O ambiente apresenta 
         características de uma gestão eficaz, com comunicação clara, reconhecimento adequado, 
@@ -411,10 +411,10 @@ def obter_interpretacao(nivel_risco: str) -> str:
         """,
         
         "Baixo": """
-        **✅ Ambiente Aceitável com Pontos de Atenção**
+        ** Ambiente Aceitável com Pontos de Atenção**
         
         A situação geral está dentro de parâmetros aceitáveis, mas há aspectos que merecem 
-        atenção. É importante identificar as áreas específicas com pontuações mais elevadas 
+        atenção.  importante identificar as áreas específicas com pontuações mais elevadas 
         e desenvolver planos de melhoria focados.
         
         **Recomendações:**
@@ -425,10 +425,10 @@ def obter_interpretacao(nivel_risco: str) -> str:
         """,
         
         "Moderado": """
-        **⚠️ Sinais Significativos de Toxicidade**
+        **️ Sinais Significativos de Toxicidade**
         
         Os resultados apontam para problemas consideráveis no ambiente de liderança que 
-        requerem atenção imediata. É fundamental realizar uma avaliação mais aprofundada 
+        requerem atenção imediata.  fundamental realizar uma avaliação mais aprofundada 
         e desenvolver um plano de ação estruturado com metas claras e prazos definidos.
         
         **Recomendações:**
@@ -440,10 +440,10 @@ def obter_interpretacao(nivel_risco: str) -> str:
         """,
         
         "Alto": """
-        **🚨 SITUAÇÃO CRÍTICA - Intervenção Urgente Necessária**
+        ** SITUAO CRÍTICA - Intervenção Urgente Necessária**
         
         Os resultados indicam um ambiente de trabalho tóxico que pode estar causando danos 
-        significativos à saúde mental e produtividade da equipe. É imperativo que ações 
+        significativos à saúde mental e produtividade da equipe.  imperativo que ações 
         corretivas sejam tomadas IMEDIATAMENTE.
         
         **Recomendações Urgentes:**
@@ -461,7 +461,7 @@ def obter_interpretacao(nivel_risco: str) -> str:
 
 
 # ============================================================================
-# FUNÇÕES AUXILIARES
+# FUNES AUXILIARES
 # ============================================================================
 
 def obter_descricao_escala(valor: int) -> str:
@@ -472,3 +472,5 @@ def obter_descricao_escala(valor: int) -> str:
 def validar_resposta(resposta: int) -> bool:
     """Valida se uma resposta está dentro da escala"""
     return resposta in ESCALA_LIKERT.keys()
+
+

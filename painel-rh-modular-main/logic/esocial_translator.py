@@ -9,7 +9,7 @@ codificação exigidas pelo evento S-2240 do eSocial.
 # Dicionário que mapeia as dimensões de risco para os códigos e textos do eSocial.
 # Esta é a "inteligência" da tradução. Versão completa para o COPSOQ III - Média.
 ESOCIAL_MAP = {
-    # --- GRUPO 1: EXIGÊNCIAS E RECURSOS ---
+    # --- GRUPO 1: EXIGNCIAS E RECURSOS ---
     'Ritmo de Trabalho': {
         'codigo': '05.01.001',
         'descricao_codigo': 'Ritmo de trabalho penoso',
@@ -82,7 +82,7 @@ ESOCIAL_MAP = {
         'justificativa': "A falta de controle sobre a própria jornada e pausas é um fator de estresse que afeta a recuperação psicofisiológica, tratando-se de uma regra da organização do trabalho."
     },
 
-    # --- GRUPO 2: AMBIENTE SOCIAL, LIDERANÇA E CULTURA ---
+    # --- GRUPO 2: AMBIENTE SOCIAL, LIDERANA E CULTURA ---
     'Qualidade da Liderança': {
         'codigo': '05.01.004',
         'descricao_codigo': 'Fatores ergonômicos organizacionais',
@@ -254,7 +254,7 @@ ESOCIAL_MAP = {
         'justificativa': "O desequilíbrio trabalho-vida pessoal é um risco ligado à organização da jornada, volume de trabalho e cultura de longas horas, sendo um fator organizacional."
     },
 
-    # --- GRUPO 3: RESULTADOS E PERCEPÇÕES INDIVIDUAIS ---
+    # --- GRUPO 3: RESULTADOS E PERCEPES INDIVIDUAIS ---
     'Satisfação com o trabalho': {
         'codigo': '05.01.004',
         'descricao_codigo': 'Fatores ergonômicos organizacionais',
@@ -353,3 +353,5 @@ def traduzir_risco_para_esocial(risco_inventario: dict):
             ),
             'justificativa': "Este é um código padrão para riscos organizacionais não mapeados diretamente. A descrição deve ser refinada pelo profissional de SST com base nas evidências coletadas."
         }
+
+

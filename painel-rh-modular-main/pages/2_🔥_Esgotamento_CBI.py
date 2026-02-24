@@ -1,4 +1,4 @@
-# pages/2_🔥_Esgotamento_CBI.py
+# pages/2__Esgotamento_CBI.py
 # Responsabilidade: Apresentar a interface para a ferramenta de análise de Esgotamento.
 
 import streamlit as st
@@ -9,7 +9,7 @@ import os
 from datetime import datetime
 
 # --- Adiciona o diretório raiz ao Python Path ---
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # CORREÇÃO: abspath
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # CORREO: abspath
 if project_root not in sys.path:
     sys.path.append(project_root)
 # ------------------------------------------------
@@ -54,7 +54,7 @@ cbi_questions = {
 cbi_response_options = {
     "Sempre / Quase Sempre": 100, 
     "Frequentemente": 75, 
-    "Às vezes": 50, 
+    "s vezes": 50, 
     "Raramente": 25, 
     "Nunca / Quase Nunca": 0
 }
@@ -62,7 +62,7 @@ cbi_response_options = {
 cbi_inverted_options = {
     "Sempre / Quase Sempre": 0, 
     "Frequentemente": 25, 
-    "Às vezes": 50, 
+    "s vezes": 50, 
     "Raramente": 75, 
     "Nunca / Quase Nunca": 100
 }
@@ -79,20 +79,20 @@ ANALYSIS_TYPE_FOR_THIS_PAGE = AnalysisType.BURNOUT_CBI
 def get_risk_info(overall_score: float):
     """Determina o nível de risco com base na pontuação geral."""
     if overall_score >= 75:
-        return RiskLevel.HIGH, "#EF4444", "🚨 ALTO"
+        return RiskLevel.HIGH, "#EF4444", " ALTO"
     elif overall_score >= 50:
-        return RiskLevel.MODERATE, "#F59E0B", "⚠️ MODERADO"
+        return RiskLevel.MODERATE, "#F59E0B", "️ MODERADO"
     else:
-        return RiskLevel.LOW, "#10B981", "✅ BAIXO"
+        return RiskLevel.LOW, "#10B981", " BAIXO"
 
 def render_results(analysis):
     """Renderiza os resultados da análise e os componentes de IA."""
-    st.success(f"✅ Análise '{analysis.name}' concluída!")
+    st.success(f" Análise '{analysis.name}' concluída!")
     
     # Botões de ação
     col_save, col_export = st.columns(2)
     with col_save:
-        if st.button("💾 Salvar Análise", use_container_width=True):
+        if st.button(" Salvar Análise", width='stretch'):
             try:
                 storage.save_analysis(analysis)
                 st.success("Análise salva com sucesso!")
@@ -100,29 +100,29 @@ def render_results(analysis):
                 st.error(f"Erro ao salvar análise: {e}")
     
     with col_export:
-        if st.button("📤 Exportar Resultados", use_container_width=True):
+        if st.button(" Exportar Resultados", width='stretch'):
             st.info("Funcionalidade de exportação em desenvolvimento")
     
     overall = analysis.metadata.get('overall_score', 0)
     
-    # CORREÇÃO: Exibir métrica principal corretamente
-    st.subheader("📊 Score Geral de Esgotamento")
+    # CORREO: Exibir métrica principal corretamente
+    st.subheader(" Score Geral de Esgotamento")
     st.metric(
         label="Pontuação Total", 
         value=f"{overall:.1f}/100",
         delta=None
     )
     
-    # CORREÇÃO: Exibir nível de risco corretamente
+    # CORREO: Exibir nível de risco corretamente
     risk_level, risk_color, risk_text = get_risk_info(overall)
     st.markdown(f"**Nível de Risco:** <span style='color: {risk_color}; font-weight: bold;'>{risk_text}</span>", unsafe_allow_html=True)
     
     # Dimensões do burnout
-    st.subheader("📈 Dimensões do Esgotamento")
+    st.subheader(" Dimensões do Esgotamento")
     cols = st.columns(len(analysis.data))
     for i, (dim, score) in enumerate(analysis.data.items()):
         with cols[i]:
-            # CORREÇÃO: Formatar nome da dimensão
+            # CORREO: Formatar nome da dimensão
             dim_name = dim.replace("Burnout ", "").replace("Relacionado ao ", "")
             st.metric(label=dim_name, value=f"{score:.1f}")
             
@@ -171,7 +171,7 @@ if submitted:
         # Salva automaticamente
         try:
             storage.save_analysis(analysis_result)
-            st.success("✅ Análise salva automaticamente!")
+            st.success(" Análise salva automaticamente!")
         except Exception as e:
             st.warning(f"Análise calculada, mas não foi possível salvar: {e}")
 
@@ -179,3 +179,5 @@ if submitted:
 if 'latest_analysis' in st.session_state and st.session_state.latest_analysis is not None:
     if st.session_state.latest_analysis.type == ANALYSIS_TYPE_FOR_THIS_PAGE:
         render_results(st.session_state.latest_analysis)
+
+

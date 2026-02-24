@@ -13,9 +13,9 @@ from .toxicidade_model import (
     ResultadoAvaliacao
 )
 
-# --- INÍCIO DA ADIÇÃO ---
+# --- INÍCIO DA ADIO ---
 from .copsoq_ii_model import CopsoqII
-# --- FIM DA ADIÇÃO ---
+# --- FIM DA ADIO ---
 
 
 __all__ = [
@@ -26,7 +26,9 @@ __all__ = [
     'RespostaAvaliacao',
     'ResultadoAvaliacao',
     
-    # --- INÍCIO DA ADIÇÃO ---
+    # --- INÍCIO DA ADIO ---
     'CopsoqII'
-    # --- FIM DA ADIÇÃO ---
+    # --- FIM DA ADIO ---
 ]
+
+

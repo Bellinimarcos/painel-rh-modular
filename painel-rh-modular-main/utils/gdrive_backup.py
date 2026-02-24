@@ -143,7 +143,7 @@ class GDriveBackup:
 
 def render_gdrive_backup_config():
     """Interface para configurar backup automático no Google Drive."""
-    st.subheader("☁️ Backup Automático - Google Drive")
+    st.subheader("️ Backup Automático - Google Drive")
     
     st.info("""
     **Como configurar:**
@@ -153,13 +153,13 @@ def render_gdrive_backup_config():
     4. Configure frequência dos backups
     """)
     
-    with st.expander("📖 Instruções Detalhadas"):
+    with st.expander(" Instruções Detalhadas"):
         st.markdown("""
         ### Passo 1: Google Cloud Console
         1. Acesse [Google Cloud Console](https://console.cloud.google.com)
         2. Crie novo projeto: "Painel RH Backups"
         3. Ative a **Google Drive API**
-        4. Vá em **Credenciais** → **Criar Credenciais** → **ID do cliente OAuth**
+        4. Vá em **Credenciais**  **Criar Credenciais**  **ID do cliente OAuth**
         5. Tipo: "Aplicativo para computador"
         6. Baixe o arquivo JSON
         7. Renomeie para `credentials.json`
@@ -181,27 +181,27 @@ def render_gdrive_backup_config():
     col1, col2 = st.columns(2)
     
     with col1:
-        if st.button("🔐 Autenticar Google Drive", use_container_width=True):
+        if st.button(" Autenticar Google Drive", width='stretch'):
             try:
                 gdrive.authenticate()
-                st.success("✅ Autenticação bem-sucedida!")
+                st.success(" Autenticação bem-sucedida!")
             except FileNotFoundError:
-                st.error("❌ Arquivo credentials.json não encontrado")
+                st.error(" Arquivo credentials.json não encontrado")
             except Exception as e:
-                st.error(f"❌ Erro: {e}")
+                st.error(f" Erro: {e}")
     
     with col2:
-        if st.button("🗂️ Criar Pasta Backups", use_container_width=True):
+        if st.button("️ Criar Pasta Backups", width='stretch'):
             try:
                 folder_id = gdrive.create_backup_folder()
-                st.success(f"✅ Pasta criada: {folder_id}")
+                st.success(f" Pasta criada: {folder_id}")
             except Exception as e:
-                st.error(f"❌ Erro: {e}")
+                st.error(f" Erro: {e}")
     
     st.divider()
     
     # Backup manual
-    if st.button("☁️ Fazer Backup Agora", type="primary", use_container_width=True):
+    if st.button("️ Fazer Backup Agora", type="primary", width='stretch'):
         from utils.backup_manager import BackupManager
         
         backup_mgr = BackupManager()
@@ -211,7 +211,7 @@ def render_gdrive_backup_config():
             
             if link:
                 st.success(msg)
-                st.markdown(f"[📂 Ver no Google Drive]({link})")
+                st.markdown(f"[ Ver no Google Drive]({link})")
             else:
                 st.error(msg)
     
@@ -228,7 +228,7 @@ def render_gdrive_backup_config():
         st.info(f"Backup será executado diariamente às {backup_time.strftime('%H:%M')}")
         
         # Salva configuração
-        if st.button("💾 Salvar Configuração"):
+        if st.button(" Salvar Configuração"):
             config = {
                 'enabled': True,
                 'time': backup_time.strftime('%H:%M')
@@ -240,7 +240,7 @@ def render_gdrive_backup_config():
             with open(config_path, 'w') as f:
                 json.dump(config, f)
             
-            st.success("✅ Configuração salva!")
+            st.success(" Configuração salva!")
 
 
 # Script para executar backup agendado (rodar em servidor/cron)
@@ -282,3 +282,5 @@ def scheduled_backup():
 if __name__ == "__main__":
     # Executar como script standalone para backups agendados
     scheduled_backup()
+
+

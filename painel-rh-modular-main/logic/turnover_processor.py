@@ -258,15 +258,15 @@ class TurnoverProcessor:
         diff = taxa - benchmark
         if diff > benchmark * 0.5:  # 50% acima
             insights.append(
-                f"🚨 Taxa de turnover crítica: {diff:.1f}% acima do benchmark do setor ({benchmark:.1f}%)"
+                f" Taxa de turnover crítica: {diff:.1f}% acima do benchmark do setor ({benchmark:.1f}%)"
             )
         elif diff > 0:
             insights.append(
-                f"⚠️ Taxa de turnover {diff:.1f}% acima do benchmark do setor ({benchmark:.1f}%)"
+                f"️ Taxa de turnover {diff:.1f}% acima do benchmark do setor ({benchmark:.1f}%)"
             )
         else:
             insights.append(
-                f"✅ Taxa de turnover dentro dos parâmetros do setor"
+                f" Taxa de turnover dentro dos parâmetros do setor"
             )
         
         # Insight sobre balanço de movimentação
@@ -274,28 +274,28 @@ class TurnoverProcessor:
         if saldo > 0:
             percentual_crescimento = (saldo / media_funcionarios) * 100
             insights.append(
-                f"📈 Crescimento do quadro: {saldo} colaboradores ({percentual_crescimento:.1f}%)"
+                f" Crescimento do quadro: {saldo} colaboradores ({percentual_crescimento:.1f}%)"
             )
         elif saldo < 0:
             percentual_reducao = abs(saldo / media_funcionarios) * 100
             insights.append(
-                f"📉 Redução do quadro: {abs(saldo)} colaboradores ({percentual_reducao:.1f}%)"
+                f" Redução do quadro: {abs(saldo)} colaboradores ({percentual_reducao:.1f}%)"
             )
         else:
             insights.append(
-                f"⚖️ Quadro estável: admissões e demissões equilibradas"
+                f"️ Quadro estável: admissões e demissões equilibradas"
             )
         
         # Insight sobre custo
         custo_percentual = (impacto_total / (media_funcionarios * 12000)) * 100  # Assume salário médio 12k/ano
         if custo_percentual > 20:
             insights.append(
-                f"💰 Impacto financeiro elevado: R$ {impacto_total:,.2f} "
+                f" Impacto financeiro elevado: R$ {impacto_total:,.2f} "
                 f"(~{custo_percentual:.1f}% da folha anual estimada)"
             )
         elif impacto_total > 100000:
             insights.append(
-                f"💸 Impacto financeiro significativo: R$ {impacto_total:,.2f}"
+                f" Impacto financeiro significativo: R$ {impacto_total:,.2f}"
             )
         
         # Insight sobre padrão de rotatividade
@@ -303,13 +303,15 @@ class TurnoverProcessor:
             ratio = admissoes / demissoes
             if ratio > 1.5:
                 insights.append(
-                    f"🔄 Alta taxa de contratação: {admissoes} admissões vs {demissoes} demissões - "
+                    f" Alta taxa de contratação: {admissoes} admissões vs {demissoes} demissões - "
                     f"possível expansão ou dificuldade de retenção"
                 )
             elif ratio < 0.7:
                 insights.append(
-                    f"📊 Alta taxa de desligamento: {demissoes} demissões vs {admissoes} admissões - "
+                    f" Alta taxa de desligamento: {demissoes} demissões vs {admissoes} admissões - "
                     f"possível reestruturação ou redução de custos"
                 )
         
         return insights
+
+

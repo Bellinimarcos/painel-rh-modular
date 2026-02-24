@@ -1,4 +1,4 @@
-# pages/3_💼_Workaholism_DUWAS.py
+# pages/3__Workaholism_DUWAS.py
 """
 Responsabilidade: Interface para análise de Workaholism usando DUWAS.
 """
@@ -51,7 +51,7 @@ duwas_questions = {
 # Opções de resposta
 duwas_response_options = {
     "Quase Nunca / Nunca": 1,
-    "Às vezes": 2,
+    "s vezes": 2,
     "Frequentemente": 3,
     "Quase Sempre / Sempre": 4
 }
@@ -59,14 +59,14 @@ duwas_response_options = {
 
 def render_results(analysis):
     """Renderiza resultados DUWAS"""
-    st.success(f"✅ Análise '{analysis.name}' concluída!")
+    st.success(f" Análise '{analysis.name}' concluída!")
     
     scores = analysis.data
     excessive = scores.get("Trabalhar Excessivamente", 0)
     compulsive = scores.get("Trabalhar Compulsivamente", 0)
     
     # Scores principais
-    st.subheader("📊 Resultados DUWAS")
+    st.subheader(" Resultados DUWAS")
     
     col1, col2 = st.columns(2)
     
@@ -74,42 +74,42 @@ def render_results(analysis):
         ui.render_metric_card(
             "Trabalhar Excessivamente",
             f"{excessive}/20",
-            icon="🏃",
+            icon="",
             color=analysis.risk_level.color,
             help_text="Mede quanto tempo você dedica ao trabalho"
         )
         
         # Interpretação
         if excessive >= 15:
-            st.error("🚨 Nível muito alto")
+            st.error(" Nível muito alto")
         elif excessive >= 12:
-            st.warning("⚠️ Nível alto")
+            st.warning("️ Nível alto")
         elif excessive >= 8:
-            st.info("ℹ️ Nível moderado")
+            st.info("️ Nível moderado")
         else:
-            st.success("✅ Nível normal")
+            st.success(" Nível normal")
     
     with col2:
         ui.render_metric_card(
             "Trabalhar Compulsivamente",
             f"{compulsive}/20",
-            icon="🧠",
+            icon="",
             color=analysis.risk_level.color,
             help_text="Mede obsessão e dificuldade em se desligar"
         )
         
         # Interpretação
         if compulsive >= 15:
-            st.error("🚨 Nível muito alto")
+            st.error(" Nível muito alto")
         elif compulsive >= 12:
-            st.warning("⚠️ Nível alto")
+            st.warning("️ Nível alto")
         elif compulsive >= 8:
-            st.info("ℹ️ Nível moderado")
+            st.info("️ Nível moderado")
         else:
-            st.success("✅ Nível normal")
+            st.success(" Nível normal")
     
     # Classificação geral
-    st.subheader("🎯 Classificação")
+    st.subheader(" Classificação")
     
     if excessive > 12 and compulsive > 12:
         st.error("""
@@ -161,7 +161,7 @@ def render_results(analysis):
     
     # Insights automáticos
     if analysis.insights:
-        st.subheader("💡 Insights Automáticos")
+        st.subheader(" Insights Automáticos")
         for insight in analysis.insights:
             if "alto" in insight.lower():
                 st.warning(insight)
@@ -169,19 +169,19 @@ def render_results(analysis):
                 st.info(insight)
     
     # Recomendações específicas
-    st.subheader("🎯 Recomendações Personalizadas")
+    st.subheader(" Recomendações Personalizadas")
     
     recommendations = []
     
     if excessive > 10:
-        recommendations.append("📅 **Gestão de tempo:** Use técnicas como Pomodoro e estabeleça horários fixos de saída")
+        recommendations.append(" **Gestão de tempo:** Use técnicas como Pomodoro e estabeleça horários fixos de saída")
     
     if compulsive > 10:
-        recommendations.append("🧘 **Mindfulness:** Pratique meditação e exercícios de respiração para desligar mentalmente")
+        recommendations.append(" **Mindfulness:** Pratique meditação e exercícios de respiração para desligar mentalmente")
     
     if excessive > 10 or compulsive > 10:
-        recommendations.append("🏃 **Atividade física:** Exercícios regulares ajudam a reduzir ansiedade relacionada ao trabalho")
-        recommendations.append("👥 **Suporte social:** Compartilhe suas preocupações com amigos, família ou terapeuta")
+        recommendations.append(" **Atividade física:** Exercícios regulares ajudam a reduzir ansiedade relacionada ao trabalho")
+        recommendations.append(" **Suporte social:** Compartilhe suas preocupações com amigos, família ou terapeuta")
     
     for rec in recommendations:
         st.info(rec)
@@ -194,7 +194,7 @@ def render_results(analysis):
 
 # --- Interface Principal ---
 ui.render_header(
-    "💼 Dutch Work Addiction Scale (DUWAS)",
+    " Dutch Work Addiction Scale (DUWAS)",
     "Avaliação de vício em trabalho (Workaholism)"
 )
 
@@ -215,7 +215,7 @@ with st.form(key="duwas_form"):
     responses = {}
     
     for dimension, questions in duwas_questions.items():
-        st.subheader(f"📋 {dimension}")
+        st.subheader(f" {dimension}")
         st.caption(f"{len(questions)} perguntas")
         
         for i, question in enumerate(questions):
@@ -239,17 +239,17 @@ with st.form(key="duwas_form"):
     )
     
     submitted = st.form_submit_button(
-        "🚀 Calcular Resultados",
+        " Calcular Resultados",
         type="primary",
-        use_container_width=True
+        width='stretch'
     )
     
     if submitted:
-        # VALIDAÇÃO: Verifica se todas as perguntas foram respondidas
+        # VALIDAO: Verifica se todas as perguntas foram respondidas
         unanswered = [key for key, value in responses.items() if value is None]
         
         if unanswered:
-            st.error(f"❌ Por favor, responda todas as {len(unanswered)} perguntas pendentes antes de submeter.")
+            st.error(f" Por favor, responda todas as {len(unanswered)} perguntas pendentes antes de submeter.")
             st.warning("Role para cima e verifique se há perguntas sem resposta.")
             
             # Mostra quais dimensões têm perguntas pendentes
@@ -276,14 +276,14 @@ with st.form(key="duwas_form"):
                     # Salva automaticamente
                     try:
                         storage.save_analysis(analysis_result)
-                        st.success("✅ Análise salva automaticamente!")
+                        st.success(" Análise salva automaticamente!")
                     except Exception as e:
                         st.warning(f"Análise calculada, mas não foi possível salvar: {e}")
                 
                 except ValueError as e:
-                    st.error(f"❌ Erro de validação: {e}")
+                    st.error(f" Erro de validação: {e}")
                 except Exception as e:
-                    st.error(f"❌ Erro inesperado: {e}")
+                    st.error(f" Erro inesperado: {e}")
                     st.exception(e)
 
 # --- Renderização de Resultados ---
@@ -292,3 +292,5 @@ if 'latest_analysis' in st.session_state and st.session_state.latest_analysis is
         if st.session_state.get('analysis_ready', False):
             st.divider()
             render_results(st.session_state.latest_analysis)
+
+

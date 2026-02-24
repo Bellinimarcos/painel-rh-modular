@@ -306,3 +306,5 @@ def get_compliance_manager() -> ComplianceManager:
     if _manager_instance is None:
         _manager_instance = ComplianceManager()
     return _manager_instance
+
+

@@ -15,7 +15,7 @@ class BurnoutProcessor:
 
     def process(self, name: str, responses: Dict) -> AnalysisResult:
         """Calcula os scores de burnout a partir das respostas do formulário."""
-        # CORREÇÃO: Usar constantes locais
+        # CORREO: Usar constantes locais
         cbi_questions = {
             "Burnout Pessoal": [
                 {"question": "Com que frequência você se sente esgotado(a) física e emocionalmente?", "inverted": False},
@@ -47,7 +47,7 @@ class BurnoutProcessor:
         cbi_response_options = {
             "Sempre / Quase Sempre": 100, 
             "Frequentemente": 75, 
-            "Às vezes": 50, 
+            "s vezes": 50, 
             "Raramente": 25, 
             "Nunca / Quase Nunca": 0
         }
@@ -55,7 +55,7 @@ class BurnoutProcessor:
         cbi_inverted_options = {
             "Sempre / Quase Sempre": 0, 
             "Frequentemente": 25, 
-            "Às vezes": 50, 
+            "s vezes": 50, 
             "Raramente": 75, 
             "Nunca / Quase Nunca": 100
         }
@@ -67,15 +67,15 @@ class BurnoutProcessor:
                 q_hash = hashlib.md5(item['question'].encode()).hexdigest()[:8]
                 key = f"cbi_{dimension.replace(' ', '')}_{q_hash}"
                 
-                if key in responses:  # CORREÇÃO: Verificar se a chave existe
+                if key in responses:  # CORREO: Verificar se a chave existe
                     # Seleciona o mapa de pontuação correto (normal ou invertido)
                     score_map = cbi_inverted_options if item['inverted'] else cbi_response_options
                     dim_scores.append(score_map[responses[key]])
             
-            if dim_scores:  # CORREÇÃO: Evitar divisão por zero
+            if dim_scores:  # CORREO: Evitar divisão por zero
                 scores[dimension] = np.mean(dim_scores)
         
-        if scores:  # CORREÇÃO: Verificar se há scores calculados
+        if scores:  # CORREO: Verificar se há scores calculados
             overall = np.mean(list(scores.values()))
             risk = self._calculate_risk_level(overall)
         else:
@@ -94,9 +94,11 @@ class BurnoutProcessor:
 
     def _calculate_risk_level(self, overall_score: float) -> RiskLevel:
         """Determina o nível de risco com base na pontuação geral."""
-        # CORREÇÃO: Retornar apenas o enum, não tuplas
+        # CORREO: Retornar apenas o enum, não tuplas
         if overall_score >= 75:
             return RiskLevel.HIGH
         elif overall_score >= 50:
             return RiskLevel.MODERATE
         return RiskLevel.LOW
+
+

@@ -1,4 +1,4 @@
-# pages/9_📄_Tradutor_eSocial.py
+# pages/9__Tradutor_eSocial.py
 
 import streamlit as st
 
@@ -12,11 +12,11 @@ except ImportError:
 
 
 # --- Configuração da Página ---
-st.set_page_config(page_title="Tradutor para eSocial", page_icon="📄", layout="wide")
+st.set_page_config(page_title="Tradutor para eSocial", page_icon="", layout="wide")
 
 
 # --- Título e Descrição ---
-st.title("📄 Assistente de Conformidade para o eSocial (S-2240)")
+st.title(" Assistente de Conformidade para o eSocial (S-2240)")
 st.markdown("""
 Esta ferramenta utiliza os dados do seu **Inventário de Riscos** para gerar sugestões de texto e códigos
 compatíveis com o evento S-2240 do eSocial. O texto gerado deve ser **revisado e validado por um
@@ -31,7 +31,7 @@ st.divider()
 # 1. Verifica se o inventário de riscos existe e não está vazio.
 #    A variável `st.session_state.inventario_riscos` é criada na página "Riscos Psicossociais".
 if 'inventario_riscos' not in st.session_state or not st.session_state.inventario_riscos:
-    st.warning("⚠️ Nenhum risco encontrado no Inventário.", icon="⚠️")
+    st.warning("️ Nenhum risco encontrado no Inventário.", icon="️")
     st.info("Por favor, primeiro utilize a ferramenta de 'Riscos Psicossociais' para identificar e adicionar riscos ao inventário.")
 
 # 2. Se o inventário tiver riscos, mostra a interface do tradutor.
@@ -88,4 +88,6 @@ else:
             )
 
             st.markdown("**Justificativa Técnica da Sugestão:**")
-            st.info(traducao['justificativa'], icon="💡")
+            st.info(traducao['justificativa'], icon="")
+
+

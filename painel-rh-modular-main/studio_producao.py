@@ -1,5 +1,5 @@
 """
-ESTÚDIO DE PRODUÇÃO DE ÁUDIO PROFISSIONAL
+ESTDIO DE PRODUO DE ÁUDIO PROFISSIONAL
 Alfa Bureau & IPSI - Consultoria em Saúde Organizacional
 
 Produção de:
@@ -24,11 +24,11 @@ from elevenlabs import VoiceSettings
 
 st.set_page_config(
     page_title="Estúdio de Produção - Alfa Bureau & IPSI",
-    page_icon="🎙️",
+    page_icon="️",
     layout="wide"
 )
 
-st.title("🎙️ Estúdio de Produção de Áudio Profissional")
+st.title("️ Estúdio de Produção de Áudio Profissional")
 st.markdown("**Alfa Bureau & IPSI - Vinhetas, Spots e Jingles**")
 
 # ==================== VOZES DISPONÍVEIS ====================
@@ -39,9 +39,9 @@ VOZES = {
     "Carla": "m151rjrbWXbBqyq56tly"
 }
 
-# ==================== SELEÇÃO DE EMPRESA ====================
+# ==================== SELEO DE EMPRESA ====================
 st.markdown("---")
-st.subheader("🏢 Selecione a Empresa")
+st.subheader(" Selecione a Empresa")
 
 empresa = st.radio(
     "Para qual empresa deseja criar o conteúdo?",
@@ -49,9 +49,9 @@ empresa = st.radio(
     horizontal=True
 )
 
-# ==================== SELEÇÃO DE VOZES ====================
+# ==================== SELEO DE VOZES ====================
 st.markdown("---")
-st.subheader("🎤 Configurar Vozes")
+st.subheader(" Configurar Vozes")
 
 col1, col2 = st.columns(2)
 
@@ -71,9 +71,9 @@ with col2:
         help="Escolha a voz feminina para locutora/especialista"
     )
 
-st.info(f"✅ Configuração: **{voz_masculina}** (masculino) + **{voz_feminina}** (feminino)")
+st.info(f" Configuração: **{voz_masculina}** (masculino) + **{voz_feminina}** (feminino)")
 
-# ==================== BIBLIOTECA DE CONTEÚDOS ====================
+# ==================== BIBLIOTECA DE CONTEDOS ====================
 
 # ALFA BUREAU - Conteúdos
 alfa_bureau_biblioteca = {
@@ -225,7 +225,7 @@ alfa_bureau_biblioteca = {
             "duracao": "30s",
             "roteiro": [
                 {
-                    "texto": "Sua empresa está pagando impostos demais? É hora de fazer um planejamento tributário inteligente!",
+                    "texto": "Sua empresa está pagando impostos demais?  hora de fazer um planejamento tributário inteligente!",
                     "tipo": "feminino"
                 },
                 {
@@ -250,7 +250,7 @@ alfa_bureau_biblioteca = {
                     "tipo": "masculino"
                 },
                 {
-                    "texto": "Mas e se você pudesse ter uma equipe de especialistas cuidando disso para você? É exatamente isso que a Alfa Bureau oferece!",
+                    "texto": "Mas e se você pudesse ter uma equipe de especialistas cuidando disso para você?  exatamente isso que a Alfa Bureau oferece!",
                     "tipo": "feminino"
                 },
                 {
@@ -304,7 +304,7 @@ ipsi_biblioteca = {
                     "tipo": "masculino"
                 },
                 {
-                    "texto": "Um ambiente de trabalho saudável não é luxo, é necessidade. É investimento que traz retorno garantido em produtividade e resultados.",
+                    "texto": "Um ambiente de trabalho saudável não é luxo, é necessidade.  investimento que traz retorno garantido em produtividade e resultados.",
                     "tipo": "feminino"
                 },
                 {
@@ -433,12 +433,12 @@ ipsi_biblioteca = {
     ]
 }
 
-# ==================== SELEÇÃO DE CONTEÚDO ====================
+# ==================== SELEO DE CONTEDO ====================
 
 biblioteca = alfa_bureau_biblioteca if empresa == "Alfa Bureau" else ipsi_biblioteca
 
 st.markdown("---")
-st.subheader("📂 Biblioteca de Conteúdos")
+st.subheader(" Biblioteca de Conteúdos")
 
 categoria = st.selectbox(
     "Escolha a categoria:",
@@ -453,7 +453,7 @@ conteudo_selecionado = st.selectbox(
 
 # Mostrar roteiro
 st.markdown("---")
-st.subheader("📝 Roteiro Selecionado")
+st.subheader(" Roteiro Selecionado")
 
 with st.expander("Ver Roteiro Completo", expanded=True):
     for i, fala in enumerate(conteudo_selecionado['roteiro'], 1):
@@ -464,7 +464,7 @@ with st.expander("Ver Roteiro Completo", expanded=True):
 
 # ==================== UPLOAD JINGLES ====================
 st.markdown("---")
-st.subheader("🎵 Jingles Musicais (Opcional)")
+st.subheader(" Jingles Musicais (Opcional)")
 
 col1, col2 = st.columns(2)
 
@@ -494,9 +494,9 @@ with col2:
 try:
     api_key = st.secrets["ELEVENLABS_API_KEY"]
     client = ElevenLabs(api_key=api_key)
-    st.success("✅ API conectada")
+    st.success(" API conectada")
 except:
-    st.error("❌ Erro na API")
+    st.error(" Erro na API")
     st.stop()
 
 project_root = Path(__file__).parent
@@ -504,7 +504,7 @@ ffmpeg_path = project_root / "ffmpeg.exe"
 if not ffmpeg_path.exists():
     ffmpeg_path = "ffmpeg"
 
-# ==================== FUNÇÕES ====================
+# ==================== FUNES ====================
 
 def generate_audio(texto, voice_id):
     try:
@@ -525,7 +525,7 @@ def generate_audio(texto, voice_id):
         
         return b"".join(audio)
     except Exception as e:
-        st.error(f"❌ {str(e)}")
+        st.error(f" {str(e)}")
         return None
 
 def combine_audios(segments, jingle_start=None, jingle_end=None):
@@ -589,14 +589,14 @@ def combine_audios(segments, jingle_start=None, jingle_end=None):
             with open(output_file, 'rb') as f:
                 return f.read()
     except Exception as e:
-        st.error(f"❌ {str(e)}")
+        st.error(f" {str(e)}")
         return None
 
-# ==================== GERAÇÃO ====================
+# ==================== GERAO ====================
 
 st.markdown("---")
 
-if st.button(f"🎙️ **PRODUZIR ÁUDIO - {empresa}**", type="primary", use_container_width=True):
+if st.button(f"️ **PRODUZIR ÁUDIO - {empresa}**", type="primary", width='stretch'):
     progress = st.progress(0.0)
     status = st.empty()
     
@@ -608,22 +608,22 @@ if st.button(f"🎙️ **PRODUZIR ÁUDIO - {empresa}**", type="primary", use_con
         voice_id = VOZES[voz_masculina] if fala['tipo'] == 'masculino' else VOZES[voz_feminina]
         voz_nome = voz_masculina if fala['tipo'] == 'masculino' else voz_feminina
         
-        status.text(f"🎤 Gravando: {voz_nome}...")
+        status.text(f" Gravando: {voz_nome}...")
         progress.progress((i / len(roteiro)) * 0.85)
         
         audio = generate_audio(fala['texto'], voice_id)
         
         if audio:
             segments.append(audio)
-            st.success(f"✅ {voz_nome}")
+            st.success(f" {voz_nome}")
         else:
-            st.error(f"❌ Erro: {voz_nome}")
+            st.error(f" Erro: {voz_nome}")
             break
         
         time.sleep(0.5)
     
     if len(segments) == len(roteiro):
-        status.text("🎬 Finalizando...")
+        status.text(" Finalizando...")
         progress.progress(0.95)
         
         if jingle_abertura:
@@ -635,12 +635,12 @@ if st.button(f"🎙️ **PRODUZIR ÁUDIO - {empresa}**", type="primary", use_con
         
         if final:
             progress.progress(1.0)
-            status.text("✅ Pronto!")
+            status.text(" Pronto!")
             
             st.markdown("---")
-            st.markdown(f"## 🎧 {conteudo_selecionado['nome']}")
+            st.markdown(f"##  {conteudo_selecionado['nome']}")
             
-            st.success(f"✅ **Áudio com {voz_masculina} + {voz_feminina} - Otimizado para WhatsApp!**")
+            st.success(f" **Áudio com {voz_masculina} + {voz_feminina} - Otimizado para WhatsApp!**")
             
             nome_empresa = "ALFA_BUREAU" if empresa == "Alfa Bureau" else "IPSI"
             nome_arquivo = f"{nome_empresa}_{conteudo_selecionado['nome'].replace(' ', '_')}.mp3"
@@ -649,31 +649,33 @@ if st.button(f"🎙️ **PRODUZIR ÁUDIO - {empresa}**", type="primary", use_con
             
             with col1:
                 st.download_button(
-                    label=f"📥 BAIXAR ÁUDIO (.mp3)",
+                    label=f" BAIXAR ÁUDIO (.mp3)",
                     data=final,
                     file_name=nome_arquivo,
                     mime="audio/mp3",
-                    use_container_width=True,
+                    width='stretch',
                     type="primary"
                 )
             
             with col2:
                 st.metric("Formato", "MP3 128kbps")
-                st.caption("✅ WhatsApp, Instagram, Rádio")
+                st.caption(" WhatsApp, Instagram, Rádio")
             
             st.info("""
-            **📱 Como enviar no WhatsApp:**
+            ** Como enviar no WhatsApp:**
             1. Baixe o arquivo
             2. WhatsApp > Anexar > Documento
             3. Selecione o MP3
             4. Envie!
             """)
             
-            with st.expander("🎧 Preview"):
+            with st.expander(" Preview"):
                 st.audio(final, format="audio/mp3")
             
-            st.success(f"✅ Produzido para {empresa}!")
+            st.success(f" Produzido para {empresa}!")
             st.balloons()
 
 st.markdown("---")
-st.info(f"🎙️ **Estúdio Profissional** | Vozes: {voz_masculina} + {voz_feminina} | WhatsApp Ready")
+st.info(f"️ **Estúdio Profissional** | Vozes: {voz_masculina} + {voz_feminina} | WhatsApp Ready")
+
+

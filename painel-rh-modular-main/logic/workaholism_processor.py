@@ -5,7 +5,7 @@ import hashlib
 from datetime import datetime
 from typing import Dict, Any
 
-# CORREÇÃO: Importar do arquivo correto
+# CORREO: Importar do arquivo correto
 from models.analysis import AnalysisResult
 from models.enums import AnalysisType, RiskLevel
 
@@ -48,7 +48,7 @@ class WorkaholismProcessor:
         # Determina o nível de risco
         risk_level = self._determine_risk_level(overall_score)
         
-        # CORREÇÃO: Usar AnalysisResult em vez de Analysis
+        # CORREO: Usar AnalysisResult em vez de Analysis
         analysis = AnalysisResult(
             id=hashlib.md5(f"duwas_{datetime.now()}".encode()).hexdigest()[:8],
             name=name,
@@ -139,8 +139,8 @@ class WorkaholismProcessor:
         risk_level = self._determine_risk_level(overall_score)
         
         interpretations = {
-            RiskLevel.HIGH: "Os resultados indicam um alto nível de workaholism. É fortemente recomendado buscar suporte profissional para estabelecer limites saudáveis entre trabalho e vida pessoal.",
-            RiskLevel.MODERATE: "Os resultados indicam um nível moderado de workaholism. É importante estar atento aos sinais e considerar estratégias para melhor equilíbrio entre trabalho e vida pessoal.",
+            RiskLevel.HIGH: "Os resultados indicam um alto nível de workaholism.  fortemente recomendado buscar suporte profissional para estabelecer limites saudáveis entre trabalho e vida pessoal.",
+            RiskLevel.MODERATE: "Os resultados indicam um nível moderado de workaholism.  importante estar atento aos sinais e considerar estratégias para melhor equilíbrio entre trabalho e vida pessoal.",
             RiskLevel.LOW: "Os resultados indicam um baixo nível de workaholism. Continue mantendo um equilíbrio saudável entre trabalho e vida pessoal."
         }
         
@@ -158,3 +158,5 @@ class WorkaholismProcessor:
             dimension_analysis = " As pontuações nas duas dimensões estão equilibradas."
         
         return base_interpretation + dimension_analysis
+
+

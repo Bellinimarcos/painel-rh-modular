@@ -34,3 +34,5 @@ def analisar_com_copiloto(dados_analise):
         return response.text
     except Exception as e:
         return f"Erro na análise da IA: {str(e)}"
+
+

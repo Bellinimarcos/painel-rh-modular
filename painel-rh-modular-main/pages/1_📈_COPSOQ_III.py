@@ -1,4 +1,4 @@
-# pages/1_📈_COPSOQ_III.py
+# pages/1__COPSOQ_III.py
 """
 Responsabilidade: Interface para análise COPSOQ III - Questionário psicossocial.
 Suporta arquivos com respostas individuais (Resp_Q) ou scores já calculados.
@@ -30,7 +30,7 @@ try:
     from utils.file_validators import FileValidator
     from utils.validators import DataValidator
 except ImportError:
-    st.error("⚠️ Módulo utils não encontrado.")
+    st.error("️ Módulo utils não encontrado.")
     st.stop()
 
 # --- Inicialização ---
@@ -128,10 +128,10 @@ def extract_scores_from_df(df, dimension_columns):
 
 def render_results(analysis):
     """Renderiza os resultados da análise COPSOQ"""
-    st.success(f"✅ Análise '{analysis.name}' concluída!")
+    st.success(f" Análise '{analysis.name}' concluída!")
 
     # Métricas gerais
-    st.subheader("📊 Resumo Geral")
+    st.subheader(" Resumo Geral")
 
     scores = analysis.data  # dict {Dimensão: Score}
     avg_score = sum(scores.values()) / len(scores) if scores else 0
@@ -142,11 +142,11 @@ def render_results(analysis):
         ui.render_metric_card(
             "Score Médio",
             f"{avg_score:.1f}/100",
-            icon="📈",
+            icon="",
             color=analysis.risk_level.color if hasattr(analysis.risk_level, 'color') else "#3B82F6"
         )
 
-    # ✅ Contagens corrigidas considerando dimensões negativas/positivas
+    #  Contagens corrigidas considerando dimensões negativas/positivas
     high_risk = 0
     low_risk = 0
     for dim, s in scores.items():
@@ -172,7 +172,7 @@ def render_results(analysis):
 
     # Insights automáticos
     if analysis.insights:
-        st.subheader("💡 Insights Automáticos")
+        st.subheader(" Insights Automáticos")
         for insight in analysis.insights:
             if "crítico" in insight.lower():
                 st.error(insight)
@@ -182,7 +182,7 @@ def render_results(analysis):
                 st.info(insight)
 
     # Gráfico principal
-    st.subheader("📊 Scores por Dimensão")
+    st.subheader(" Scores por Dimensão")
 
     df_scores = pd.DataFrame({
         'Dimensão': list(scores.keys()),
@@ -206,17 +206,17 @@ def render_results(analysis):
         xaxis_title="Score (0-100)",
         yaxis_title=""
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     # Detalhes por categoria
-    with st.expander("📋 Detalhes Completos"):
+    with st.expander(" Detalhes Completos"):
         st.dataframe(
             df_scores.sort_values('Score', ascending=False),
-            use_container_width=True,
+            width='stretch',
             hide_index=True
         )
 
-    # ✅ Top 5 corrigido (usa HealthScore)
+    #  Top 5 corrigido (usa HealthScore)
     st.divider()
     colA, colB = st.columns(2)
 
@@ -227,12 +227,12 @@ def render_results(analysis):
     bottom5 = df_rank.sort_values("HealthScore", ascending=True).head(5)
 
     with colA:
-        st.markdown("**🟢 Top 5 Dimensões Mais Saudáveis**")
+        st.markdown("** Top 5 Dimensões Mais Saudáveis**")
         for _, row in top5.iterrows():
             st.metric(row["Dimensão"], f"{row['Score']:.1f}")
 
     with colB:
-        st.markdown("**🔴 Top 5 Dimensões Mais Críticas**")
+        st.markdown("** Top 5 Dimensões Mais Críticas**")
         for _, row in bottom5.iterrows():
             st.metric(row["Dimensão"], f"{row['Score']:.1f}")
 
@@ -244,7 +244,7 @@ def render_results(analysis):
 
 # --- Interface Principal ---
 ui.render_header(
-    "📈 COPSOQ III",
+    " COPSOQ III",
     "Copenhagen Psychosocial Questionnaire - Versão III"
 )
 
@@ -262,7 +262,7 @@ st.divider()
 
 # Upload do arquivo
 uploaded_file = st.file_uploader(
-    "📂 Selecione o arquivo de respostas COPSOQ III",
+    " Selecione o arquivo de respostas COPSOQ III",
     type=['csv', 'xlsx', 'xls'],
     key="copsoq_uploader",
     help="Arquivo com respostas ao questionário COPSOQ III"
@@ -288,32 +288,32 @@ if uploaded_file:
         st.error(error)
 
     if df is not None:
-        st.success(f"✅ Arquivo '{uploaded_file.name}' lido com sucesso!")
+        st.success(f" Arquivo '{uploaded_file.name}' lido com sucesso!")
 
         # Detecta formato do arquivo
         file_format, relevant_cols = detect_file_format(df)
 
         if file_format == "unknown":
             st.error("""
-            ❌ **Formato de arquivo não reconhecido**
+             **Formato de arquivo não reconhecido**
 
             O arquivo deve conter:
             - **Opção 1:** Colunas com nomes das dimensões COPSOQ (ex: 'Exigências Quantitativas', 'Burnout', 'Stress')
             - **Opção 2:** Colunas Resp_Q1, Resp_Q2... ou P1, P2, P3... com respostas individuais
             """)
 
-            with st.expander("🔍 Debug: Colunas encontradas"):
+            with st.expander(" Debug: Colunas encontradas"):
                 st.write(list(df.columns))
 
             st.stop()
 
         # Mostra formato detectado
         if file_format == "calculated_scores":
-            st.success(f"✅ **Formato detectado:** Scores já calculados ({len(relevant_cols)} dimensões)")
+            st.success(f" **Formato detectado:** Scores já calculados ({len(relevant_cols)} dimensões)")
         else:
-            st.success(f"✅ **Formato detectado:** Respostas brutas ({len(relevant_cols)} perguntas)")
+            st.success(f" **Formato detectado:** Respostas brutas ({len(relevant_cols)} perguntas)")
 
-        # VALIDAÇÕES
+        # VALIDAES
         validation_messages = []
 
         # Valida número de respostas
@@ -336,9 +336,9 @@ if uploaded_file:
         # Mostra mensagens de validação
         for msg_type, msg_text in validation_messages:
             if msg_type == "error":
-                st.error(f"❌ {msg_text}")
+                st.error(f" {msg_text}")
             elif msg_type == "warning":
-                st.warning(f"⚠️ {msg_text}")
+                st.warning(f"️ {msg_text}")
 
         # Bloqueia se houver erros críticos
         has_critical_errors = any(msg[0] == "error" for msg in validation_messages)
@@ -348,15 +348,15 @@ if uploaded_file:
             st.stop()
 
         # Preview dos dados
-        with st.expander("👁️ Pré-visualização dos Dados"):
-            st.write(f"**Dimensões:** {len(df)} linhas × {len(df.columns)} colunas")
+        with st.expander("️ Pré-visualização dos Dados"):
+            st.write(f"**Dimensões:** {len(df)} linhas  {len(df.columns)} colunas")
             st.write(f"**Colunas relevantes:** {len(relevant_cols)}")
-            st.dataframe(df[relevant_cols].head(10), use_container_width=True)
+            st.dataframe(df[relevant_cols].head(10), width='stretch')
 
         st.divider()
 
         # Configuração da análise
-        st.subheader("⚙️ Configuração da Análise")
+        st.subheader("️ Configuração da Análise")
 
         nome_analise = st.text_input(
             "Nome da Análise",
@@ -364,11 +364,11 @@ if uploaded_file:
         )
 
 # Botão de análise (com key e width="stretch")
-if st.button("🚀 Executar Análise COPSOQ III", type="primary", key="btn_run_copsoq3", width="stretch"):
+if st.button(" Executar Análise COPSOQ III", type="primary", key="btn_run_copsoq3", width="stretch"):
     with st.spinner("A processar questionários COPSOQ III..."):
         try:
             if df is None or file_format == "unknown":
-                st.error("❌ Carregue um arquivo válido antes de executar a análise.")
+                st.error(" Carregue um arquivo válido antes de executar a análise.")
                 st.stop()
 
             if file_format == "calculated_scores":
@@ -402,7 +402,7 @@ if st.button("🚀 Executar Análise COPSOQ III", type="primary", key="btn_run_c
                     },
                     quality=None,
                     risk_level=risk,
-                    insights=[f"📊 Dimensão mais crítica: '{min(scores.items(), key=lambda x: x[1])[0]}' com score {min(scores.values()):.1f}"]
+                    insights=[f" Dimensão mais crítica: '{min(scores.items(), key=lambda x: x[1])[0]}' com score {min(scores.values()):.1f}"]
                 )
             else:
                 # Processa respostas brutas (usa processador normal)
@@ -414,14 +414,14 @@ if st.button("🚀 Executar Análise COPSOQ III", type="primary", key="btn_run_c
             # Salva automaticamente
             try:
                 storage.save_analysis(analysis_result)
-                st.success("✅ Análise salva automaticamente!")
+                st.success(" Análise salva automaticamente!")
             except Exception as e:
                 st.warning(f"Análise calculada, mas não foi possível salvar: {e}")
 
         except ValueError as e:
-            st.error(f"❌ Erro de validação: {e}")
+            st.error(f" Erro de validação: {e}")
         except Exception as e:
-            st.error(f"❌ Erro inesperado ao processar: {e}")
+            st.error(f" Erro inesperado ao processar: {e}")
             st.exception(e)
 
 # --- Renderização de Resultados ---
@@ -430,3 +430,6 @@ if 'latest_analysis' in st.session_state and st.session_state.latest_analysis is
         if st.session_state.get('analysis_ready', False):
             st.divider()
             render_results(st.session_state.latest_analysis)
+
+
+

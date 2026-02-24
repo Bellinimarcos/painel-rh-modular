@@ -11,11 +11,11 @@ from elevenlabs import VoiceSettings
 # Configuração da página
 st.set_page_config(
     page_title="Estúdio de Voz Profissional - ElevenLabs",
-    page_icon="🎙️",
+    page_icon="️",
     layout="wide"
 )
 
-st.title("🎙️ Estúdio de Voz Profissional - Alfa Bureau")
+st.title("️ Estúdio de Voz Profissional - Alfa Bureau")
 st.markdown("**Comercial Reforma Tributária 2026 - Powered by ElevenLabs PREMIUM**")
 
 # Roteiro do comercial - VOZES PREMIUM: Daniel + Matilda
@@ -33,9 +33,9 @@ roteiro = [
 try:
     api_key = st.secrets["ELEVENLABS_API_KEY"]
     client = ElevenLabs(api_key=api_key)
-    st.success("✅ ElevenLabs API PREMIUM carregada com sucesso!")
+    st.success(" ElevenLabs API PREMIUM carregada com sucesso!")
 except Exception as e:
-    st.error("❌ Erro ao carregar chave API do ElevenLabs")
+    st.error(" Erro ao carregar chave API do ElevenLabs")
     st.stop()
 
 # Localizar FFmpeg
@@ -43,7 +43,7 @@ project_root = Path(__file__).parent
 ffmpeg_path = project_root / "ffmpeg.exe"
 
 if not ffmpeg_path.exists():
-    st.warning(f"⚠️ FFmpeg não encontrado em: {ffmpeg_path}")
+    st.warning(f"️ FFmpeg não encontrado em: {ffmpeg_path}")
     ffmpeg_path = "ffmpeg"
 
 # Função para gerar áudio
@@ -63,7 +63,7 @@ def generate_audio_elevenlabs(texto, voice_id):
         audio_bytes = b"".join(audio)
         return audio_bytes
     except Exception as e:
-        st.error(f"❌ Erro: {str(e)}")
+        st.error(f" Erro: {str(e)}")
         return None
 
 # Função para combinar áudios usando FFmpeg
@@ -112,42 +112,42 @@ def combine_audios_ffmpeg(audio_segments):
                 return f.read()
                 
     except Exception as e:
-        st.error(f"❌ Erro ao combinar com FFmpeg: {str(e)}")
+        st.error(f" Erro ao combinar com FFmpeg: {str(e)}")
         return None
 
 # Exibir roteiro
 st.markdown("---")
-st.subheader("📝 Roteiro do Comercial")
+st.subheader(" Roteiro do Comercial")
 for i, item in enumerate(roteiro, 1):
     tipo_voz = "Masculina - Energética" if item['nome'] == "Daniel" else "Feminina - Profissional"
     with st.expander(f"**Trecho {i} - {item['nome']} ({tipo_voz})**"):
         st.write(item['texto'])
 
 # Informações sobre as vozes
-with st.expander("🎤 Sobre as Vozes PREMIUM Selecionadas"):
+with st.expander(" Sobre as Vozes PREMIUM Selecionadas"):
     st.markdown("""
-    ### 🌟 Daniel (Apresentador)
-    - ✅ Voz masculina jovem e energética
-    - ✅ Tom profissional e confiante
-    - ✅ Perfeito para chamar atenção e engajar
-    - ✅ Excelente dicção e naturalidade
+    ###  Daniel (Apresentador)
+    -  Voz masculina jovem e energética
+    -  Tom profissional e confiante
+    -  Perfeito para chamar atenção e engajar
+    -  Excelente dicção e naturalidade
     
-    ### 🌟 Matilda (Especialista)
-    - ✅ Voz feminina multilíngue
-    - ✅ Tom profissional e técnico
-    - ✅ Perfeita para explicações complexas
-    - ✅ Clareza e credibilidade
+    ###  Matilda (Especialista)
+    -  Voz feminina multilíngue
+    -  Tom profissional e técnico
+    -  Perfeita para explicações complexas
+    -  Clareza e credibilidade
     
-    **🎯 Combo ideal para comerciais corporativos!**
+    ** Combo ideal para comerciais corporativos!**
     """)
 
 # Botão para ver vozes
-if st.button("🎤 Ver Todas as Vozes Disponíveis"):
+if st.button(" Ver Todas as Vozes Disponíveis"):
     try:
         voices_response = client.voices.get_all()
-        st.write("### 🎭 Vozes Disponíveis na sua Conta PAGA:")
+        st.write("###  Vozes Disponíveis na sua Conta PAGA:")
         for voice in voices_response.voices:
-            emoji = "🎤" if voice.voice_id in ["onwK4e9ZLuTAKqWW03F9", "XrExE9yKIg1WjnnlVkGX"] else "🔊"
+            emoji = "" if voice.voice_id in ["onwK4e9ZLuTAKqWW03F9", "XrExE9yKIg1WjnnlVkGX"] else ""
             marca = " ⭐ **USANDO AGORA**" if voice.voice_id in ["onwK4e9ZLuTAKqWW03F9", "XrExE9yKIg1WjnnlVkGX"] else ""
             st.write(f"{emoji} **{voice.name}** (ID: `{voice.voice_id}`){marca}")
     except Exception as e:
@@ -158,68 +158,70 @@ st.markdown("---")
 col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
-    if st.button("🎙️ **GERAR COMERCIAL COM VOZES PREMIUM**", type="primary", use_container_width=True):
+    if st.button("️ **GERAR COMERCIAL COM VOZES PREMIUM**", type="primary", width='stretch'):
         progress_bar = st.progress(0.0)
         status_text = st.empty()
         
         audio_segments = []
         
         for i, item in enumerate(roteiro):
-            status_text.text(f"🎤 Gerando trecho {i+1}/{len(roteiro)} com {item['nome']} (PREMIUM)...")
+            status_text.text(f" Gerando trecho {i+1}/{len(roteiro)} com {item['nome']} (PREMIUM)...")
             progress_bar.progress((i / len(roteiro)) * 0.7)
             
             audio = generate_audio_elevenlabs(item['texto'], item['voz'])
             
             if audio:
                 audio_segments.append(audio)
-                st.success(f"✅ Trecho {i+1} gerado com voz premium {item['nome']}!")
+                st.success(f" Trecho {i+1} gerado com voz premium {item['nome']}!")
             else:
-                st.error(f"❌ Falha no trecho {i+1}")
+                st.error(f" Falha no trecho {i+1}")
                 break
             
             if i < len(roteiro) - 1:
                 time.sleep(0.5)
         
         if len(audio_segments) == len(roteiro):
-            status_text.text("🔗 Combinando com FFmpeg em qualidade máxima...")
+            status_text.text(" Combinando com FFmpeg em qualidade máxima...")
             progress_bar.progress(0.85)
             
             combined_audio = combine_audios_ffmpeg(audio_segments)
             
             if combined_audio:
                 progress_bar.progress(1.0)
-                status_text.text("✅ Comercial PREMIUM pronto!")
+                status_text.text(" Comercial PREMIUM pronto!")
                 
                 st.markdown("---")
-                st.subheader("🎧 Comercial Completo - Qualidade PREMIUM")
-                st.info("🌟 Gerado com vozes **Daniel** (apresentador) e **Matilda** (especialista)")
+                st.subheader(" Comercial Completo - Qualidade PREMIUM")
+                st.info(" Gerado com vozes **Daniel** (apresentador) e **Matilda** (especialista)")
                 st.audio(combined_audio, format="audio/wav")
                 
                 st.download_button(
-                    label="📥 Download do Comercial PREMIUM (.wav)",
+                    label=" Download do Comercial PREMIUM (.wav)",
                     data=combined_audio,
                     file_name="comercial_alfa_bureau_PREMIUM.wav",
                     mime="audio/wav",
-                    use_container_width=True
+                    width='stretch'
                 )
                 
-                st.success("🎉 Comercial PREMIUM gerado com sucesso!")
+                st.success(" Comercial PREMIUM gerado com sucesso!")
                 st.balloons()
             else:
-                st.error("❌ Erro ao combinar. Baixe os trechos individuais:")
+                st.error(" Erro ao combinar. Baixe os trechos individuais:")
                 for i, audio in enumerate(audio_segments):
                     st.audio(audio, format="audio/mp3")
                     st.download_button(
-                        label=f"📥 Trecho {i+1} - {roteiro[i]['nome']}",
+                        label=f" Trecho {i+1} - {roteiro[i]['nome']}",
                         data=audio,
                         file_name=f"trecho_{i+1}_{roteiro[i]['nome']}.mp3",
                         mime="audio/mp3",
                         key=f"dl_{i}"
                     )
         else:
-            st.error("❌ Não foi possível gerar todos os trechos")
+            st.error(" Não foi possível gerar todos os trechos")
 
 st.markdown("---")
-st.info("💎 **Versão PREMIUM com vozes Daniel + Matilda** | Usando FFmpeg para combinação perfeita")
+st.info(" **Versão PREMIUM com vozes Daniel + Matilda** | Usando FFmpeg para combinação perfeita")
 total_chars = sum(len(item['texto']) for item in roteiro)
-st.caption(f"📊 Total: {total_chars} caracteres | Vozes: Daniel (masculina) + Matilda (feminina)")
+st.caption(f" Total: {total_chars} caracteres | Vozes: Daniel (masculina) + Matilda (feminina)")
+
+

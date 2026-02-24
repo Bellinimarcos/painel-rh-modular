@@ -1,4 +1,4 @@
-# pages/5_🔄_Turnover.py
+# pages/5__Turnover.py
 # Responsabilidade: Interface para análise de rotatividade (turnover) e impacto financeiro.
 
 import streamlit as st
@@ -26,7 +26,7 @@ from config.settings import AppConfig
 try:
     from utils.validators import DataValidator
 except ImportError:
-    st.error("⚠️ Módulo utils.validators não encontrado.")
+    st.error("️ Módulo utils.validators não encontrado.")
     st.stop()
 
 # --- Inicialização ---
@@ -44,7 +44,7 @@ ANALYSIS_TYPE_FOR_THIS_PAGE = AnalysisType.TURNOVER
 
 def render_results(analysis):
     """Renderiza os resultados da análise de turnover."""
-    st.success(f"✅ Análise '{analysis.name}' concluída!")
+    st.success(f" Análise '{analysis.name}' concluída!")
     
     # Métricas principais
     taxa_anual = analysis.data['taxa_turnover_anual']
@@ -52,7 +52,7 @@ def render_results(analysis):
     impacto = analysis.data['impacto_financeiro']
     custo_por_func = analysis.data['custo_por_funcionario']
     
-    st.subheader("📊 Métricas Principais")
+    st.subheader(" Métricas Principais")
     
     col1, col2, col3, col4 = st.columns(4)
     
@@ -60,7 +60,7 @@ def render_results(analysis):
         ui.render_metric_card(
             "Turnover Anualizado",
             f"{taxa_anual:.2f}%",
-            icon="🔄",
+            icon="",
             color=analysis.risk_level.color
         )
     
@@ -77,29 +77,29 @@ def render_results(analysis):
         ui.render_metric_card(
             "Impacto Financeiro Total",
             f"R$ {impacto:,.2f}",
-            icon="💰"
+            icon=""
         )
     
     with col4:
         ui.render_metric_card(
             "Custo por Funcionário",
             f"R$ {custo_por_func:,.2f}",
-            icon="👤"
+            icon=""
         )
     
     # Insights da análise
     if analysis.insights:
-        st.subheader("💡 Insights Automáticos")
+        st.subheader(" Insights Automáticos")
         for insight in analysis.insights:
-            if "crítica" in insight.lower() or "🚨" in insight:
+            if "crítica" in insight.lower() or "" in insight:
                 st.error(insight)
-            elif "acima" in insight.lower() or "⚠️" in insight:
+            elif "acima" in insight.lower() or "️" in insight:
                 st.warning(insight)
             else:
                 st.info(insight)
     
     # Análise detalhada de custos
-    st.subheader("💸 Detalhamento de Custos")
+    st.subheader(" Detalhamento de Custos")
     
     custos_detalhados = analysis.data['custos_detalhados']
     
@@ -116,7 +116,7 @@ def render_results(analysis):
             showlegend=True,
             height=400
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # Tabela de custos
         col1, col2 = st.columns(2)
@@ -136,7 +136,7 @@ def render_results(analysis):
         st.info("Nenhum custo registrado para este período")
     
     # Comparação com benchmark
-    st.subheader("📈 Comparação com o Mercado")
+    st.subheader(" Comparação com o Mercado")
     
     fig = go.Figure()
     fig.add_trace(go.Bar(
@@ -157,10 +157,10 @@ def render_results(analysis):
         barmode='group',
         height=300
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     # Projeção de tendência
-    st.subheader("📈 Projeção de Tendência")
+    st.subheader(" Projeção de Tendência")
     st.caption("Projeções baseadas na taxa atual observada no período analisado")
     
     taxa_mensal = taxa_anual / 12
@@ -196,7 +196,7 @@ def render_results(analysis):
 
 
 # --- Interface Principal ---
-ui.render_header("🔄 Análise de Turnover", "Rotatividade de pessoal e impacto financeiro")
+ui.render_header(" Análise de Turnover", "Rotatividade de pessoal e impacto financeiro")
 
 st.info("""
 **O que é Turnover?**
@@ -208,15 +208,15 @@ dividida pelo número médio de funcionários. Quanto maior, maior a instabilida
 # Seleção do modo de entrada
 modo_entrada = st.radio(
     "Selecione o modo de entrada de dados:",
-    ["📝 Entrada Manual", "📂 Importar Arquivo"],
+    [" Entrada Manual", " Importar Arquivo"],
     horizontal=True
 )
 
 st.divider()
 
 # Modo de importação de arquivo
-if modo_entrada == "📂 Importar Arquivo":
-    st.subheader("📂 Importação de Dados de Movimentação")
+if modo_entrada == " Importar Arquivo":
+    st.subheader(" Importação de Dados de Movimentação")
     
     st.info("""
     **Formato esperado:**
@@ -228,7 +228,7 @@ if modo_entrada == "📂 Importar Arquivo":
     col_up1, col_up2 = st.columns(2)
     
     with col_up1:
-        st.markdown("**📥 Arquivo de Admissões**")
+        st.markdown("** Arquivo de Admissões**")
         uploaded_admissoes = st.file_uploader(
             "Lista de colaboradores admitidos",
             type=['csv', 'xlsx', 'xls', 'txt'],
@@ -236,7 +236,7 @@ if modo_entrada == "📂 Importar Arquivo":
         )
     
     with col_up2:
-        st.markdown("**📤 Arquivo de Demissões**")
+        st.markdown("** Arquivo de Demissões**")
         uploaded_demissoes = st.file_uploader(
             "Lista de colaboradores demitidos",
             type=['csv', 'xlsx', 'xls', 'txt'],
@@ -258,10 +258,10 @@ if modo_entrada == "📂 Importar Arquivo":
                 if df_adm is not None and not df_adm.empty:
                     df_adm = df_adm.dropna(how='all')
                     admissoes_count = len(df_adm)
-                    st.success(f"✅ {admissoes_count} admissões detectadas em '{uploaded_admissoes.name}'")
+                    st.success(f" {admissoes_count} admissões detectadas em '{uploaded_admissoes.name}'")
                     
-                    with st.expander("👁️ Preview Admissões"):
-                        st.dataframe(df_adm.head(10), use_container_width=True)
+                    with st.expander("️ Preview Admissões"):
+                        st.dataframe(df_adm.head(10), width='stretch')
             
             # Processa arquivo de demissões
             if uploaded_demissoes:
@@ -271,10 +271,10 @@ if modo_entrada == "📂 Importar Arquivo":
                 if df_dem is not None and not df_dem.empty:
                     df_dem = df_dem.dropna(how='all')
                     demissoes_count = len(df_dem)
-                    st.success(f"✅ {demissoes_count} demissões detectadas em '{uploaded_demissoes.name}'")
+                    st.success(f" {demissoes_count} demissões detectadas em '{uploaded_demissoes.name}'")
                     
-                    with st.expander("👁️ Preview Demissões"):
-                        st.dataframe(df_dem.head(10), use_container_width=True)
+                    with st.expander("️ Preview Demissões"):
+                        st.dataframe(df_dem.head(10), width='stretch')
             
             # Se pelo menos um arquivo foi carregado
             if admissoes_count > 0 or demissoes_count > 0:
@@ -327,10 +327,10 @@ if modo_entrada == "📂 Importar Arquivo":
                         f"Turnover - Importação - {periodo_meses} meses"
                     )
                     
-                    submitted = st.form_submit_button("🚀 Executar Análise", type="primary")
+                    submitted = st.form_submit_button(" Executar Análise", type="primary")
                     
                     if submitted:
-                        # VALIDAÇÕES
+                        # VALIDAES
                         validations = [
                             DataValidator.validate_employee_count(func_inicio, field_name="Funcionários no início"),
                             DataValidator.validate_employee_count(admissoes, min_val=0, field_name="Admissões"),
@@ -343,9 +343,9 @@ if modo_entrada == "📂 Importar Arquivo":
                         all_valid, validation_errors = DataValidator.validate_all(validations)
                         
                         if not all_valid:
-                            st.error("❌ Erros de validação:")
+                            st.error(" Erros de validação:")
                             for error in validation_errors:
-                                st.error(f"  • {error}")
+                                st.error(f"   {error}")
                         else:
                             with st.spinner("A processar..."):
                                 try:
@@ -363,7 +363,7 @@ if modo_entrada == "📂 Importar Arquivo":
                                     
                                     try:
                                         storage.save_analysis(analysis_result)
-                                        st.success("✅ Análise salva automaticamente!")
+                                        st.success(" Análise salva automaticamente!")
                                     except Exception as e:
                                         st.warning(f"Análise calculada, mas não foi possível salvar: {e}")
                                 except Exception as e:
@@ -374,13 +374,13 @@ if modo_entrada == "📂 Importar Arquivo":
             st.error(f"Erro ao processar arquivos: {e}")
     
     if not uploaded_admissoes and not uploaded_demissoes:
-        st.warning("📤 Faça upload de pelo menos um arquivo para começar")
+        st.warning(" Faça upload de pelo menos um arquivo para começar")
         st.stop()
 
 # Modo manual (original)
 else:
     with st.form(key="turnover_form"):
-        st.subheader("1️⃣ Dados do Período")
+        st.subheader("1️ Dados do Período")
         
         col1, col2, col3 = st.columns(3)
         
@@ -431,14 +431,14 @@ else:
         if func_fim != func_fim_calculado:
             diff = abs(func_fim - func_fim_calculado)
             st.warning(
-                f"⚠️ Atenção: O número de funcionários no fim ({func_fim}) difere do esperado "
+                f"️ Atenção: O número de funcionários no fim ({func_fim}) difere do esperado "
                 f"({func_fim_calculado}) por {diff} colaboradores. "
                 f"Verifique se há transferências ou outros movimentos não contabilizados."
             )
         
         st.divider()
         
-        st.subheader("2️⃣ Configurações e Custos")
+        st.subheader("2️ Configurações e Custos")
         
         col6, col7 = st.columns(2)
         
@@ -452,7 +452,7 @@ else:
         with col7:
             periodo_descricao = st.text_input(
                 "Descrição do Período",
-                value=f"Últimos {periodo_meses} mês(es)",
+                value=f"ltimos {periodo_meses} mês(es)",
                 help="Ex: 'Q1 2025', '1º Semestre 2025'"
             )
         
@@ -493,10 +493,10 @@ else:
             f"Turnover - {setor} - {periodo_descricao}"
         )
         
-        submitted = st.form_submit_button("🚀 Executar Análise", type="primary", use_container_width=True)
+        submitted = st.form_submit_button(" Executar Análise", type="primary", width='stretch')
         
         if submitted:
-            # VALIDAÇÕES ROBUSTAS
+            # VALIDAES ROBUSTAS
             validations = [
                 DataValidator.validate_employee_count(func_inicio, field_name="Funcionários no início"),
                 DataValidator.validate_employee_count(admissoes, min_val=0, field_name="Admissões"),
@@ -514,9 +514,9 @@ else:
             all_valid, validation_errors = DataValidator.validate_all(validations)
             
             if not all_valid:
-                st.error("❌ Erros de validação encontrados:")
+                st.error(" Erros de validação encontrados:")
                 for error in validation_errors:
-                    st.error(f"  • {error}")
+                    st.error(f"   {error}")
             else:
                 with st.spinner("A processar análise de turnover..."):
                     try:
@@ -542,14 +542,14 @@ else:
                         
                         try:
                             storage.save_analysis(analysis_result)
-                            st.success("✅ Análise salva automaticamente!")
+                            st.success(" Análise salva automaticamente!")
                         except Exception as e:
                             st.warning(f"Análise calculada, mas não foi possível salvar: {e}")
                     
                     except ValueError as e:
-                        st.error(f"❌ Erro de validação: {e}")
+                        st.error(f" Erro de validação: {e}")
                     except Exception as e:
-                        st.error(f"❌ Erro inesperado: {e}")
+                        st.error(f" Erro inesperado: {e}")
                         st.exception(e)
 
 # --- Renderização de Resultados ---
@@ -558,3 +558,5 @@ if 'latest_analysis' in st.session_state and st.session_state.latest_analysis is
         if st.session_state.get('analysis_ready', False):
             st.divider()
             render_results(st.session_state.latest_analysis)
+
+

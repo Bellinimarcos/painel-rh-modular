@@ -5,7 +5,7 @@ from datetime import datetime
 
 def render_analysis_timeline(analyses):
     """Mostra uma linha do tempo simples das análises por dia."""
-    st.subheader("🗓️ Linha do tempo")
+    st.subheader("️ Linha do tempo")
 
     if not analyses:
         st.info("Sem dados para timeline.")
@@ -24,12 +24,12 @@ def render_analysis_timeline(analyses):
     df_group = df.groupby("data", as_index=False)["contagem"].sum()
 
     fig = px.bar(df_group, x="data", y="contagem", title="Análises por dia")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 def render_analysis_distribution(analyses):
     """Mostra a distribuição por tipo de análise."""
-    st.subheader("📦 Distribuição por ferramenta")
+    st.subheader(" Distribuição por ferramenta")
 
     if not analyses:
         st.info("Sem dados para distribuição.")
@@ -46,4 +46,7 @@ def render_analysis_distribution(analyses):
     df_group.columns = ["tipo", "contagem"]
 
     fig = px.pie(df_group, names="tipo", values="contagem", title="Distribuição por tipo")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
+
+
+

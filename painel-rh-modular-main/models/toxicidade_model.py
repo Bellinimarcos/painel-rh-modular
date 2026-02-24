@@ -35,7 +35,7 @@ class Questao:
         """
         if self.tipo == TipoQuestao.INVERSA:
             # Questão inversa: resposta alta (concordo) = comportamento bom = pontuação baixa
-            resposta = 6 - resposta  # Inverte: 5→1, 4→2, 3→3, 2→4, 1→5
+            resposta = 6 - resposta  # Inverte: 51, 42, 33, 24, 15
         
         # Normaliza para escala 0-100
         # 1 = 0 pontos, 5 = 100 pontos
@@ -262,22 +262,22 @@ class QuestionarioToxicidade:
         # Recomendações gerais
         if pontuacao_total >= 75:
             recomendacoes.append(
-                "⚠️ URGENTE: Situação crítica detectada. "
+                "️ URGENTE: Situação crítica detectada. "
                 "Recomenda-se intervenção imediata do RH e suporte psicológico à equipe."
             )
         elif pontuacao_total >= 50:
             recomendacoes.append(
-                "⚠️ ATENÇÃO: Sinais significativos de toxicidade. "
+                "️ ATENO: Sinais significativos de toxicidade. "
                 "Recomenda-se avaliação aprofundada e plano de ação corretivo."
             )
         elif pontuacao_total >= 25:
             recomendacoes.append(
-                "✓ Situação dentro de limites aceitáveis, mas há pontos de atenção. "
+                " Situação dentro de limites aceitáveis, mas há pontos de atenção. "
                 "Monitoramento regular é recomendado."
             )
         else:
             recomendacoes.append(
-                "✓ Excelente ambiente de liderança. "
+                " Excelente ambiente de liderança. "
                 "Manter práticas atuais e fortalecer pontos positivos."
             )
         
@@ -391,3 +391,5 @@ class QuestionarioToxicidade:
             f"Dimensões: {len(self.dimensoes)}\n"
             f"Questões: {len(self)}"
         )
+
+

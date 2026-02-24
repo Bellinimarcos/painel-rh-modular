@@ -5,12 +5,12 @@ import sys
 import os
 import pandas as pd
 
-# --- INÍCIO DA CORREÇÃO DE IMPORTAÇÃO ---
+# --- INÍCIO DA CORREO DE IMPORTAO ---
 current_dir = os.path.dirname(__file__)
 root_dir = os.path.abspath(os.path.join(current_dir, ".."))
 if root_dir not in sys.path:
     sys.path.append(root_dir)
-# --- FIM DA CORREÇÃO ---
+# --- FIM DA CORREO ---
 
 from models import CopsoqII
 from logic.copsoq_ii_logic import calcular_pontuacao_copsoq_ii, get_cor_risco
@@ -18,13 +18,13 @@ from logic.copsoq_ii_logic import calcular_pontuacao_copsoq_ii, get_cor_risco
 st.set_page_config(layout="wide", page_title="COPSOQ II - AEP")
 
 # --- Definição das Escalas (CORRIGIDAS) ---
-ESCALA_FREQUENCIA_1 = ["Nunca/ quase nunca", "Raramente", "Às vezes", "Frequentemente", "Sempre"]
-ESCALA_FREQUENCIA_2 = ["Nunca/ quase nunca", "Raramente", "Às vezes", "Frequentemente", "Sempre"]
+ESCALA_FREQUENCIA_1 = ["Nunca/ quase nunca", "Raramente", "s vezes", "Frequentemente", "Sempre"]
+ESCALA_FREQUENCIA_2 = ["Nunca/ quase nunca", "Raramente", "s vezes", "Frequentemente", "Sempre"]
 ESCALA_INTENSIDADE_1 = ["Nada/ quase nada", "Um pouco", "Moderadamente", "Muito", "Extremamente"]
 ESCALA_SAUDE = ["Excelente", "Muito boa", "Boa", "Razoável", "Deficitária"] # Corrigido
 ESCALA_INTENSIDADE_2 = ["Nada/ quase nada", "Um pouco", "Moderadamente", "Muito", "Extremamente"] # Corrigido
-ESCALA_FREQUENCIA_3 = ["Nunca/ quase nunca", "Raramente", "Às vezes", "Frequentemente", "Sempre"]
-ESCALA_FREQUENCIA_4 = ["Nunca/quase nunca", "Raramente", "Às vezes", "Frequentemente", "Sempre"]
+ESCALA_FREQUENCIA_3 = ["Nunca/ quase nunca", "Raramente", "s vezes", "Frequentemente", "Sempre"]
+ESCALA_FREQUENCIA_4 = ["Nunca/quase nunca", "Raramente", "s vezes", "Frequentemente", "Sempre"]
 
 # Mapeamento de texto para valor numérico (1-5)
 map_freq_1 = {k: i+1 for i, k in enumerate(ESCALA_FREQUENCIA_1)}
@@ -34,7 +34,7 @@ map_int_2 = {k: i+1 for i, k in enumerate(ESCALA_INTENSIDADE_2)}
 map_freq_3 = {k: i+1 for i, k in enumerate(ESCALA_FREQUENCIA_3)}
 map_freq_4 = {k: i+1 for i, k in enumerate(ESCALA_FREQUENCIA_4)}
 
-# --- FUNÇÃO PARA COLORIR O SEMÁFORO ---
+# --- FUNO PARA COLORIR O SEMÁFORO ---
 def colorir_risco(val):
     cor = 'black' # Cor padrão
     if val == "Verde":
@@ -56,7 +56,7 @@ def render_form():
         
         # --- Bloco 1 ---
         st.subheader("Critério: exigências laborais/organização do trabalho e conteúdo")
-        st.caption("Escala: 1- Nunca/ quase nunca, 2- Raramente, 3- Às vezes, 4- Frequentemente, 5- Sempre")
+        st.caption("Escala: 1- Nunca/ quase nunca, 2- Raramente, 3- s vezes, 4- Frequentemente, 5- Sempre")
         
         q_text = [
             "1. A sua carga de trabalho acumula-se por ser mal distribuída?",
@@ -72,7 +72,7 @@ def render_form():
             "11. Recebe toda a informação de que necessita para fazer bem o seu trabalho?",
             "12. Sabe exatamente quais as suas responsabilidades?",
             "13. O seu trabalho é reconhecido e apreciado pela gerência?",
-            "14. É tratado de forma justa no seu local de trabalho?",
+            "14.  tratado de forma justa no seu local de trabalho?",
             "15. Com que frequência tem ajuda e apoio do seu superior imediato?",
             "16. Existe um bom ambiente de trabalho entre si e os seus colegas?"
         ] 
@@ -82,11 +82,11 @@ def render_form():
 
         # --- Bloco 2 ---
         st.subheader("Critério: relações sociais e liderança")
-        st.caption("Em relação à sua chefia direta... Escala: 1- Nunca/ quase nunca, 2- Raramente, 3- Às vezes, 4- Frequentemente, 5- Sempre")
+        st.caption("Em relação à sua chefia direta... Escala: 1- Nunca/ quase nunca, 2- Raramente, 3- s vezes, 4- Frequentemente, 5- Sempre")
 
         q_text_2 = [
             "17. Oferece aos indivíduos e ao grupo boas oportunidades de desenvolvimento?",
-            "18. É bom no planejamento do trabalho?",
+            "18.  bom no planejamento do trabalho?",
             "19. A gerência confia nos seus funcionários para fazerem o seu trabalho bem?",
             "20. Confia na informação que lhe é transmitida pela gerência?",
             "21. Os conflitos são resolvidos de uma forma justa?",
@@ -133,7 +133,7 @@ def render_form():
 
         # --- Bloco 6 ---
         st.subheader("Critério: saúde e bem-estar")
-        st.caption("Com que frequência durante as últimas 4 semanas sentiu... Escala: 1- Nunca/ quase nunca, 2- Raramente, 3- Às vezes, 4- Frequentemente, 5- Sempre")
+        st.caption("Com que frequência durante as últimas 4 semanas sentiu... Escala: 1- Nunca/ quase nunca, 2- Raramente, 3- s vezes, 4- Frequentemente, 5- Sempre")
 
         q_text_6 = [
             "32. Acordou várias vezes durante a noite e depois não conseguia adormecer novamente?",
@@ -149,7 +149,7 @@ def render_form():
 
         # --- Bloco 7 ---
         st.subheader("Critério: comportamentos ofensivos")
-        st.caption("Nos últimos 12 meses, no seu local de trabalho... Escala: 1- Nunca/quase nunca, 2- Raramente, 3- Às vezes, 4- Frequentemente, 5- Sempre")
+        st.caption("Nos últimos 12 meses, no seu local de trabalho... Escala: 1- Nunca/quase nunca, 2- Raramente, 3- s vezes, 4- Frequentemente, 5- Sempre")
 
         q_text_7 = [
             "38. Tem sido alvo de insultos ou provocações verbais?",
@@ -196,7 +196,7 @@ def render_form():
             
             st.success("Formulário validado com sucesso!")
             
-            # --- CÁLCULO E EXIBIÇÃO DOS RESULTADOS (DESCOMENTADO) ---
+            # --- CÁLCULO E EXIBIO DOS RESULTADOS (DESCOMENTADO) ---
             df_resultados = calcular_pontuacao_copsoq_ii(dados_validos)
             
             st.subheader("Resultados da Avaliação (Semáforo de Risco)")
@@ -205,7 +205,7 @@ def render_form():
             # Aplicar o estilo (semáforo)
             st.dataframe(
                 df_resultados.style.applymap(colorir_risco, subset=['Nível de Risco']),
-                use_container_width=True
+                width='stretch'
             )
             
             with st.expander("Ver dados brutos (JSON)"):
@@ -219,3 +219,5 @@ def render_form():
 if __name__ == "__main__":
     st.sidebar.success("Módulo COPSOQ II (AEP) carregado.")
     render_form()
+
+

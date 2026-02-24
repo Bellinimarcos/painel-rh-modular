@@ -48,7 +48,7 @@ def gerar_dados_mock_dashboard(setores, dominios_questionario):
 
 # --- Página Principal ---
 
-st.title("📝 Módulo de Avaliação de Riscos Psicossiais")
+st.title(" Módulo de Avaliação de Riscos Psicossiais")
 st.markdown("""
 Esta ferramenta é um módulo integrado ao Painel de RH para gerenciar o ciclo de avaliação
 de riscos psicossiais, em linha com as NRs 01, 05 e 17.
@@ -56,9 +56,9 @@ de riscos psicossiais, em linha com as NRs 01, 05 e 17.
 
 # Abas para simular os Módulos da proposta
 tab1, tab2, tab3 = st.tabs([
-    "🎯 Módulo 2: Responder Avaliação (Visão do Colaborador)",
-    "📊 Módulo 3: Dashboard de Resultados (Visão do RH/Gestor)",
-    "⚙️ Módulo 1 e 4: Configuração e Planos (Visão do RH)"
+    " Módulo 2: Responder Avaliação (Visão do Colaborador)",
+    " Módulo 3: Dashboard de Resultados (Visão do RH/Gestor)",
+    "️ Módulo 1 e 4: Configuração e Planos (Visão do RH)"
 ])
 
 # --- Aba 1: Responder Avaliação (Módulo 2) ---
@@ -155,7 +155,7 @@ with tab2:
             yaxis_title="Domínios de Risco",
             height=max(500, len(dominios_ativos) * 20) # Ajusta altura dinamicamente
         )
-        st.plotly_chart(heatmap_fig, use_container_width=True)
+        st.plotly_chart(heatmap_fig, width='stretch')
 
         st.subheader("Análise Detalhada por Filtro")
         
@@ -181,7 +181,7 @@ with tab2:
                 range_color=[0, 100]
             )
             bar_fig.update_layout(height=400)
-            st.plotly_chart(bar_fig, use_container_width=True)
+            st.plotly_chart(bar_fig, width='stretch')
 
         with col2:
             dominio_filtro = st.selectbox("Selecione o Domínio", ["Todos"] + dominios_ativos, key="filtro_dominio")
@@ -203,7 +203,7 @@ with tab2:
                 range_color=[0, 100]
             )
             bar_fig_setor.update_layout(height=400)
-            st.plotly_chart(bar_fig_setor, use_container_width=True)
+            st.plotly_chart(bar_fig_setor, width='stretch')
 
 
 # --- Aba 3: Configuração e Planos (Módulos 1 e 4) ---
@@ -266,4 +266,7 @@ with tab3:
         st.date_input("Quando (When)?", key="plano_data")
         st.text_area("Como (How)?", "1. Workshop com a equipe para feedback\n2. Reunião de redefinição de metas\n3. Contratação de 1 SDR")
         st.button("Salvar Plano de Ação")
+
+
+
 

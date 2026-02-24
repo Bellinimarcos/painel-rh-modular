@@ -68,3 +68,5 @@ if df is not None:
     print(f"Erros: {errors}")
 
 print("\nAmbos os validadores funcionando!")
+
+

@@ -6,19 +6,19 @@ import streamlit as st
 from elevenlabs.client import ElevenLabs
 from elevenlabs import VoiceSettings
 
-st.title("🔬 Diagnóstico Avançado - Chiado")
+st.title(" Diagnóstico Avançado - Chiado")
 
 # API
 try:
     api_key = st.secrets["ELEVENLABS_API_KEY"]
     client = ElevenLabs(api_key=api_key)
-    st.success("✅ API conectada")
+    st.success(" API conectada")
 except Exception as e:
-    st.error(f"❌ {str(e)}")
+    st.error(f" {str(e)}")
     st.stop()
 
 st.markdown("---")
-st.subheader("🧪 Teste de Modelos e Formatos")
+st.subheader(" Teste de Modelos e Formatos")
 
 # Configurações
 texto_teste = st.text_area(
@@ -34,12 +34,12 @@ voice_id = st.text_input(
 )
 
 # Teste de modelos
-st.markdown("### 🎙️ Teste 1: Diferentes Modelos")
+st.markdown("### ️ Teste 1: Diferentes Modelos")
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    if st.button("🔹 Modelo Multilingual V2"):
+    if st.button(" Modelo Multilingual V2"):
         st.info("Gerando com eleven_multilingual_v2...")
         try:
             audio = client.text_to_speech.convert(
@@ -56,12 +56,12 @@ with col1:
             )
             audio_bytes = b"".join(audio)
             st.audio(audio_bytes, format="audio/mp3")
-            st.success(f"✅ {len(audio_bytes):,} bytes")
+            st.success(f" {len(audio_bytes):,} bytes")
         except Exception as e:
-            st.error(f"❌ {str(e)}")
+            st.error(f" {str(e)}")
 
 with col2:
-    if st.button("⚡ Modelo Turbo V2.5"):
+    if st.button(" Modelo Turbo V2.5"):
         st.info("Gerando com eleven_turbo_v2_5...")
         try:
             audio = client.text_to_speech.convert(
@@ -78,12 +78,12 @@ with col2:
             )
             audio_bytes = b"".join(audio)
             st.audio(audio_bytes, format="audio/mp3")
-            st.success(f"✅ {len(audio_bytes):,} bytes")
+            st.success(f" {len(audio_bytes):,} bytes")
         except Exception as e:
-            st.error(f"❌ {str(e)}")
+            st.error(f" {str(e)}")
 
 with col3:
-    if st.button("🌍 Modelo Multilingual V1"):
+    if st.button(" Modelo Multilingual V1"):
         st.info("Gerando com eleven_multilingual_v1...")
         try:
             audio = client.text_to_speech.convert(
@@ -98,13 +98,13 @@ with col3:
             )
             audio_bytes = b"".join(audio)
             st.audio(audio_bytes, format="audio/mp3")
-            st.success(f"✅ {len(audio_bytes):,} bytes")
+            st.success(f" {len(audio_bytes):,} bytes")
         except Exception as e:
-            st.error(f"❌ {str(e)}")
+            st.error(f" {str(e)}")
 
 # Teste de formatos
 st.markdown("---")
-st.markdown("### 🎵 Teste 2: Diferentes Formatos de Saída")
+st.markdown("###  Teste 2: Diferentes Formatos de Saída")
 
 col1, col2, col3 = st.columns(3)
 
@@ -126,9 +126,9 @@ with col1:
             )
             audio_bytes = b"".join(audio)
             st.audio(audio_bytes, format="audio/mp3")
-            st.success(f"✅ {len(audio_bytes):,} bytes")
+            st.success(f" {len(audio_bytes):,} bytes")
         except Exception as e:
-            st.error(f"❌ {str(e)}")
+            st.error(f" {str(e)}")
 
 with col2:
     if st.button("MP3 44100 192"):
@@ -148,9 +148,9 @@ with col2:
             )
             audio_bytes = b"".join(audio)
             st.audio(audio_bytes, format="audio/mp3")
-            st.success(f"✅ {len(audio_bytes):,} bytes")
+            st.success(f" {len(audio_bytes):,} bytes")
         except Exception as e:
-            st.error(f"❌ {str(e)}")
+            st.error(f" {str(e)}")
 
 with col3:
     if st.button("PCM 44100"):
@@ -170,18 +170,18 @@ with col3:
             )
             audio_bytes = b"".join(audio)
             st.audio(audio_bytes, format="audio/wav")
-            st.success(f"✅ {len(audio_bytes):,} bytes")
+            st.success(f" {len(audio_bytes):,} bytes")
         except Exception as e:
-            st.error(f"❌ {str(e)}")
+            st.error(f" {str(e)}")
 
 # Teste de estabilidade
 st.markdown("---")
-st.markdown("### ⚖️ Teste 3: Ajuste de Estabilidade")
+st.markdown("### ️ Teste 3: Ajuste de Estabilidade")
 
 stability_test = st.slider("Stability", 0.0, 1.0, 0.7, 0.05)
 similarity_test = st.slider("Similarity Boost", 0.0, 1.0, 0.75, 0.05)
 
-if st.button("🎤 Testar com Configurações Personalizadas", type="primary"):
+if st.button(" Testar com Configurações Personalizadas", type="primary"):
     st.info("Gerando...")
     try:
         audio = client.text_to_speech.convert(
@@ -197,11 +197,11 @@ if st.button("🎤 Testar com Configurações Personalizadas", type="primary"):
         )
         audio_bytes = b"".join(audio)
         st.audio(audio_bytes, format="audio/mp3")
-        st.success(f"✅ Gerado: {len(audio_bytes):,} bytes")
+        st.success(f" Gerado: {len(audio_bytes):,} bytes")
         
         st.info(f"**Configurações usadas:** Stability={stability_test}, Similarity={similarity_test}")
     except Exception as e:
-        st.error(f"❌ {str(e)}")
+        st.error(f" {str(e)}")
 
 # Informações
 st.markdown("---")
@@ -218,3 +218,5 @@ st.info("""
 - Tente outras vozes (Jessica, etc)
 - Verifique se a voz não está "clonada" com áudio de baixa qualidade
 """)
+
+

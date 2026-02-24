@@ -335,7 +335,7 @@ class GerenciadorAvaliacaoToxicidade:
             confirmar: Deve ser True para executar (segurança)
         """
         if not confirmar:
-            raise ValueError("É necessário confirmar a exclusão de dados")
+            raise ValueError(" necessário confirmar a exclusão de dados")
         
         if self.arquivo_avaliacoes.exists():
             self.arquivo_avaliacoes.unlink()
@@ -355,3 +355,5 @@ def criar_gerenciador(questionario: QuestionarioToxicidade) -> GerenciadorAvalia
         GerenciadorAvaliacaoToxicidade: Gerenciador configurado
     """
     return GerenciadorAvaliacaoToxicidade(questionario)
+
+

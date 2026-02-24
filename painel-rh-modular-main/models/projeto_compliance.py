@@ -35,9 +35,9 @@ class FerramentaAplicada:
     def progresso(self) -> str:
         """Retorna string de progresso visual"""
         if self.status == StatusFerramenta.FINALIZADA:
-            return f"✅ {self.num_respondentes} respondentes"
+            return f" {self.num_respondentes} respondentes"
         elif self.status == StatusFerramenta.EM_COLETA:
-            return f"📝 {self.num_respondentes} respondentes"
+            return f" {self.num_respondentes} respondentes"
         else:
             return "⏳ Pendente"
 
@@ -130,58 +130,60 @@ class ProjetoCompliance:
     def resumo_status(self) -> str:
         """Retorna resumo textual do status"""
         if self.status == StatusProjeto.CONCLUIDO:
-            return "✅ Projeto Concluído - Documentação gerada"
+            return " Projeto Concluído - Documentação gerada"
         elif self.status == StatusProjeto.PLANOS_ACAO:
-            return "📋 Planos de Ação em desenvolvimento"
+            return " Planos de Ação em desenvolvimento"
         elif self.status == StatusProjeto.ANALISE:
-            return "📊 Análise de resultados em andamento"
+            return " Análise de resultados em andamento"
         elif self.status == StatusProjeto.EM_AVALIACAO:
-            return f"📝 Avaliações em andamento - {self.progresso_geral():.0f}% completo"
+            return f" Avaliações em andamento - {self.progresso_geral():.0f}% completo"
         else:
-            return "🆕 Projeto iniciado - Configure as ferramentas"
+            return " Projeto iniciado - Configure as ferramentas"
 
 # Ferramentas disponíveis no sistema
 FERRAMENTAS_DISPONIVEIS = {
     "COPSOQ III": {
         "nome_completo": "Copenhagen Psychosocial Questionnaire III",
         "descricao": "Avaliação de riscos psicossociais (84 questões - Versão Média)",
-        "icone": "🛡️",
+        "icone": "️",
         "validacao": "Dra. Teresa Cotrim",
         "nr_relacionada": "NR-1, NR-17"
     },
     "COPSOQ II": {
         "nome_completo": "Copenhagen Psychosocial Questionnaire II",
         "descricao": "Versão anterior do COPSOQ (validada Brasil)",
-        "icone": "📋",
+        "icone": "",
         "validacao": "Validação Brasil",
         "nr_relacionada": "NR-1, NR-17"
     },
     "CBI": {
         "nome_completo": "Copenhagen Burnout Inventory",
         "descricao": "Avaliação de esgotamento profissional",
-        "icone": "🔥",
+        "icone": "",
         "validacao": "Internacional",
         "nr_relacionada": "NR-1"
     },
     "DUWAS": {
         "nome_completo": "Dutch Work Addiction Scale",
         "descricao": "Avaliação de workaholism",
-        "icone": "💼",
+        "icone": "",
         "validacao": "Internacional",
         "nr_relacionada": "NR-1"
     },
     "Absenteísmo": {
         "nome_completo": "Análise de Absenteísmo",
         "descricao": "Índices de faltas e afastamentos",
-        "icone": "📊",
+        "icone": "",
         "validacao": "Indicador RH",
         "nr_relacionada": "NR-1"
     },
     "Turnover": {
         "nome_completo": "Análise de Rotatividade",
         "descricao": "Índices de turnover voluntário/involuntário",
-        "icone": "🔄",
+        "icone": "",
         "validacao": "Indicador RH",
         "nr_relacionada": "NR-1"
     }
 }
+
+

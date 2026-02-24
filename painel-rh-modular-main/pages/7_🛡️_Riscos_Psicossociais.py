@@ -3,8 +3,8 @@ import pandas as pd
 from datetime import datetime
 import json
 
-# --- 1. CONFIGURAÇÃO INICIAL DA PÁGINA E ESTILOS ---
-st.set_page_config(page_title="COPSOQ III - Riscos Psicossociais", page_icon="🛡️", layout="wide")
+# --- 1. CONFIGURAO INICIAL DA PÁGINA E ESTILOS ---
+st.set_page_config(page_title="COPSOQ III - Riscos Psicossociais", page_icon="️", layout="wide")
 
 st.markdown("""
 <style>
@@ -21,12 +21,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- 2. TÍTULO E CABEÇALHO ---
-st.title("🛡️ Sistema de Gestão de Riscos Psicossociais")
+# --- 2. TÍTULO E CABEALHO ---
+st.title("️ Sistema de Gestão de Riscos Psicossociais")
 st.markdown("**COPSOQ III - Brasil | Versão Média | Validação Dra. Teresa Cotrim**")
-st.caption("⚠️ Material validado cientificamente - Uso restrito para pesquisa e consultoria profissional")
+st.caption("️ Material validado cientificamente - Uso restrito para pesquisa e consultoria profissional")
 
-# --- 3. INICIALIZAÇÃO DO ESTADO DA SESSÃO ---
+# --- 3. INICIALIZAO DO ESTADO DA SESSO ---
 # Garante que as variáveis persistam entre as interações do usuário
 if 'projeto' not in st.session_state:
     st.session_state.projeto = {}
@@ -109,8 +109,8 @@ QUESTOES = {
     'Transp2': 'Você sabe exatamente quais as áreas são de sua responsabilidade?',
     'Transp3': 'Você sabe exatamente o que se espera de você no seu trabalho?',
     'CPL1': 'São solicitadas exigências contraditórias no seu trabalho?',
-    'CPL2': 'Às vezes você precisa fazer coisas de modo diferente ao que elas deveriam ser feitas?',
-    'CPL3': 'Às vezes você precisa fazer coisas que parecem desnecessárias?',
+    'CPL2': 's vezes você precisa fazer coisas de modo diferente ao que elas deveriam ser feitas?',
+    'CPL3': 's vezes você precisa fazer coisas que parecem desnecessárias?',
     'QL1': 'Em relação à sua chefia direta, até que ponto considera que garante que os membros da equipe tenham boas oportunidades para desenvolvimento?',
     'QL2': 'Em relação à sua chefia direta, até que ponto considera que é adequada no planejamento do trabalho?',
     'QL3': 'Em relação à sua chefia direta, até que ponto considera que é adequada na resolução de conflitos?',
@@ -148,7 +148,7 @@ QUESTOES = {
     'Sat3': 'Em relação ao seu trabalho em geral, quão satisfeito(a) está com o modo como as suas habilidades são usadas?',
     'Saude': 'Em geral, você diria que a sua saúde é:',
     'AE1': 'Quando tenho um problema, normalmente consigo encontrar diversas maneiras de resolvê-lo',
-    'AE2': 'É fácil para mim manter os meus planos e alcançar os meus objetivos',
+    'AE2': ' fácil para mim manter os meus planos e alcançar os meus objetivos',
     'Sono1': 'Com que frequência durante as últimas 4 semanas tem encontrado dificuldade para dormir?',
     'Sono2': 'Com que frequência durante as últimas 4 semanas acorda muito cedo e não é capaz de voltar a dormir?',
     'Burnout1': 'Com que frequência durante as últimas 4 semanas se sente fisicamente exausto?',
@@ -159,7 +159,7 @@ QUESTOES = {
     'SD2': 'Com que frequência durante as últimas 4 semanas sente falta de interesse pelas coisas cotidianas?'
 }
 
-ESCALA_NUNCA_SEMPRE = ['Nunca', 'Raramente', 'Às vezes', 'Frequentemente', 'Sempre']
+ESCALA_NUNCA_SEMPRE = ['Nunca', 'Raramente', 's vezes', 'Frequentemente', 'Sempre']
 ESCALA_NADA_EXTREMAMENTE = ['Nada', 'Um pouco', 'Moderadamente', 'Muito', 'Extremamente']
 ESCALA_SAUDE = ['Fraca', 'Razoável', 'Boa', 'Muito boa', 'Excelente']
 
@@ -172,18 +172,18 @@ for cod in QUESTOES.keys():
     else:
         ESCALAS_POR_QUESTAO[cod] = ESCALA_NUNCA_SEMPRE
 
-# --- 5. FUNÇÕES DE CÁLCULO ---
+# --- 5. FUNES DE CÁLCULO ---
 def calcular_nivel_risco(prob, sev):
     """Calcula o nível de risco com base na probabilidade e severidade."""
     score = prob * sev
     if score >= 15:
-        return {'nivel': 'CRÍTICO', 'cor': '🔴', 'score': score}
+        return {'nivel': 'CRÍTICO', 'cor': '', 'score': score}
     elif score >= 9:
-        return {'nivel': 'ALTO', 'cor': '🟠', 'score': score}
+        return {'nivel': 'ALTO', 'cor': '', 'score': score}
     elif score >= 4:
-        return {'nivel': 'MÉDIO', 'cor': '🟡', 'score': score}
+        return {'nivel': 'MDIO', 'cor': '', 'score': score}
     else:
-        return {'nivel': 'BAIXO', 'cor': '🟢', 'score': score}
+        return {'nivel': 'BAIXO', 'cor': '', 'score': score}
 
 def calcular_scores_dimensoes(respostas):
     """Calcula os scores de 0 a 100 para cada dimensão do COPSOQ."""
@@ -206,18 +206,18 @@ def calcular_scores_dimensoes(respostas):
 
 # --- 6. LAYOUT DA INTERFACE (ABAS) ---
 tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-    "👥 Dados Sócio-Demográficos",
-    "📋 COPSOQ III - Questionário",
-    "📊 Resultados & Análise",
-    "⚠️ Inventário de Riscos",
-    "📈 Matriz de Risco",
-    "✅ Planos 5W2H"
+    " Dados Sócio-Demográficos",
+    " COPSOQ III - Questionário",
+    " Resultados & Análise",
+    "️ Inventário de Riscos",
+    " Matriz de Risco",
+    " Planos 5W2H"
 ])
 
-# --- ABA 1: DADOS SÓCIO-DEMOGRÁFICOS ---
+# --- ABA 1: DADOS SCIO-DEMOGRÁFICOS ---
 with tab1:
     st.header("Parte 1: Caracterização Sócio-Demográfica")
-    st.info("📝 Por favor, preencha o questionário com atenção e responda a todas as questões.")
+    st.info(" Por favor, preencha o questionário com atenção e responda a todas as questões.")
 
     with st.form("form_demografico"):
         col1, col2 = st.columns(2)
@@ -238,7 +238,7 @@ with tab1:
             tempo_empresa = st.number_input("5. Tempo na Empresa (anos completos)", min_value=0, max_value=50, value=0)
             setor_atividade = st.text_input("6. Setor de Atividade")
 
-        submitted = st.form_submit_button("💾 Salvar e Iniciar Questionário COPSOQ III", use_container_width=True)
+        submitted = st.form_submit_button(" Salvar e Iniciar Questionário COPSOQ III", width='stretch')
 
         if submitted:
             st.session_state.dados_demograficos = {
@@ -251,23 +251,23 @@ with tab1:
                 'setor': setor_atividade
             }
             st.session_state.respostas_copsoq = {}
-            st.success("✅ Dados salvos! Vá para a aba 'COPSOQ III - Questionário' para responder.")
+            st.success(" Dados salvos! Vá para a aba 'COPSOQ III - Questionário' para responder.")
 
 # --- ABA 2: QUESTIONÁRIO COPSOQ III ---
 with tab2:
     st.header("Parte 2: COPSOQ III - Questionário Completo (84 questões)")
 
     if 'dados_demograficos' not in st.session_state:
-        st.warning("⚠️ Por favor, preencha primeiro os Dados Sócio-Demográficos na aba anterior.")
+        st.warning("️ Por favor, preencha primeiro os Dados Sócio-Demográficos na aba anterior.")
     else:
-        st.info(f"👤 Respondente: {st.session_state.dados_demograficos['sexo']}, {st.session_state.dados_demograficos['idade']} anos")
+        st.info(f" Respondente: {st.session_state.dados_demograficos['sexo']}, {st.session_state.dados_demograficos['idade']} anos")
 
         if 'respostas_copsoq' not in st.session_state:
             st.session_state.respostas_copsoq = {}
 
         with st.form("form_copsoq"):
             for dimensao, codigos in DIMENSOES_COPSOQ.items():
-                st.subheader(f"📌 {dimensao}")
+                st.subheader(f" {dimensao}")
 
                 for cod in codigos:
                     questao_texto = QUESTOES[cod]
@@ -278,7 +278,7 @@ with tab2:
 
                 st.divider()
 
-            submitted_copsoq = st.form_submit_button("✅ Finalizar e Calcular Resultados", use_container_width=True)
+            submitted_copsoq = st.form_submit_button(" Finalizar e Calcular Resultados", width='stretch')
 
             if submitted_copsoq:
                 novo_respondente = {
@@ -289,17 +289,17 @@ with tab2:
                     'scores': calcular_scores_dimensoes(st.session_state.respostas_copsoq)
                 }
                 st.session_state.respondentes.append(novo_respondente)
-                st.success(f"✅ Questionário finalizado! Total de respondentes: {len(st.session_state.respondentes)}")
+                st.success(f" Questionário finalizado! Total de respondentes: {len(st.session_state.respondentes)}")
                 st.balloons()
 
 # --- ABA 3: RESULTADOS E ANÁLISE ---
 with tab3:
-    st.header("📊 Resultados & Análise Coletiva")
+    st.header(" Resultados & Análise Coletiva")
 
     if not st.session_state.respondentes:
-        st.info("📝 Ainda não há respondentes. Aplique o questionário COPSOQ III primeiro.")
+        st.info(" Ainda não há respondentes. Aplique o questionário COPSOQ III primeiro.")
     else:
-        st.success(f"✅ Total de respondentes: **{len(st.session_state.respondentes)}**")
+        st.success(f" Total de respondentes: **{len(st.session_state.respondentes)}**")
         st.subheader("Scores Médios por Dimensão (0-100)")
 
         df_scores = pd.DataFrame([r['scores'] for r in st.session_state.respondentes])
@@ -314,16 +314,16 @@ with tab3:
             'Mín': df_scores.min()[medias.index].values.round(1),
             'Máx': df_scores.max()[medias.index].values.round(1)
         })
-        st.dataframe(df_detalhado, use_container_width=True, hide_index=True)
+        st.dataframe(df_detalhado, width='stretch', hide_index=True)
 
-        st.subheader("🚨 Identificação Automática de Riscos")
+        st.subheader(" Identificação Automática de Riscos")
         st.info("Dimensões com score médio < 40 são consideradas áreas de risco")
 
         riscos_identificados = medias[medias < 40]
 
         if len(riscos_identificados) > 0:
             for dimensao, score in riscos_identificados.items():
-                if st.button(f"➕ Adicionar '{dimensao}' ao Inventário de Riscos", key=f"add_{dimensao}"):
+                if st.button(f" Adicionar '{dimensao}' ao Inventário de Riscos", key=f"add_{dimensao}"):
                     novo_risco = {
                         'id': len(st.session_state.inventario_riscos) + 1,
                         'dimensao': dimensao,
@@ -334,13 +334,13 @@ with tab3:
                         'nivel_risco': calcular_nivel_risco(4, 3)
                     }
                     st.session_state.inventario_riscos.append(novo_risco)
-                    st.success(f"✅ Risco adicionado ao inventário!")
+                    st.success(f" Risco adicionado ao inventário!")
                     st.rerun()
         else:
-            st.success("✅ Nenhuma dimensão com score crítico identificada.")
+            st.success(" Nenhuma dimensão com score crítico identificada.")
 
         st.divider()
-        st.subheader("📥 Exportar Dados")
+        st.subheader(" Exportar Dados")
 
         dados_export = []
         for resp in st.session_state.respondentes:
@@ -361,7 +361,7 @@ with tab3:
         csv = df_export.to_csv(index=False).encode('utf-8-sig')
 
         st.download_button(
-            label="📊 Download Dados Completos (CSV)",
+            label=" Download Dados Completos (CSV)",
             data=csv,
             file_name=f"COPSOQ_III_Dados_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
             mime="text/csv"
@@ -369,9 +369,9 @@ with tab3:
 
 # --- ABA 4: INVENTÁRIO DE RISCOS ---
 with tab4:
-    st.header("⚠️ Inventário de Riscos Psicossociais")
+    st.header("️ Inventário de Riscos Psicossociais")
 
-    with st.expander("➕ Adicionar Risco Manualmente", expanded=False):
+    with st.expander(" Adicionar Risco Manualmente", expanded=False):
         col1, col2 = st.columns(2)
 
         with col1:
@@ -387,7 +387,7 @@ with tab4:
         with col4:
             sev_manual = st.slider("Severidade", 1, 5, 3, key="sev_manual")
 
-        if st.button("➕ Adicionar Risco Manual"):
+        if st.button(" Adicionar Risco Manual"):
             if fator_manual:
                 novo_risco = {
                     'id': len(st.session_state.inventario_riscos) + 1,
@@ -399,7 +399,7 @@ with tab4:
                     'nivel_risco': calcular_nivel_risco(prob_manual, sev_manual)
                 }
                 st.session_state.inventario_riscos.append(novo_risco)
-                st.success("✅ Risco adicionado!")
+                st.success(" Risco adicionado!")
                 st.rerun()
 
     st.subheader(f"Riscos Identificados ({len(st.session_state.inventario_riscos)})")
@@ -415,11 +415,11 @@ with tab4:
                 
                 **Evidências:** {risco['evidencias']}
                 
-                📊 P: {risco['probabilidade']}/5 | S: {risco['severidade']}/5 | Score: {risco['nivel_risco']['score']}
+                 P: {risco['probabilidade']}/5 | S: {risco['severidade']}/5 | Score: {risco['nivel_risco']['score']}
                 """)
 
             with col2:
-                if st.button("🗑️", key=f"del_risco_{i}"):
+                if st.button("️", key=f"del_risco_{i}"):
                     st.session_state.inventario_riscos.pop(i)
                     st.rerun()
 
@@ -427,7 +427,7 @@ with tab4:
 
 # --- ABA 5: MATRIZ DE RISCO ---
 with tab5:
-    st.header("📈 Matriz de Probabilidade × Severidade")
+    st.header(" Matriz de Probabilidade  Severidade")
 
     matriz_data = []
     for prob in range(5, 0, -1):
@@ -440,27 +440,27 @@ with tab5:
             linha.append(f"{nivel['cor']} {score}\n({len(riscos_celula)})")
         matriz_data.append(linha)
 
-    df_matriz = pd.DataFrame(matriz_data, columns=['P↓\\S→', '1', '2', '3', '4', '5'])
-    st.dataframe(df_matriz, use_container_width=True, hide_index=True)
+    df_matriz = pd.DataFrame(matriz_data, columns=['P\\S', '1', '2', '3', '4', '5'])
+    st.dataframe(df_matriz, width='stretch', hide_index=True)
 
     st.subheader("Distribuição por Nível de Risco")
     col1, col2, col3, col4 = st.columns(4)
 
     total_baixo = len([r for r in st.session_state.inventario_riscos if r['nivel_risco']['nivel'] == 'BAIXO'])
-    total_medio = len([r for r in st.session_state.inventario_riscos if r['nivel_risco']['nivel'] == 'MÉDIO'])
+    total_medio = len([r for r in st.session_state.inventario_riscos if r['nivel_risco']['nivel'] == 'MDIO'])
     total_alto = len([r for r in st.session_state.inventario_riscos if r['nivel_risco']['nivel'] == 'ALTO'])
     total_critico = len([r for r in st.session_state.inventario_riscos if r['nivel_risco']['nivel'] == 'CRÍTICO'])
 
-    col1.metric("🟢 BAIXO", total_baixo)
-    col2.metric("🟡 MÉDIO", total_medio)
-    col3.metric("🟠 ALTO", total_alto)
-    col4.metric("🔴 CRÍTICO", total_critico)
+    col1.metric(" BAIXO", total_baixo)
+    col2.metric(" MDIO", total_medio)
+    col3.metric(" ALTO", total_alto)
+    col4.metric(" CRÍTICO", total_critico)
 
-# --- ABA 6: PLANOS DE AÇÃO 5W2H ---
+# --- ABA 6: PLANOS DE AO 5W2H ---
 with tab6:
-    st.header("✅ Planos de Ação 5W2H")
+    st.header(" Planos de Ação 5W2H")
 
-    if st.button("➕ Novo Plano de Ação"):
+    if st.button(" Novo Plano de Ação"):
         novo_plano = {
             'id': len(st.session_state.planos_acao) + 1,
             'what': '', 'why': '', 'where': '', 'when': '',
@@ -471,12 +471,12 @@ with tab6:
 
     if st.session_state.planos_acao:
         for i, plano in enumerate(st.session_state.planos_acao):
-            with st.expander(f"📋 Plano de Ação #{i+1}", expanded=True):
+            with st.expander(f" Plano de Ação #{i+1}", expanded=True):
                 col1, col2 = st.columns(2)
 
                 with col1:
-                    what = st.text_input("O QUÊ (What)", value=plano['what'], key=f"what_{i}")
-                    why = st.text_input("POR QUÊ (Why)", value=plano['why'], key=f"why_{i}")
+                    what = st.text_input("O QU (What)", value=plano['what'], key=f"what_{i}")
+                    why = st.text_input("POR QU (Why)", value=plano['why'], key=f"why_{i}")
                     where = st.text_input("ONDE (Where)", value=plano['where'], key=f"where_{i}")
                     when = st.text_input("QUANDO (When)", value=plano['when'], key=f"when_{i}")
 
@@ -495,30 +495,30 @@ with tab6:
                     'who': who, 'how': how, 'how_much': how_much, 'risco_relacionado': risco_rel
                 }
 
-                if st.button("🗑️ Remover Plano", key=f"del_plano_{i}"):
+                if st.button("️ Remover Plano", key=f"del_plano_{i}"):
                     st.session_state.planos_acao.pop(i)
                     st.rerun()
     else:
         st.info("Nenhum plano de ação criado ainda.")
 
-# --- 7. SEÇÃO FINAL: RELATÓRIO E FOOTER ---
+# --- 7. SEO FINAL: RELATRIO E FOOTER ---
 st.divider()
-st.subheader("📥 Gerar Relatório Completo")
+st.subheader(" Gerar Relatório Completo")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    if st.button("📄 Gerar e Baixar Relatório Completo (.txt)", disabled=len(st.session_state.inventario_riscos)==0):
+    if st.button(" Gerar e Baixar Relatório Completo (.txt)", disabled=len(st.session_state.inventario_riscos)==0):
         relatorio = f"""
-RELATÓRIO DE AVALIAÇÃO DE RISCOS PSICOSSOCIAIS
+RELATRIO DE AVALIAO DE RISCOS PSICOSSOCIAIS
 COPSOQ III - BRASIL (Versão Média)
 ==============================================
 
-DADOS DA AVALIAÇÃO
+DADOS DA AVALIAO
 Número de Respondentes: {len(st.session_state.respondentes)}
 Data do Relatório: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}
 
-RESULTADOS COPSOQ III - SCORES MÉDIOS POR DIMENSÃO
+RESULTADOS COPSOQ III - SCORES MDIOS POR DIMENSO
 ===================================================
 
 """
@@ -542,12 +542,12 @@ RESULTADOS COPSOQ III - SCORES MÉDIOS POR DIMENSÃO
 
 """
 
-        relatorio += "\nPLANOS DE AÇÃO 5W2H\n===================\n"
+        relatorio += "\nPLANOS DE AO 5W2H\n===================\n"
         for i, p in enumerate(st.session_state.planos_acao, 1):
             relatorio += f"""
 Plano {i}:
-  O QUÊ: {p['what']}
-  POR QUÊ: {p['why']}
+  O QU: {p['what']}
+  POR QU: {p['why']}
   ONDE: {p['where']}
   QUANDO: {p['when']}
   QUEM: {p['who']}
@@ -558,14 +558,14 @@ Plano {i}:
 """
 
         relatorio += f"""
-RECOMENDAÇÕES
+RECOMENDAES
 =============
 - Priorizar ações para riscos CRÍTICOS e ALTOS
 - Estabelecer cronograma de monitoramento trimestral
 - Realizar nova avaliação COPSOQ III em 6-12 meses
 - Implementar ciclo PDCA para melhoria contínua
 
-FUNDAMENTOS LEGAIS E METODOLÓGICOS
+FUNDAMENTOS LEGAIS E METODOLGICOS
 ===================================
 Brasil: NR-1 (GRO/PGR), NR-17 (Ergonomia), CLT Art. 157-158
 Internacional: OIT (C155, C187), EU-OSHA Framework Directive 89/391/EEC
@@ -578,7 +578,7 @@ Material confidencial - Uso restrito para pesquisa e consultoria profissional
 """
 
         st.download_button(
-            label="✅ Clique aqui para baixar o Relatório",
+            label=" Clique aqui para baixar o Relatório",
             data=relatorio.encode('utf-8'),
             file_name=f"Relatorio_COPSOQ_III_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
             mime="text/plain"
@@ -586,14 +586,16 @@ Material confidencial - Uso restrito para pesquisa e consultoria profissional
 
 with col2:
     if st.session_state.respondentes:
-        st.info(f"✅ {len(st.session_state.respondentes)} respondentes avaliados")
-        st.info(f"⚠️ {len(st.session_state.inventario_riscos)} riscos identificados")
-        st.info(f"📋 {len(st.session_state.planos_acao)} planos de ação criados")
+        st.info(f" {len(st.session_state.respondentes)} respondentes avaliados")
+        st.info(f"️ {len(st.session_state.inventario_riscos)} riscos identificados")
+        st.info(f" {len(st.session_state.planos_acao)} planos de ação criados")
 
 st.divider()
 st.caption("""
-**COPSOQ III - Copenhagen Psychosocial Questionnaire (Versão Média Brasil)** 🔬 Validação: Dra. Teresa Cotrim | Parceria Internacional  
-🇧🇷 Adaptação para países de língua portuguesa  
-⚠️ Material validado cientificamente - Uso restrito  
-📚 31 Dimensões | 84 Questões | Protocolo Internacional
+**COPSOQ III - Copenhagen Psychosocial Questionnaire (Versão Média Brasil)**  Validação: Dra. Teresa Cotrim | Parceria Internacional  
+ Adaptação para países de língua portuguesa  
+️ Material validado cientificamente - Uso restrito  
+ 31 Dimensões | 84 Questões | Protocolo Internacional
 """)
+
+

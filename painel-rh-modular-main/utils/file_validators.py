@@ -174,19 +174,19 @@ class FileValidator:
             return "DataFrame vazio"
         
         preview = []
-        preview.append(f"📊 **Dimensões**: {len(df)} linhas × {df.shape[1]} colunas")
-        preview.append(f"📋 **Colunas**: {', '.join(df.columns[:10].tolist())}")
+        preview.append(f" **Dimensões**: {len(df)} linhas  {df.shape[1]} colunas")
+        preview.append(f" **Colunas**: {', '.join(df.columns[:10].tolist())}")
         if df.shape[1] > 10:
             preview.append(f"   ... e mais {df.shape[1] - 10} colunas")
         
         # Tipos de dados
         dtypes_summary = df.dtypes.value_counts().to_dict()
-        preview.append(f"🔢 **Tipos de dados**: {dtypes_summary}")
+        preview.append(f" **Tipos de dados**: {dtypes_summary}")
         
         # Dados ausentes
         null_count = df.isnull().sum().sum()
         if null_count > 0:
-            preview.append(f"⚠️ **Dados ausentes**: {null_count} células vazias")
+            preview.append(f"️ **Dados ausentes**: {null_count} células vazias")
         
         return "\n".join(preview)
 
@@ -252,3 +252,5 @@ class ColumnMapper:
                 suggestions[target] = detected
         
         return suggestions
+
+

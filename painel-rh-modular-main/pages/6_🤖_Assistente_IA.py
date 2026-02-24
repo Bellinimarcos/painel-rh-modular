@@ -1,4 +1,4 @@
-# pages/6_🤖_Assistente_IA.py
+# pages/6__Assistente_IA.py
 """
 Assistente IA com memória persistente, contexto de análises E verificação de fontes.
 """
@@ -76,7 +76,7 @@ Risco: {analysis.risk_level.label if analysis.risk_level else 'N/A'}
         data_items = list(analysis.data.items())[:3]
         for key, value in data_items:
             if isinstance(value, (int, float)):
-                summary += f"  • {key}: {value:.2f}\n"
+                summary += f"   {key}: {value:.2f}\n"
     
     return summary.strip()
 
@@ -84,7 +84,7 @@ Risco: {analysis.risk_level.label if analysis.risk_level else 'N/A'}
 def render_document_sources(kb_results, auto_expand=True, message_id=None):
     """Renderiza painel com documentos fonte encontrados (CORRIGIDO - sem botão duplicado)"""
     if not kb_results:
-        st.info("ℹ️ Nenhum documento consultado para esta resposta (baseada em conhecimento geral da IA)")
+        st.info("️ Nenhum documento consultado para esta resposta (baseada em conhecimento geral da IA)")
         return
     
     # Gera ID único para esta renderização
@@ -92,10 +92,10 @@ def render_document_sources(kb_results, auto_expand=True, message_id=None):
         message_id = str(datetime.now().timestamp()).replace('.', '')
     
     # Banner destacado
-    st.success(f"✅ {len(kb_results)} documento(s) consultado(s) - Confira abaixo as fontes!")
+    st.success(f" {len(kb_results)} documento(s) consultado(s) - Confira abaixo as fontes!")
     
-    with st.expander(f"📚 **FONTES: Documentos Consultados ({len(kb_results)})**", expanded=auto_expand):
-        st.warning("⚠️ **IMPORTANTE:** Sempre confira os trechos abaixo para validar se a resposta da IA está correta!")
+    with st.expander(f" **FONTES: Documentos Consultados ({len(kb_results)})**", expanded=auto_expand):
+        st.warning("️ **IMPORTANTE:** Sempre confira os trechos abaixo para validar se a resposta da IA está correta!")
         
         for i, result in enumerate(kb_results, 1):
             doc = result['document']
@@ -104,7 +104,7 @@ def render_document_sources(kb_results, auto_expand=True, message_id=None):
             
             # Container com borda destacada
             with st.container():
-                st.markdown(f"### 📄 {i}. {doc['title']}")
+                st.markdown(f"###  {i}. {doc['title']}")
                 
                 col1, col2, col3 = st.columns([2, 1, 1])
                 with col1:
@@ -115,14 +115,14 @@ def render_document_sources(kb_results, auto_expand=True, message_id=None):
                     st.caption(f"**Total:** {doc['word_count']:,} palavras")
                 
                 if doc.get('tags'):
-                    st.caption(f"🏷️ **Tags:** {', '.join(doc['tags'])}")
+                    st.caption(f"️ **Tags:** {', '.join(doc['tags'])}")
                 
                 # Exibe snippet com destaque visual
-                st.markdown("#### 📋 Trecho Relevante Encontrado:")
+                st.markdown("####  Trecho Relevante Encontrado:")
                 st.info(snippet)
                 
                 # Expander para documento completo
-                with st.expander("🔍 Ver documento completo"):
+                with st.expander(" Ver documento completo"):
                     st.text_area(
                         "Conteúdo completo do documento (Use Ctrl+A e Ctrl+C para copiar)",
                         value=doc['content'],
@@ -317,12 +317,12 @@ ui.render_header(
 
 # BANNER DE AVISO DESTACADO
 st.warning("""
-⚠️ **IMPORTANTE - SEMPRE CONFIRA AS FONTES!**
+️ **IMPORTANTE - SEMPRE CONFIRA AS FONTES!**
 
 Este assistente usa IA para analisar documentos e dados. **Para consultas legais ou normativas (estatutos, leis, regulamentos):**
-- ✅ Sempre confira o painel **"📚 FONTES: Documentos Consultados"** que aparece abaixo de cada resposta
-- ✅ Verifique se a citação da IA corresponde ao trecho original do documento
-- ✅ Em caso de dúvida, consulte o texto completo do documento ou um profissional jurídico
+-  Sempre confira o painel **" FONTES: Documentos Consultados"** que aparece abaixo de cada resposta
+-  Verifique se a citação da IA corresponde ao trecho original do documento
+-  Em caso de dúvida, consulte o texto completo do documento ou um profissional jurídico
 
 A IA fornece **análises e recomendações**, mas as **fontes oficiais** são sempre os documentos originais.
 """)
@@ -364,7 +364,7 @@ with st.sidebar:
         
         with st.expander("Ver categorias"):
             for cat, count in kb_stats.get('categories', {}).items():
-                st.caption(f"• {cat}: {count}")
+                st.caption(f" {cat}: {count}")
     else:
         st.info("Nenhum documento na base ainda")
     
@@ -373,13 +373,13 @@ with st.sidebar:
     # Ações
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("Limpar", use_container_width=True):
+        if st.button("Limpar", width='stretch'):
             memory.clear()
             st.session_state.conversation_memory = ConversationMemory(user_id="default")
             st.rerun()
     
     with col2:
-        if st.button("Exportar", use_container_width=True):
+        if st.button("Exportar", width='stretch'):
             if stats['total_messages'] > 0:
                 export_path = memory.export_conversation()
                 st.success(f"Exportado!")
@@ -469,4 +469,6 @@ if prompt := st.chat_input("Faca uma pergunta sobre seus dados de RH..."):
 if analyses:
     with st.expander("Analises Disponiveis"):
         for analysis in sorted(analyses, key=lambda x: x.timestamp, reverse=True)[:5]:
-            st.caption(f"• {analysis.name} ({analysis.type.value}) - {analysis.timestamp.strftime('%d/%m/%Y')}")
+            st.caption(f" {analysis.name} ({analysis.type.value}) - {analysis.timestamp.strftime('%d/%m/%Y')}")
+
+

@@ -12,24 +12,24 @@ from pathlib import Path
 from elevenlabs.client import ElevenLabs
 from elevenlabs import VoiceSettings
 
-# ==================== CONFIGURAÇÃO ====================
+# ==================== CONFIGURAO ====================
 st.set_page_config(
     page_title="Podcast Profissional - Alfa Bureau",
-    page_icon="🎙️",
+    page_icon="️",
     layout="wide"
 )
 
-st.title("🎙️ Podcast Profissional - Alfa Bureau Cast")
+st.title("️ Podcast Profissional - Alfa Bureau Cast")
 st.markdown("**Reforma Tributária 2026 - Versão Expandida (3-4 minutos)**")
 
 # ==================== UPLOAD DE JINGLES ====================
 st.markdown("---")
-st.subheader("🎵 Faça Upload dos seus Jingles")
+st.subheader(" Faça Upload dos seus Jingles")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.info("**🎵 Jingle de Abertura**")
+    st.info("** Jingle de Abertura**")
     jingle_abertura = st.file_uploader(
         "Escolha o arquivo de áudio",
         type=['mp3', 'wav', 'm4a', 'ogg', 'flac', 'aac', 'mp2', 'wma'],
@@ -37,11 +37,11 @@ with col1:
         help="Formatos aceitos: MP3, WAV, M4A, OGG, FLAC, AAC, MP2, WMA"
     )
     if jingle_abertura:
-        st.success(f"✅ {jingle_abertura.name}")
+        st.success(f" {jingle_abertura.name}")
         st.audio(jingle_abertura, format=f"audio/{jingle_abertura.name.split('.')[-1]}")
 
 with col2:
-    st.warning("**🎵 Jingle de Encerramento**")
+    st.warning("** Jingle de Encerramento**")
     jingle_encerramento = st.file_uploader(
         "Escolha o arquivo de áudio",
         type=['mp3', 'wav', 'm4a', 'ogg', 'flac', 'aac', 'mp2', 'wma'],
@@ -49,7 +49,7 @@ with col2:
         help="Formatos aceitos: MP3, WAV, M4A, OGG, FLAC, AAC, MP2, WMA"
     )
     if jingle_encerramento:
-        st.success(f"✅ {jingle_encerramento.name}")
+        st.success(f" {jingle_encerramento.name}")
         st.audio(jingle_encerramento, format=f"audio/{jingle_encerramento.name.split('.')[-1]}")
 
 # ==================== ROTEIRO EXPANDIDO ====================
@@ -59,13 +59,13 @@ roteiro = [
         "texto": "E aí, tudo bem com vocês? Sejam muito bem-vindos a mais um episódio do Alfa Bureau Cast, o podcast que simplifica a gestão empresarial para você! Eu sou o Brian, e hoje vamos falar sobre um tema que tá tirando o sono de muitos empresários: a Reforma Tributária de 2026. E pra nos ajudar a entender tudo isso, trouxe aqui a nossa especialista em tributos. E aí, como você está?",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - Abertura Completa"
+        "descricao": " Brian - Abertura Completa"
     },
     {
         "texto": "Oi Brian! Tudo ótimo, obrigada! Olha, esse assunto é realmente sério, viu? A Reforma Tributária vai mexer profundamente com todas as empresas brasileiras. Não é exagero dizer que será uma das maiores mudanças das últimas décadas no nosso sistema tributário.",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
-        "descricao": "👩 Matilda - Resposta Inicial"
+        "descricao": " Matilda - Resposta Inicial"
     },
     
     # DESENVOLVIMENTO
@@ -73,49 +73,49 @@ roteiro = [
         "texto": "Nossa, pesado isso! Mas vamos lá, explica pra gente: o que exatamente vai mudar? Porque eu sei que tem muita gente ainda meio perdida nesse assunto, sem entender direito o que vem pela frente.",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - Pergunta 1"
+        "descricao": " Brian - Pergunta 1"
     },
     {
-        "texto": "Ótima pergunta! Então, vamos simplificar: hoje, a gente tem um sistema super complexo, com cinco impostos diferentes sobre consumo. Tem o ICMS estadual, o ISS municipal, o PIS, a Cofins e o IPI federal. É uma bagunça, né? Com a reforma, tudo isso vai virar apenas dois impostos: o IBS, que é o Imposto sobre Bens e Serviços, e o CBS, a Contribuição sobre Bens e Serviços. Parece simples, mas o impacto dessa mudança vai ser gigante!",
+        "texto": "tima pergunta! Então, vamos simplificar: hoje, a gente tem um sistema super complexo, com cinco impostos diferentes sobre consumo. Tem o ICMS estadual, o ISS municipal, o PIS, a Cofins e o IPI federal.  uma bagunça, né? Com a reforma, tudo isso vai virar apenas dois impostos: o IBS, que é o Imposto sobre Bens e Serviços, e o CBS, a Contribuição sobre Bens e Serviços. Parece simples, mas o impacto dessa mudança vai ser gigante!",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
-        "descricao": "👩 Matilda - Explicação Detalhada"
+        "descricao": " Matilda - Explicação Detalhada"
     },
     {
         "texto": "Entendi. E quando isso vai acontecer de fato? Tem algum cronograma?",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - Pergunta 2"
+        "descricao": " Brian - Pergunta 2"
     },
     {
         "texto": "Sim! A transição vai ser gradual. Começa em 2026 com uma fase de testes, e a implementação completa está prevista para acontecer até 2033. Então são sete anos de transição. Mas atenção: as empresas precisam começar a se preparar agora, em 2025, porque as mudanças nos sistemas e processos levam tempo!",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
-        "descricao": "👩 Matilda - Cronograma"
+        "descricao": " Matilda - Cronograma"
     },
     {
         "texto": "Puts, então não dá pra deixar pra última hora mesmo! E as empresas, o que elas precisam fazer pra se preparar? Quais são os principais pontos de atenção?",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - Pergunta 3"
+        "descricao": " Brian - Pergunta 3"
     },
     {
         "texto": "Olha, existem três pilares fundamentais de preparação. Primeiro: revisar todos os contratos comerciais, porque as alíquotas vão mudar e isso impacta preços e margens. Segundo: atualizar os sistemas de gestão, ERP, faturamento, tudo! Os sistemas atuais não estão preparados pra esse novo modelo. E terceiro, o mais crítico: fazer um planejamento tributário bem estruturado. A Alfa Bureau tem ajudado dezenas de empresas exatamente nisso, fazendo diagnósticos completos e planos de ação personalizados.",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
-        "descricao": "👩 Matilda - Solução Completa"
+        "descricao": " Matilda - Solução Completa"
     },
     {
         "texto": "Excelente! E me diz uma coisa: tem setores que vão ser mais impactados que outros?",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - Pergunta 4"
+        "descricao": " Brian - Pergunta 4"
     },
     {
         "texto": "Com certeza! O varejo, serviços, construção civil e indústria vão sentir mudanças significativas. Cada setor tem suas particularidades. Por exemplo, alguns terão benefícios fiscais, outros vão enfrentar aumento de carga tributária. Por isso é tão importante ter um diagnóstico específico do seu negócio.",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
-        "descricao": "👩 Matilda - Setores Impactados"
+        "descricao": " Matilda - Setores Impactados"
     },
     
     # ENCERRAMENTO
@@ -123,31 +123,31 @@ roteiro = [
         "texto": "Perfeito! Acho que conseguimos esclarecer bastante coisa aqui, né? Muito obrigado pela participação, foi esclarecedor demais!",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - Agradecimento"
+        "descricao": " Brian - Agradecimento"
     },
     {
         "texto": "Imagina, Brian! Foi um prazer enorme estar aqui. E galera, só um recado importante: não deixem pra última hora, tá? A Reforma Tributária tá chegando e quem se preparar antes vai ter uma vantagem competitiva gigante!",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
-        "descricao": "👩 Matilda - Alerta Final"
+        "descricao": " Matilda - Alerta Final"
     },
     {
-        "texto": "Exatamente! E pra quem quer um diagnóstico completo e personalizado da situação da sua empresa, a Alfa Bureau está de portas abertas. Nossa equipe de especialistas pode fazer uma análise detalhada e criar um plano de ação sob medida pro seu negócio. É só entrar em contato!",
+        "texto": "Exatamente! E pra quem quer um diagnóstico completo e personalizado da situação da sua empresa, a Alfa Bureau está de portas abertas. Nossa equipe de especialistas pode fazer uma análise detalhada e criar um plano de ação sob medida pro seu negócio.  só entrar em contato!",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - CTA"
+        "descricao": " Brian - CTA"
     },
     {
         "texto": "Isso mesmo! E não percam o próximo episódio do Alfa Bureau Cast, onde vamos falar sobre estratégias práticas de implementação. Vai ser imperdível!",
         "voz": "XrExE9yKIg1WjnnlVkGX",
         "nome": "Matilda",
-        "descricao": "👩 Matilda - Convite"
+        "descricao": " Matilda - Convite"
     },
     {
         "texto": "Fiquem ligados! Um super abraço a todos e até o próximo episódio!",
         "voz": "nPczCjzI2devNBz1zQrb",
         "nome": "Brian",
-        "descricao": "👨 Brian - Despedida"
+        "descricao": " Brian - Despedida"
     }
 ]
 
@@ -155,10 +155,10 @@ roteiro = [
 try:
     api_key = st.secrets["ELEVENLABS_API_KEY"]
     client = ElevenLabs(api_key=api_key)
-    st.success("✅ ElevenLabs API carregada com sucesso!")
+    st.success(" ElevenLabs API carregada com sucesso!")
 except Exception as e:
-    st.error(f"❌ Erro ao carregar API: {str(e)}")
-    st.info("💡 Configure sua API Key em `.streamlit/secrets.toml`")
+    st.error(f" Erro ao carregar API: {str(e)}")
+    st.info(" Configure sua API Key em `.streamlit/secrets.toml`")
     st.stop()
 
 # ==================== CONFIGURAR FFMPEG ====================
@@ -167,7 +167,7 @@ ffmpeg_path = project_root / "ffmpeg.exe"
 if not ffmpeg_path.exists():
     ffmpeg_path = "ffmpeg"
 
-# ==================== FUNÇÕES ====================
+# ==================== FUNES ====================
 
 def generate_audio_stable(texto, voice_id):
     """Gera áudio usando ElevenLabs com configurações otimizadas - CORRIGIDO"""
@@ -207,7 +207,7 @@ def generate_audio_stable(texto, voice_id):
         return audio_bytes
         
     except Exception as e:
-        st.error(f"❌ Erro ao gerar áudio: {str(e)}")
+        st.error(f" Erro ao gerar áudio: {str(e)}")
         return None
 
 
@@ -239,7 +239,7 @@ def combine_audios_with_jingles(audio_segments, jingle_start=None, jingle_end=No
                 if result.returncode == 0:
                     file_list.append(converted_start)
                 else:
-                    st.warning(f"⚠️ Aviso ao converter jingle de abertura: {result.stderr}")
+                    st.warning(f"️ Aviso ao converter jingle de abertura: {result.stderr}")
             
             # Adicionar segmentos do podcast (já em MP3)
             for i, segment in enumerate(audio_segments):
@@ -269,7 +269,7 @@ def combine_audios_with_jingles(audio_segments, jingle_start=None, jingle_end=No
                 if result.returncode == 0:
                     file_list.append(converted_end)
                 else:
-                    st.warning(f"⚠️ Aviso ao converter jingle de encerramento: {result.stderr}")
+                    st.warning(f"️ Aviso ao converter jingle de encerramento: {result.stderr}")
             
             # Criar arquivo de lista
             list_file = temp_path / "filelist.txt"
@@ -302,67 +302,67 @@ def combine_audios_with_jingles(audio_segments, jingle_start=None, jingle_end=No
                 return f.read()
                 
     except Exception as e:
-        st.error(f"❌ Erro ao combinar áudios: {str(e)}")
+        st.error(f" Erro ao combinar áudios: {str(e)}")
         return None
 
 # ==================== INTERFACE ====================
 
 st.markdown("---")
-st.subheader("🎭 Apresentadores")
+st.subheader(" Apresentadores")
 
 col1, col2 = st.columns(2)
 with col1:
-    st.info("**👨 Brian**\n\nVoz grave e consistente\nTom profissional estável\nApresentador principal")
+    st.info("** Brian**\n\nVoz grave e consistente\nTom profissional estável\nApresentador principal")
 with col2:
-    st.success("**👩 Matilda**\n\nVoz PT-BR natural\nTom técnico e claro\nEspecialista convidada")
+    st.success("** Matilda**\n\nVoz PT-BR natural\nTom técnico e claro\nEspecialista convidada")
 
 # Estrutura
 st.markdown("---")
-st.subheader("📻 Estrutura do Podcast")
+st.subheader(" Estrutura do Podcast")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    status_abertura = "✅" if jingle_abertura else "⏳"
+    status_abertura = "" if jingle_abertura else "⏳"
     st.info(f"**{status_abertura} Abertura**\n\nJingle musical\n~5-10s")
 with col2:
-    st.success("**🎙️ Corpo Principal**\n\nDiálogo expandido\n~3-4 minutos")
+    st.success("**️ Corpo Principal**\n\nDiálogo expandido\n~3-4 minutos")
 with col3:
-    status_encerramento = "✅" if jingle_encerramento else "⏳"
+    status_encerramento = "" if jingle_encerramento else "⏳"
     st.warning(f"**{status_encerramento} Encerramento**\n\nJingle musical\n~5-10s")
 
 # Duração total
 total_dialogos = len(roteiro)
 duracao_estimada = f"{total_dialogos * 15} - {total_dialogos * 20} segundos"
-st.info(f"📊 **Duração estimada do diálogo:** {duracao_estimada} | **Total de falas:** {total_dialogos}")
+st.info(f" **Duração estimada do diálogo:** {duracao_estimada} | **Total de falas:** {total_dialogos}")
 
 # Roteiro
 st.markdown("---")
-with st.expander("📝 Ver Roteiro Completo (Expandido)"):
+with st.expander(" Ver Roteiro Completo (Expandido)"):
     for i, item in enumerate(roteiro, 1):
         st.write(f"**{i}. {item['descricao']}**")
         st.write(f"_{item['nome']}: {item['texto']}_")
         st.divider()
 
 # Info
-with st.expander("⚙️ Melhorias desta Versão"):
+with st.expander("️ Melhorias desta Versão"):
     st.markdown("""
-    **✅ Correções aplicadas:**
-    - 🔧 **Qualidade de áudio melhorada:** formato MP3 44.1kHz 128kbps
-    - 🔧 **Estabilidade aumentada:** 0.75 para Brian, 0.65 para Matilda
-    - 🔧 **Validação de áudio:** verifica se o áudio foi gerado corretamente
-    - 📏 **Podcast expandido:** de ~1min para 3-4 minutos
-    - 💬 **Mais conteúdo:** 15 falas ao invés de 11
-    - 🎯 **Mais profundidade:** explicações detalhadas sobre a reforma
+    ** Correções aplicadas:**
+    -  **Qualidade de áudio melhorada:** formato MP3 44.1kHz 128kbps
+    -  **Estabilidade aumentada:** 0.75 para Brian, 0.65 para Matilda
+    -  **Validação de áudio:** verifica se o áudio foi gerado corretamente
+    -  **Podcast expandido:** de ~1min para 3-4 minutos
+    -  **Mais conteúdo:** 15 falas ao invés de 11
+    -  **Mais profundidade:** explicações detalhadas sobre a reforma
     
     **Estrutura do podcast:**
-    1. 🎵 **Jingle de Abertura** (seu arquivo)
-    2. 🎙️ **Diálogo expandido** (gerado com ElevenLabs - SEM chiados!)
-    3. 🎵 **Jingle de Encerramento** (seu arquivo)
+    1.  **Jingle de Abertura** (seu arquivo)
+    2. ️ **Diálogo expandido** (gerado com ElevenLabs - SEM chiados!)
+    3.  **Jingle de Encerramento** (seu arquivo)
     
     **Resultado:** Podcast profissional de 3-4 minutos em alta qualidade!
     """)
 
-# ==================== BOTÃO GERAR ====================
+# ==================== BOTO GERAR ====================
 
 st.markdown("---")
 col1, col2, col3 = st.columns([1, 2, 1])
@@ -371,16 +371,16 @@ with col2:
     # Verificar avisos
     mensagem_aviso = ""
     if not jingle_abertura and not jingle_encerramento:
-        mensagem_aviso = "⚠️ Gerando sem jingles (somente falas)"
+        mensagem_aviso = "️ Gerando sem jingles (somente falas)"
     elif not jingle_abertura:
-        mensagem_aviso = "⚠️ Sem jingle de abertura"
+        mensagem_aviso = "️ Sem jingle de abertura"
     elif not jingle_encerramento:
-        mensagem_aviso = "⚠️ Sem jingle de encerramento"
+        mensagem_aviso = "️ Sem jingle de encerramento"
     
     if mensagem_aviso:
         st.warning(mensagem_aviso)
     
-    if st.button("🎙️ **GERAR PODCAST EXPANDIDO**", type="primary", use_container_width=True):
+    if st.button("️ **GERAR PODCAST EXPANDIDO**", type="primary", width='stretch'):
         progress_bar = st.progress(0.0)
         status_text = st.empty()
         
@@ -392,16 +392,16 @@ with col2:
             if failed:
                 break
                 
-            status_text.text(f"🎤 Gerando: {item['descricao']}...")
+            status_text.text(f" Gerando: {item['descricao']}...")
             progress_bar.progress((i / len(roteiro)) * 0.85)
             
             audio = generate_audio_stable(item['texto'], item['voz'])
             
             if audio and len(audio) > 1000:  # Verificar se áudio é válido
                 audio_segments.append(audio)
-                st.success(f"✅ {item['descricao']} - {len(audio)} bytes")
+                st.success(f" {item['descricao']} - {len(audio)} bytes")
             else:
-                st.error(f"❌ Falha ao gerar: {item['descricao']}")
+                st.error(f" Falha ao gerar: {item['descricao']}")
                 failed = True
                 break
             
@@ -409,7 +409,7 @@ with col2:
         
         # Combinar tudo
         if not failed and len(audio_segments) == len(roteiro):
-            status_text.text("🎬 Combinando áudios com jingles...")
+            status_text.text(" Combinando áudios com jingles...")
             progress_bar.progress(0.95)
             
             # Resetar file uploaders
@@ -426,18 +426,18 @@ with col2:
             
             if final_podcast:
                 progress_bar.progress(1.0)
-                status_text.text("✅ Podcast pronto!")
+                status_text.text(" Podcast pronto!")
                 
                 st.markdown("---")
-                st.subheader("🎧 Alfa Bureau Cast - Versão Expandida Final")
+                st.subheader(" Alfa Bureau Cast - Versão Expandida Final")
                 
                 # Mostrar estrutura
                 estrutura = []
                 if jingle_abertura:
-                    estrutura.append("🎵 Jingle Abertura")
-                estrutura.append(f"🎙️ Diálogo ({len(roteiro)} falas)")
+                    estrutura.append(" Jingle Abertura")
+                estrutura.append(f"️ Diálogo ({len(roteiro)} falas)")
                 if jingle_encerramento:
-                    estrutura.append("🎵 Jingle Encerramento")
+                    estrutura.append(" Jingle Encerramento")
                 
                 st.info(f"**Estrutura:** {' + '.join(estrutura)}")
                 
@@ -457,32 +457,32 @@ with col2:
                 col_a, col_b = st.columns(2)
                 with col_a:
                     st.download_button(
-                        label="📥 Download Podcast Expandido (.wav)",
+                        label=" Download Podcast Expandido (.wav)",
                         data=final_podcast,
                         file_name="alfa_bureau_podcast_EXPANDIDO_v2.wav",
                         mime="audio/wav",
-                        use_container_width=True
+                        width='stretch'
                     )
                 with col_b:
                     st.metric("Qualidade", "PREMIUM ⭐")
                 
-                st.success("🎉 Podcast PROFISSIONAL EXPANDIDO gerado com sucesso!")
+                st.success(" Podcast PROFISSIONAL EXPANDIDO gerado com sucesso!")
                 st.balloons()
         else:
-            st.error("❌ Falha na geração. Verifique sua API Key e conexão.")
+            st.error(" Falha na geração. Verifique sua API Key e conexão.")
 
 # ==================== FOOTER ====================
 
 st.markdown("---")
 st.markdown("""
 <div style='text-align: center; padding: 20px; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 10px;'>
-    <h3 style='color: white; margin: 0;'>💎 Versão 2.0 - Expandida e Corrigida</h3>
+    <h3 style='color: white; margin: 0;'> Versão 2.0 - Expandida e Corrigida</h3>
     <p style='color: white; margin: 5px 0 0 0;'>SEM chiados | 3-4 minutos | 15 falas | Alta qualidade</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-with st.expander("🐛 Troubleshooting"):
+with st.expander(" Troubleshooting"):
     st.markdown("""
     **Se ainda tiver chiado:**
     1. Verifique se sua API Key está correta
@@ -499,3 +499,5 @@ with st.expander("🐛 Troubleshooting"):
     ffmpeg -i podcast.wav -b:a 192k podcast.mp3
     ```
     """)
+
+

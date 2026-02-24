@@ -9,11 +9,11 @@ import time
 # Configuração da página
 st.set_page_config(
     page_title="Estúdio de Voz Profissional",
-    page_icon="🎙️",
+    page_icon="️",
     layout="wide"
 )
 
-st.title("🎙️ Estúdio de Voz Profissional - Alfa Bureau")
+st.title("️ Estúdio de Voz Profissional - Alfa Bureau")
 st.markdown("**Comercial Reforma Tributária 2026**")
 
 # Roteiro do comercial
@@ -30,9 +30,9 @@ roteiro = [
 # Verificar chave API
 try:
     api_key = st.secrets["GEMINI_API_KEY"]
-    st.success("✅ Chave API carregada com sucesso!")
+    st.success(" Chave API carregada com sucesso!")
 except Exception as e:
-    st.error("❌ Erro ao carregar chave API do secrets.toml")
+    st.error(" Erro ao carregar chave API do secrets.toml")
     st.stop()
 
 # Função para converter PCM para WAV
@@ -46,11 +46,11 @@ def pcm_to_wav(pcm_data, sample_rate=24000):
     wav_buffer.seek(0)
     return wav_buffer.read()
 
-# Função para gerar áudio - VERSÃO CORRIGIDA
+# Função para gerar áudio - VERSO CORRIGIDA
 def generate_audio(texto, voz, api_key, max_retries=3):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key={api_key}"
     
-    # CORREÇÃO: Enviando apenas o texto sem instruções de estilo
+    # CORREO: Enviando apenas o texto sem instruções de estilo
     # O Gemini TTS deve receber apenas o texto a ser narrado
     payload = {
         "contents": [
@@ -82,15 +82,15 @@ def generate_audio(texto, voz, api_key, max_retries=3):
                 st.error("⏳ Limite de API excedido. Aguarde 1 hora.")
                 return None
             elif response.status_code == 403:
-                st.error("🔐 Chave API inválida ou sem permissão para TTS.")
+                st.error(" Chave API inválida ou sem permissão para TTS.")
                 return None
             elif response.status_code == 500:
                 if attempt < max_retries - 1:
-                    st.warning(f"⚠️ Erro 500 (servidor Google). Tentativa {attempt + 2}/{max_retries} em 5s...")
+                    st.warning(f"️ Erro 500 (servidor Google). Tentativa {attempt + 2}/{max_retries} em 5s...")
                     time.sleep(5)
                     continue
                 else:
-                    st.error("❌ Servidor do Google instável. Aguarde 10 minutos e tente novamente.")
+                    st.error(" Servidor do Google instável. Aguarde 10 minutos e tente novamente.")
                     return None
             
             response.raise_for_status()
@@ -108,10 +108,10 @@ def generate_audio(texto, voz, api_key, max_retries=3):
                         wav_data = pcm_to_wav(pcm_data)
                         return wav_data
                     else:
-                        st.error("❌ Resposta da API não contém dados de áudio")
+                        st.error(" Resposta da API não contém dados de áudio")
                         return None
             else:
-                st.error("❌ Resposta vazia da API")
+                st.error(" Resposta vazia da API")
                 return None
             
         except requests.exceptions.Timeout:
@@ -119,15 +119,15 @@ def generate_audio(texto, voz, api_key, max_retries=3):
                 st.warning(f"⏰ Timeout. Tentando novamente ({attempt + 2}/{max_retries})...")
                 time.sleep(5)
             else:
-                st.error("❌ Timeout após múltiplas tentativas.")
+                st.error(" Timeout após múltiplas tentativas.")
                 return None
                 
         except Exception as e:
             if attempt < max_retries - 1:
-                st.warning(f"⚠️ Erro: {str(e)[:100]}. Tentando novamente...")
+                st.warning(f"️ Erro: {str(e)[:100]}. Tentando novamente...")
                 time.sleep(5)
             else:
-                st.error(f"❌ Erro após {max_retries} tentativas: {str(e)[:100]}")
+                st.error(f" Erro após {max_retries} tentativas: {str(e)[:100]}")
                 return None
     
     return None
@@ -157,13 +157,13 @@ def combine_audios(audio_segments):
         output.seek(0)
         return output.read()
     except ImportError:
-        st.warning("⚠️ PyDub não disponível. Instale com: pip install pydub")
+        st.warning("️ PyDub não disponível. Instale com: pip install pydub")
         st.info("Retornando apenas o primeiro segmento. Instale PyDub para combinar todos.")
         return audio_segments[0] if audio_segments else None
 
 # Interface para testar voz individual
 st.markdown("---")
-st.subheader("🔧 Teste de Voz Individual")
+st.subheader(" Teste de Voz Individual")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -171,22 +171,22 @@ with col1:
 with col2:
     test_text = st.text_input("Texto de teste:", "Olá, este é um teste de voz.")
 
-if st.button("🎤 Testar Voz"):
+if st.button(" Testar Voz"):
     with st.spinner("Gerando áudio de teste..."):
         test_audio = generate_audio(test_text, test_voice, api_key)
         if test_audio:
             st.audio(test_audio, format="audio/wav")
-            st.success("✅ Áudio de teste gerado!")
+            st.success(" Áudio de teste gerado!")
         else:
-            st.error("❌ Erro ao gerar áudio de teste")
+            st.error(" Erro ao gerar áudio de teste")
 
 # Exibir roteiro
 st.markdown("---")
-st.subheader("📝 Roteiro do Comercial")
+st.subheader(" Roteiro do Comercial")
 for i, item in enumerate(roteiro, 1):
     with st.expander(f"**Trecho {i} - Voz: {item['voz']}**"):
         st.write(item['texto'])
-        if st.button(f"▶️ Preview", key=f"preview_{i}"):
+        if st.button(f"️ Preview", key=f"preview_{i}"):
             with st.spinner(f"Gerando preview do trecho {i}..."):
                 preview_audio = generate_audio(item['texto'], item['voz'], api_key)
                 if preview_audio:
@@ -197,14 +197,14 @@ st.markdown("---")
 col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
-    if st.button("🎙️ **GERAR COMERCIAL COMPLETO**", type="primary", use_container_width=True):
+    if st.button("️ **GERAR COMERCIAL COMPLETO**", type="primary", width='stretch'):
         progress_bar = st.progress(0.0)
         status_text = st.empty()
         
         audio_segments = []
         
         for i, item in enumerate(roteiro):
-            status_text.text(f"🎤 Gerando trecho {i+1}/{len(roteiro)}: {item['voz']}...")
+            status_text.text(f" Gerando trecho {i+1}/{len(roteiro)}: {item['voz']}...")
             progress_bar.progress((i / len(roteiro)) * 0.7)
             
             # Log para debug
@@ -216,9 +216,9 @@ with col2:
             
             if audio:
                 audio_segments.append(audio)
-                st.success(f"✅ Trecho {i+1} gerado com sucesso! ({item['voz']})")
+                st.success(f" Trecho {i+1} gerado com sucesso! ({item['voz']})")
             else:
-                st.error(f"❌ Falha no trecho {i+1}")
+                st.error(f" Falha no trecho {i+1}")
                 break
             
             # Delay para evitar limite da API
@@ -226,30 +226,30 @@ with col2:
                 time.sleep(3)  # 3 segundos entre requisições
         
         if len(audio_segments) == len(roteiro):
-            status_text.text("🔗 Combinando áudios...")
+            status_text.text(" Combinando áudios...")
             progress_bar.progress(0.85)
             
             combined_audio = combine_audios(audio_segments)
             
             if combined_audio:
                 progress_bar.progress(1.0)
-                status_text.text("✅ Comercial pronto!")
+                status_text.text(" Comercial pronto!")
                 
                 st.markdown("---")
-                st.subheader("🎧 Comercial Completo")
+                st.subheader(" Comercial Completo")
                 st.audio(combined_audio, format="audio/wav")
                 
                 # Botão de download
                 st.download_button(
-                    label="📥 Download do Comercial (.wav)",
+                    label=" Download do Comercial (.wav)",
                     data=combined_audio,
                     file_name="comercial_alfa_bureau.wav",
                     mime="audio/wav",
-                    use_container_width=True
+                    width='stretch'
                 )
                 
                 # Salvar trechos individuais também
-                with st.expander("💾 Download dos Trechos Individuais"):
+                with st.expander(" Download dos Trechos Individuais"):
                     for i, (segment, item) in enumerate(zip(audio_segments, roteiro), 1):
                         st.download_button(
                             label=f"Trecho {i} - {item['voz']}",
@@ -259,17 +259,17 @@ with col2:
                             key=f"download_{i}"
                         )
                 
-                st.success("🎉 Comercial gerado com sucesso!")
+                st.success(" Comercial gerado com sucesso!")
                 st.balloons()
             else:
-                st.error("❌ Erro ao combinar áudios")
+                st.error(" Erro ao combinar áudios")
         else:
-            st.error("❌ Não foi possível gerar todos os trechos")
+            st.error(" Não foi possível gerar todos os trechos")
             if len(audio_segments) > 0:
-                st.info(f"💡 {len(audio_segments)} trechos foram gerados com sucesso. Tente novamente para completar.")
+                st.info(f" {len(audio_segments)} trechos foram gerados com sucesso. Tente novamente para completar.")
                 
                 # Permitir download dos trechos que foram gerados
-                with st.expander("💾 Download dos Trechos Gerados"):
+                with st.expander(" Download dos Trechos Gerados"):
                     for i, segment in enumerate(audio_segments, 1):
                         st.download_button(
                             label=f"Trecho {i}",
@@ -282,7 +282,7 @@ with col2:
 # Rodapé
 st.markdown("---")
 st.info("""
-💡 **Dicas Importantes:**
+ **Dicas Importantes:**
 - Use o teste de voz individual primeiro para verificar se a API está funcionando
 - Teste cada trecho individualmente antes de gerar o comercial completo
 - O processo completo leva aproximadamente 50 segundos
@@ -290,9 +290,9 @@ st.info("""
 """)
 
 # Informações adicionais
-with st.expander("ℹ️ Informações Técnicas e Solução de Problemas"):
+with st.expander("️ Informações Técnicas e Solução de Problemas"):
     st.markdown("""
-    **✅ Correções implementadas:**
+    ** Correções implementadas:**
     - Removido instruções de estilo que causavam geração de música
     - API recebe apenas o texto puro para narração
     - Adicionado silêncio de 500ms entre trechos
@@ -300,7 +300,7 @@ with st.expander("ℹ️ Informações Técnicas e Solução de Problemas"):
     - Preview individual de cada trecho
     - Download de trechos individuais
     
-    **🔍 Diagnóstico de Problemas:**
+    ** Diagnóstico de Problemas:**
     
     **Se ouvir apenas música:**
     - A API está interpretando incorretamente o prompt
@@ -318,10 +318,12 @@ with st.expander("ℹ️ Informações Técnicas e Solução de Problemas"):
     """)
 
 # Debug da configuração
-with st.expander("🐛 Debug - Configuração Atual"):
+with st.expander(" Debug - Configuração Atual"):
     st.write("**Configuração da API:**")
-    st.code(f"API Key: {'✅ Configurada' if api_key else '❌ Não configurada'}")
+    st.code(f"API Key: {' Configurada' if api_key else ' Não configurada'}")
     st.code(f"Modelo: gemini-2.5-flash-preview-tts")
     st.code(f"Sample Rate: 24000 Hz")
     st.code(f"Canais: Mono")
     st.code(f"Bit Depth: 16 bits")
+
+
